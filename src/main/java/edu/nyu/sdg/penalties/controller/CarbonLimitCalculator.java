@@ -1,6 +1,7 @@
 package edu.nyu.sdg.penalties.controller;
 
 import com.google.common.collect.ImmutableList;
+import edu.nyu.sdg.penalties.model.CarbonLimits;
 import edu.nyu.sdg.penalties.model.LL84Data;
 import edu.nyu.sdg.penalties.model.LookupData;
 import edu.nyu.sdg.penalties.model.OccupancyGroupInfo;
@@ -20,18 +21,27 @@ public class CarbonLimitCalculator {
         this.lookupData = lookupData;
     }
 
-    public BigDecimal calculateCarbonLimit() {
+    public CarbonLimits calculateCarbonLimit(LL84Data ll84Data) {
+        requireNonNull(ll84Data, "ll84Data is required and missing.");
 
-        /**
-         * Inputs - top three occupancy groups, the sq foot, and their carbon limit per square foot
-         */
+        List<OccupancyGroupInfo> occupancyGroupInfos = constructOccupancyGroupInfo(ll84Data);
 
+        BigDecimal totalCarbonLimitPhase1 = BigDecimal.valueOf(0);
+        BigDecimal totalCarbonLimitPhase2 = BigDecimal.valueOf(0);
 
-        throw new RuntimeException("finish ths impl!!");
+        for (OccupancyGroupInfo occupancyGroupInfo : occupancyGroupInfos) {
+            BigDecimal carbonLimitPhase1 = occupancyGroupInfo.getCarbonLimitPhase1().multiply(occupancyGroupInfo.getOccupancyGroupArea()).divide(BigDecimal.valueOf(1000));
+            BigDecimal carbonLimitPhase2 = occupancyGroupInfo.getCarbonLimitPhase2().multiply(occupancyGroupInfo.getOccupancyGroupArea()).divide(BigDecimal.valueOf(1000));
+
+            totalCarbonLimitPhase1 = totalCarbonLimitPhase1.add(carbonLimitPhase1);
+            totalCarbonLimitPhase2 = totalCarbonLimitPhase2.add(carbonLimitPhase2);
+        }
+
+        return CarbonLimits.newBuilder().withCarbonLimitPhase1(totalCarbonLimitPhase1).withCarbonLimitPhase2(totalCarbonLimitPhase2).build();
     }
 
 
-    public List<OccupancyGroupInfo> constructOccupancyGroupInfo(LL84Data ll84Data) {
+    private List<OccupancyGroupInfo> constructOccupancyGroupInfo(LL84Data ll84Data) {
 
         requireNonNull(ll84Data, "ll84Data is required and missing.");
         requireNonNull(lookupData.getLl84ll97(), "lookupData.getLl84ll97() is required and missing.");
@@ -45,8 +55,8 @@ public class CarbonLimitCalculator {
 
         Map<String, Map<String, BigDecimal>> ll97CarbonLimit = lookupData.getLl97CarbonLimit();
         Map<String, BigDecimal> carbonLimitsGrp1 = ll97CarbonLimit.get(occupancyGrp1);
-        Map<String, BigDecimal> carbonLimitsGrp2 = ll97CarbonLimit.get(occupancyGrp1);
-        Map<String, BigDecimal> carbonLimitsGrp3 = ll97CarbonLimit.get(occupancyGrp1);
+        Map<String, BigDecimal> carbonLimitsGrp2 = ll97CarbonLimit.get(occupancyGrp2);
+        Map<String, BigDecimal> carbonLimitsGrp3 = ll97CarbonLimit.get(occupancyGrp3);
 
         OccupancyGroupInfo occupancyGroupInfo1 = OccupancyGroupInfo.newBuilder()
                 .withOccupancyGroup(occupancyGrp1)
