@@ -8,10 +8,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LookupConfig {
 
-    @Bean
-    @ConfigurationProperties(prefix = "lookup")
-    LookupData lookupData() {
-        return new LookupData();
-    }
-
+  @Bean
+  @ConfigurationProperties(prefix = "lookup")
+  LookupData lookupData() {
+    return new LookupData();
+  }
 }

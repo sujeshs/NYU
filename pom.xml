@@ -1,68 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.4.2</version>
-    <relativePath/> <!-- lookup parent from repository -->
-  </parent>
+    <groupId>edu.nyu.sdg</groupId>
+    <artifactId>sdg-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>sdg-parent</name>
+    <description>SDG Initiative Parent POM</description>
+    <packaging>pom</packaging>
+    <url>https://www.stern.nyu.edu/experience-stern/about/departments-centers-initiatives/centers-of-research/center-sustainable-business/research/research-initiatives/invest-nyc-sdg-initiative</url>
 
-  <groupId>edu.nyu.sdg</groupId>
-  <artifactId>penalties</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>penalties</name>
-  <description>Penalties calculator</description>
-  <url>https://www.stern.nyu.edu/experience-stern/about/departments-centers-initiatives/centers-of-research/center-sustainable-business/research/research-initiatives/invest-nyc-sdg-initiative</url>
+    <modules>
+        <module>penalties</module>
+    </modules>
 
-  <properties>
-    <java.version>11</java.version>
-  </properties>
+    <properties>
+        <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-  <dependencies>
+        <version.google.guava>30.1-jre</version.google.guava>
+        <version.mvn.git-commit-id-plugin>4.0.3</version.mvn.git-commit-id-plugin>
+        <version.mvn.sorter>2.13.1</version.mvn.sorter>
+        <version.mvn.spotless.google>1.7</version.mvn.spotless.google>
+        <version.mvn.spotless>2.7.0</version.mvn.spotless>
+        <version.spring>2.4.2</version.spring>
+    </properties>
 
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>30.1-jre</version>
-    </dependency>
+    <dependencyManagement>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
+        <dependencies>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${version.google.guava}</version>
+            </dependency>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <scope>runtime</scope>
-      <optional>true</optional>
-    </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <version>${version.spring}</version>
+            </dependency>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${version.spring}</version>
+            </dependency>
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${version.spring}</version>
+            </dependency>
 
+        </dependencies>
 
-  </dependencies>
+    </dependencyManagement>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${version.spring}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.diffplug.spotless</groupId>
+                    <artifactId>spotless-maven-plugin</artifactId>
+                    <version>${version.mvn.spotless}</version>
+
+                    <configuration>
+                        <java>
+
+                            <includes>
+                                <include>src/**/*.java</include>
+                            </includes>
+
+                            <googleJavaFormat>
+                                <version>${version.mvn.spotless.google}</version>
+                                <style>GOOGLE</style>
+                            </googleJavaFormat>
+
+                            <removeUnusedImports />
+                        </java>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.github.ekryd.sortpom</groupId>
+                    <artifactId>sortpom-maven-plugin</artifactId>
+                    <version>${version.mvn.sorter}</version>
+
+                    <configuration>
+                        <createBackupFile>false</createBackupFile>
+                        <expandEmptyElements>false</expandEmptyElements>
+                        <keepBlankLines>true</keepBlankLines>
+                        <lineSeparator>\n</lineSeparator>
+                        <nrOfIndentSpace>2</nrOfIndentSpace>
+                        <predefinedSortOrder>custom_1</predefinedSortOrder>
+                        <sortDependencies>groupId,artifactId</sortDependencies>
+                        <sortProperties>false</sortProperties>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>pl.project13.maven</groupId>
+                    <artifactId>git-commit-id-plugin</artifactId>
+                    <version>${version.mvn.git-commit-id-plugin}</version>
+
+                    <configuration>
+                        <generateGitPropertiesFile>true</generateGitPropertiesFile>
+
+                        <includeOnlyProperties>
+                            <includeOnlyProperty>git.branch</includeOnlyProperty>
+                            <includeOnlyProperty>git.build.time</includeOnlyProperty>
+                            <includeOnlyProperty>git.commit.id.abbrev</includeOnlyProperty>
+                            <includeOnlyProperty>git.commit.id</includeOnlyProperty>
+                            <includeOnlyProperty>git.commit.message.full</includeOnlyProperty>
+                            <includeOnlyProperty>git.commit.time</includeOnlyProperty>
+                            <includeOnlyProperty>git.remote.origin.url</includeOnlyProperty>
+                        </includeOnlyProperties>
+                    </configuration>
+
+                    <executions>
+                        <execution>
+                            <id>get-the-git-info</id>
+
+                            <goals>
+                                <goal>revision</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
+    </build>
 
 </project>

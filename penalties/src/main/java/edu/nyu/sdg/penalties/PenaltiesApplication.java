@@ -8,14 +8,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class PenaltiesApplication {
 
-	public static void main(String[] args) {
+  public static void main(String[] args) {
 
-		ConfigurableApplicationContext ctx = SpringApplication.run(PenaltiesApplication.class, args);
-		LookupData lookupData = ctx.getBean(LookupData.class);
+    ConfigurableApplicationContext ctx = SpringApplication.run(PenaltiesApplication.class, args);
+    LookupData lookupData = ctx.getBean(LookupData.class);
 
-		System.out.println("lookupData = " + lookupData);
-
-
-	}
-
+    System.out.println("lookupData = " + lookupData);
+  }
 }

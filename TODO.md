@@ -1,0 +1,1 @@
+1. App accepts only data without spaces and special characters. Enhance this.

@@ -18,4 +18,9 @@ lookup:
       2024-2029: 10.74
       2030-2034: 4.2
   energysrc-ghcoeff:
+    DistrictSteam: 0.00004493
+    FuelOil2: 0.00007421
+    FuelOil4: 0.00007529
+    Natural-Gas: 0.00005311
     Utility-Electricity: 0.000288962
+    Diesel: 0
