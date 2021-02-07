@@ -3,12 +3,12 @@ lookup:
     Multifamily Housing: R2-Residential
     Office: B-Business
   ll97-carbonlimit:
-    2024-2029:
-      B-Business: 8.46
-      R2-Residential: 6.75
-    2030-2034:
-      B-Business: 4.53
-      R2-Residential: 4.07
+    B-Business:
+      2024-2029: 8.46
+      2030-2034: 4.53
+    R2-Residential:
+      2024-2029: 6.75
+      2030-2034: 4.07
   energysrc-ghcoeff:
     Utility-Electricity: 0.000288962
 

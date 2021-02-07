@@ -1,6 +1,6 @@
 package edu.nyu.sdg.penalties;
 
-import edu.nyu.sdg.penalties.config.LookupData;
+import edu.nyu.sdg.penalties.model.LookupData;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
