@@ -13,6 +13,6 @@ public class PenaltiesApplication {
     ConfigurableApplicationContext ctx = SpringApplication.run(PenaltiesApplication.class, args);
     LookupData lookupData = ctx.getBean(LookupData.class);
 
-    System.out.println("lookupData = " + lookupData);
+    System.out.println("lookupData => " + lookupData);
   }
 }
