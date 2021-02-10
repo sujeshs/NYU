@@ -1,0 +1,14 @@
+POST http://localhost:9000/penalty
+Content-Type: application/json
+
+{
+  "spaceUse1":"MultifamilyHousing",
+  "spaceUse2":"RetailStore",
+  "spaceUse3":"SocialMeetingHall",
+  "spaceUse1FloorArea": 7420000,
+  "spaceUse2FloorArea": 297100,
+  "spaceUse3FloorArea": 125490,
+  "fuelOil2Use": 32139374,
+  "diesel2Use": 2281002,
+  "naturalGasUse": 1310168149
+}
