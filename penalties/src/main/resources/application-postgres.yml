@@ -1,0 +1,14 @@
+db:
+  postgres:
+    dao:
+      thread:
+        pool:
+          blocking-queue-size: 4
+          executor-name-format: postgres-dao-pool-%d
+          size: 4
+    hikari:
+      jdbc-url: jdbc:postgresql://localhost:5432/nyu
+      maximum-pool-size: 40
+      minimum-idle: 10
+      password: rdmp
+      username: rdmp

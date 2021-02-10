@@ -24,3 +24,8 @@ lookup:
     Natural-Gas: 0.00005311
     Utility-Electricity: 0.000288962
     Diesel: 0
+spring:
+  profiles:
+    include: postgres
+server:
+  port: 9000
