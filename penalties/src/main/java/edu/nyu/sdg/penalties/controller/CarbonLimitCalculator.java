@@ -6,7 +6,6 @@ import static java.util.Objects.*;
 import com.google.common.collect.ImmutableList;
 import edu.nyu.sdg.penalties.model.CarbonLimits;
 import edu.nyu.sdg.penalties.model.LL84Data;
-import edu.nyu.sdg.penalties.model.LookupData;
 import edu.nyu.sdg.penalties.model.OccupancyGroupInfo;
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,10 +13,12 @@ import java.util.Map;
 
 public final class CarbonLimitCalculator {
 
-  private final LookupData lookupData;
+  private final Map<String, Map<String, BigDecimal>> carbonLimitData;
+  private final Map<String, String> occupancySpaceUseData;
 
-  public CarbonLimitCalculator(LookupData lookupData) {
-    this.lookupData = lookupData;
+  public CarbonLimitCalculator(Map<String, Map<String, BigDecimal>> carbonLimitData, Map<String, String> occupancySpaceUseData) {
+    this.carbonLimitData = requireNonNull(carbonLimitData, "carbonLimitData is required and missing.");
+    this.occupancySpaceUseData = requireNonNull(occupancySpaceUseData, "occupancySpaceUseData is required and missing.");
   }
 
   public CarbonLimits calculateCarbonLimit(LL84Data ll84Data) {
@@ -53,21 +54,14 @@ public final class CarbonLimitCalculator {
   private List<OccupancyGroupInfo> constructOccupancyGroupInfo(LL84Data ll84Data) {
 
     requireNonNull(ll84Data, "ll84Data is required and missing.");
-    requireNonNull(lookupData.getLl84ll97(), "lookupData.getLl84ll97() is required and missing.");
-    requireNonNull(
-        lookupData.getLl97CarbonLimit(),
-        "lookupData.getLl97CarbonLimit() is required and missing.");
 
-    Map<String, String> ll84Toll97Mapping = lookupData.getLl84ll97();
+    String occupancyGrp1 = occupancySpaceUseData.get(ll84Data.getSpaceUse1());
+    String occupancyGrp2 = occupancySpaceUseData.get(ll84Data.getSpaceUse2());
+    String occupancyGrp3 = occupancySpaceUseData.get(ll84Data.getSpaceUse3());
 
-    String occupancyGrp1 = ll84Toll97Mapping.get(ll84Data.getSpaceUse1());
-    String occupancyGrp2 = ll84Toll97Mapping.get(ll84Data.getSpaceUse2());
-    String occupancyGrp3 = ll84Toll97Mapping.get(ll84Data.getSpaceUse3());
-
-    Map<String, Map<String, BigDecimal>> ll97CarbonLimit = lookupData.getLl97CarbonLimit();
-    Map<String, BigDecimal> carbonLimitsGrp1 = ll97CarbonLimit.get(occupancyGrp1);
-    Map<String, BigDecimal> carbonLimitsGrp2 = ll97CarbonLimit.get(occupancyGrp2);
-    Map<String, BigDecimal> carbonLimitsGrp3 = ll97CarbonLimit.get(occupancyGrp3);
+    Map<String, BigDecimal> carbonLimitsGrp1 = carbonLimitData.get(occupancyGrp1);
+    Map<String, BigDecimal> carbonLimitsGrp2 = carbonLimitData.get(occupancyGrp2);
+    Map<String, BigDecimal> carbonLimitsGrp3 = carbonLimitData.get(occupancyGrp3);
 
     OccupancyGroupInfo occupancyGroupInfo1 =
         OccupancyGroupInfo.newBuilder()

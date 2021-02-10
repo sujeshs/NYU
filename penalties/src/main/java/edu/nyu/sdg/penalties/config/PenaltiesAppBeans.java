@@ -5,9 +5,12 @@ import static java.util.Objects.*;
 import edu.nyu.sdg.penalties.controller.CarbonLimitCalculator;
 import edu.nyu.sdg.penalties.controller.EnergyConsumptionCalculator;
 import edu.nyu.sdg.penalties.controller.FlowOrchestrator;
-import edu.nyu.sdg.penalties.model.LookupData;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.math.BigDecimal;
+import java.util.Map;
 
 @Configuration
 public class PenaltiesAppBeans {
@@ -18,16 +21,19 @@ public class PenaltiesAppBeans {
   }
 
   @Bean
-  CarbonLimitCalculator carbonLimitCalculator(LookupData lookupData) {
-    requireNonNull(lookupData, "lookupData is required and missing.");
+  CarbonLimitCalculator carbonLimitCalculator( @Qualifier("carbon-limit") Map<String, Map<String, BigDecimal>> carbonLimitData,
+                                               @Qualifier("occupancy-spaceuse") Map<String, String> occupancySpaceUseData) {
+    requireNonNull(carbonLimitData, "carbonLimitData is required and missing.");
+    requireNonNull(occupancySpaceUseData, "occupancySpaceUseData is required and missing.");
 
-    return new CarbonLimitCalculator(lookupData);
+    return new CarbonLimitCalculator(carbonLimitData, occupancySpaceUseData );
   }
 
   @Bean
-  EnergyConsumptionCalculator energyConsumptionCalculator(LookupData lookupData) {
-    requireNonNull(lookupData, "lookupData is required and missing.");
+  EnergyConsumptionCalculator energyConsumptionCalculator( @Qualifier("energy-ghg-coeff") Map<String, BigDecimal> energysrcGHCoeffData) {
+    requireNonNull(energysrcGHCoeffData, "energysrcGHCoeffData is required and missing.");
 
-    return new EnergyConsumptionCalculator(lookupData);
+    return new EnergyConsumptionCalculator(energysrcGHCoeffData);
   }
+
 }
