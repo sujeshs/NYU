@@ -7,6 +7,9 @@ import edu.nyu.sdg.penalties.controller.EnergyConsumptionCalculator;
 import edu.nyu.sdg.penalties.controller.FlowOrchestrator;
 import java.math.BigDecimal;
 import java.util.Map;
+
+import edu.nyu.sdg.penalties.dao.contract.SDGDataInsertDAO;
+import edu.nyu.sdg.penalties.inputstream.file.CSVFileLoader;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,12 +20,15 @@ public class PenaltiesAppBeans {
   @Bean
   FlowOrchestrator flowOrchestrator(
       CarbonLimitCalculator carbonLimitCalculator,
-      EnergyConsumptionCalculator energyConsumptionCalculator) {
+      EnergyConsumptionCalculator energyConsumptionCalculator,
+      SDGDataInsertDAO sdgDataInsertDAO
+  ) {
     requireNonNull(carbonLimitCalculator, "carbonLimitCalculator is required and missing.");
     requireNonNull(
         energyConsumptionCalculator, "energyConsumptionCalculator is required and missing.");
+    requireNonNull(sdgDataInsertDAO, "sdgDataInsertDAO is required and missing.");
 
-    return new FlowOrchestrator(carbonLimitCalculator, energyConsumptionCalculator);
+    return new FlowOrchestrator(carbonLimitCalculator, energyConsumptionCalculator, sdgDataInsertDAO);
   }
 
   @Bean
@@ -41,5 +47,12 @@ public class PenaltiesAppBeans {
     requireNonNull(energysrcGHCoeffData, "energysrcGHCoeffData is required and missing.");
 
     return new EnergyConsumptionCalculator(energysrcGHCoeffData);
+  }
+
+  @Bean
+  CSVFileLoader csvFileLoader(FlowOrchestrator flowOrchestrator) {
+    requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
+
+    return new CSVFileLoader(flowOrchestrator);
   }
 }

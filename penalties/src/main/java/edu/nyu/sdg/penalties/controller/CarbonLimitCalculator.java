@@ -70,27 +70,31 @@ public final class CarbonLimitCalculator {
     OccupancyGroupInfo occupancyGroupInfo1 =
         OccupancyGroupInfo.newBuilder()
             .withOccupancyGroup(occupancyGrp1)
-            .withCarbonLimitPhase1(carbonLimitsGrp1.get(PHASE1))
-            .withCarbonLimitPhase2(carbonLimitsGrp1.get(PHASE2))
+            .withCarbonLimitPhase1(getNullSafeCarbonLimit(carbonLimitsGrp1, PHASE1))
+            .withCarbonLimitPhase2(getNullSafeCarbonLimit(carbonLimitsGrp1, PHASE2))
             .withOccupancyGroupArea(ll84Data.getLargestPropertyUseTypeGrossFloorArea())
             .build();
 
     OccupancyGroupInfo occupancyGroupInfo2 =
         OccupancyGroupInfo.newBuilder()
             .withOccupancyGroup(occupancyGrp2)
-            .withCarbonLimitPhase1(carbonLimitsGrp2.get(PHASE1))
-            .withCarbonLimitPhase2(carbonLimitsGrp2.get(PHASE2))
+            .withCarbonLimitPhase1(getNullSafeCarbonLimit(carbonLimitsGrp2,PHASE1))
+            .withCarbonLimitPhase2(getNullSafeCarbonLimit(carbonLimitsGrp2,PHASE2))
             .withOccupancyGroupArea(ll84Data.getSecondLargestPropertyUseTypeGrossFloorArea())
             .build();
 
     OccupancyGroupInfo occupancyGroupInfo3 =
         OccupancyGroupInfo.newBuilder()
             .withOccupancyGroup(occupancyGrp3)
-            .withCarbonLimitPhase1(carbonLimitsGrp3.get(PHASE1))
-            .withCarbonLimitPhase2(carbonLimitsGrp3.get(PHASE2))
+            .withCarbonLimitPhase1(getNullSafeCarbonLimit(carbonLimitsGrp3,PHASE1))
+            .withCarbonLimitPhase2(getNullSafeCarbonLimit(carbonLimitsGrp3,PHASE2))
             .withOccupancyGroupArea(ll84Data.getThirdLargestPropertyUseTypeGrossFloorArea())
             .build();
 
     return ImmutableList.of(occupancyGroupInfo1, occupancyGroupInfo2, occupancyGroupInfo3);
+  }
+
+  private BigDecimal getNullSafeCarbonLimit(Map<String, BigDecimal> carbonLimits, String key) {
+    return carbonLimits == null ? BigDecimal.ZERO : carbonLimits.get(PHASE1);
   }
 }

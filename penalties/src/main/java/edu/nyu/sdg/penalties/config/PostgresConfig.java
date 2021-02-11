@@ -5,8 +5,11 @@ import static java.util.Objects.requireNonNull;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import edu.nyu.sdg.penalties.dao.contract.LookupDAO;
+import edu.nyu.sdg.penalties.dao.contract.SDGDataInsertDAO;
 import edu.nyu.sdg.penalties.dao.postgres.impl.LookUpDAOPostgresImpl;
 import javax.sql.DataSource;
+
+import edu.nyu.sdg.penalties.dao.postgres.impl.SDGDataInsertPostgresImpl;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,5 +42,11 @@ public class PostgresConfig {
   LookupDAO lookupDAO(JdbcTemplate postgresJdbcTemplate) {
     requireNonNull(postgresJdbcTemplate, "postgresJdbcTemplate is required and missing.");
     return new LookUpDAOPostgresImpl(postgresJdbcTemplate);
+  }
+
+  @Bean
+  SDGDataInsertDAO sdgDataInsertDAO(JdbcTemplate postgresJdbcTemplate) {
+    requireNonNull(postgresJdbcTemplate, "postgresJdbcTemplate is required and missing.");
+    return new SDGDataInsertPostgresImpl(postgresJdbcTemplate);
   }
 }

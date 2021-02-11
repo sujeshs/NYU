@@ -4,7 +4,9 @@ import static java.math.BigDecimal.ZERO;
 import static java.util.Objects.requireNonNull;
 
 import edu.nyu.sdg.penalties.AppConstants;
+import edu.nyu.sdg.penalties.dao.contract.SDGDataInsertDAO;
 import edu.nyu.sdg.penalties.model.CarbonLimits;
+import edu.nyu.sdg.penalties.model.DerivedVariables;
 import edu.nyu.sdg.penalties.model.LL84Data;
 import edu.nyu.sdg.penalties.model.Penalties;
 import java.math.BigDecimal;
@@ -13,15 +15,17 @@ public final class FlowOrchestrator {
 
   private final CarbonLimitCalculator carbonLimitCalculator;
   private final EnergyConsumptionCalculator energyConsumptionCalculator;
+  private final SDGDataInsertDAO sdgDataInsertDAO;
 
   public FlowOrchestrator(
-      CarbonLimitCalculator carbonLimitCalculator,
-      EnergyConsumptionCalculator energyConsumptionCalculator) {
+    CarbonLimitCalculator carbonLimitCalculator,
+    EnergyConsumptionCalculator energyConsumptionCalculator, SDGDataInsertDAO sdgDataInsertDAO) {
     this.carbonLimitCalculator =
         requireNonNull(carbonLimitCalculator, "carbonLimitCalculator is required and missing.");
     this.energyConsumptionCalculator =
         requireNonNull(
             energyConsumptionCalculator, "energyConsumptionCalculator is required and missing.");
+    this.sdgDataInsertDAO = requireNonNull(sdgDataInsertDAO, "sdgDataInsertDAO is required and missing.");
   }
 
   /**
@@ -53,11 +57,23 @@ public final class FlowOrchestrator {
             ? phase2ExcessEmission.multiply(AppConstants.PENALTY_PER_TON)
             : ZERO;
 
-    return Penalties.newBuilder()
+    Penalties calculatedPenalties = Penalties.newBuilder()
         .withPhase1Penalties(phase1Penalty)
         .withPhase2Penalties(phase2Penalty)
         .withPhase1PenaltiesUSD(AppConstants.CURRENCY_FORMAT.format(phase1Penalty))
         .withPhase2PenaltiesUSD(AppConstants.CURRENCY_FORMAT.format(phase2Penalty))
         .build();
+
+    DerivedVariables derivedVariables = DerivedVariables.newBuilder()
+      .withPenalties(calculatedPenalties)
+      .withCarbonLimits(carbonLimits)
+      .withTotalActualEmissions(emissions)
+      .withExcessEmissionPhase1(phase1ExcessEmission)
+      .withExcessEmissionPhase2(phase2ExcessEmission)
+      .build();
+
+    sdgDataInsertDAO.writePenaltyInfo(ll84Data, derivedVariables);
+
+    return calculatedPenalties;
   }
 }

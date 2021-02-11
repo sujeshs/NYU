@@ -4,15 +4,15 @@ create extension if not exists "uuid-ossp";
 
 create table FEED_LL84_BBL(
 ID SERIAL,
-BBL BIGINT not null,
-NYC_BIN BIGINT not null,
-PROPERTY_ID BIGINT,
+BBL varchar(1000) not null,
+NYC_BIN BIGINT varchar(1000) null,
+PROPERTY_ID varchar(1000),
 PROPERTY_NAME VARCHAR(40),
 CITY_BUILDING VARCHAR(4),
 EMAIL VARCHAR(60),
 ADDRESS_LINE_1 VARCHAR(100),
 ADDRESS_LINE_2 VARCHAR(100),
-POSTAL_CODE BIGINT,
+POSTAL_CODE varchar(100),
 BOROUGH VARCHAR(50),
 DOF_GROSS_FLOOR_AREA DECIMAL(24,2),
 SELF_REPORTED_GROSS_FLOOR_AREA DECIMAL(24,2),
@@ -72,7 +72,7 @@ SPACE_USE     varchar(100) not null
 /** Computed values */
 create table DERIVED_PENALTY_EXEMPTION(
 ID SERIAL,
-BBL BIGINT primary key not null, /** TODO: check with Alejandro if penalty exemptions can be tracked at BBL level */
+BBL varchar(1000) primary key not null, /** TODO: check with Alejandro if penalty exemptions can be tracked at BBL level */
 POWER_GENERATION BOOLEAN,
 CITY_BUILDING BOOLEAN,
 NYCHA BOOLEAN,
@@ -83,18 +83,20 @@ PROJECT_BASED_FED_HOUSING_PROGRAM BOOLEAN,
 PENALTY_EXEMPT_FLAG BOOLEAN
 );
 
-create table DERIVED_PENALTY_VARIABLES(
-ID SERIAL,
-BBL BIGINT not null,
-NYC_BIN BIGINT not null,
-TOTAL_CARBON_EMISSION_THRESHOLD_2024_202 DECIMAL(24,2),
-TOTAL_CARBON_EMISSION_THRESHOLD_2030_2034 DECIMAL(24,2),
-TOTAL_ACTUAL_EMISSION DECIMAL(24,2),
-EMISSION_EXCESS_2024_2029 DECIMAL(24,2),
-EMISSION_EXCESS_2030_2034 DECIMAL(24,2),
-EMISSION_PENALTY_2024_2029 DECIMAL(24,2),
-EMISSION_PENALTY_2030_2034 DECIMAL(24,2),
-primary key (BBL, NYC_BIN)
+create table DERIVED_PENALTY_VARIABLES
+(
+    ID                                        serial        not null,
+    BBL                                       varchar(1000) not null,
+    NYC_BIN                                   varchar(1000) not null,
+    TOTAL_CARBON_EMISSION_THRESHOLD_2024_2029 numeric(24, 2),
+    TOTAL_CARBON_EMISSION_THRESHOLD_2030_2034 numeric(24, 2),
+    TOTAL_ACTUAL_EMISSION                     numeric(24, 2),
+    EMISSION_EXCESS_2024_2029                 numeric(24, 2),
+    EMISSION_EXCESS_2030_2034                 numeric(24, 2),
+    EMISSION_PENALTY_2024_2029                varchar(100),
+    EMISSION_PENALTY_2030_2034                varchar(100),
+    constraint derived_penalty_variables_pkey
+        primary key (bbl, nyc_bin)
 );
 
 create table FEED_SOANA_OWNERSHIP_INFO(

@@ -22,11 +22,13 @@ INSERT INTO public.lookup_carbon_limit (id, occupancy_grp, carbon_limit_2024_202
 INSERT INTO public.lookup_carbon_limit (id, occupancy_grp, carbon_limit_2024_2029, carbon_limit_2030_2034) VALUES (56, 'U-Utility/Misc', 0.00, 0.00);
 
 
+INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (36, 'B-Business', 'Financial Office');
+INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (15, 'I2-Institutional', 'Hospital (General Medical & Surgical)');
+INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (40, 'B-Business', 'Bank Branch');
+INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (3, 'M-Mercantile', 'Retail Store');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (1, 'B-Business', 'Office');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (2, 'R2-Residential', 'MultifamilyHousing');
-INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (3, 'M-Mercantile', 'RetailStore');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (4, 'A-Assembly', 'SocialMeetingHall');
-INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (5, 'B-AmbulatoryHealth', 'MedicalOffice');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (6, 'E-Educational', 'K-12 School');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (7, 'R1-Residential', 'Hotel');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (8, 'A-Assembly', 'WorshipFacility');
@@ -35,8 +37,6 @@ INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_u
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (11, 'S-Storage', 'Non-RefrigeratedWarehouse');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (12, 'S-Storage', 'RefrigeratedWarehouse');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (13, 'F-Factory/Industrial', 'Manufacturing/IndustrialPlant');
-INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (14, 'R2-Residential', 'MultifamilyHousing');
-INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (15, 'I2-Institutional', 'Hospital(GeneralMedical&Surgical)*');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (16, 'A-Assembly', 'Other');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (17, 'A-Assembly', 'Other-Education');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (18, 'A-Assembly', 'Museum');
@@ -57,11 +57,9 @@ INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_u
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (33, 'U-Utility/Misc', 'Parking');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (34, 'E-Educational', 'AdultEducation');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (35, 'U-Utility/Misc', 'Self-StorageFacility');
-INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (36, 'B-Business', 'FinancialOffice');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (37, 'M-Mercantile', 'StripMall');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (38, 'I3-Institutional', 'Prison/Incarceration');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (39, 'B-Business', 'FitnessCenter/HealthClub/Gym');
-INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (40, 'B-Business', 'BankBranch');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (41, 'M-Mercantile', 'WholesaleClub/Supercenter');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (42, 'B-Business', 'DataCenter');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (43, 'U-Utility/Misc', 'Other-Services');
