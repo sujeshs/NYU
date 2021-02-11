@@ -8,7 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class PenaltiesApplication {
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
 
     ConfigurableApplicationContext ctx = SpringApplication.run(PenaltiesApplication.class, args);
 

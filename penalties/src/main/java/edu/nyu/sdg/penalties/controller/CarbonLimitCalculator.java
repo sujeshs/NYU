@@ -59,9 +59,9 @@ public final class CarbonLimitCalculator {
 
     requireNonNull(ll84Data, "ll84Data is required and missing.");
 
-    String occupancyGrp1 = occupancySpaceUseData.get(ll84Data.getSpaceUse1());
-    String occupancyGrp2 = occupancySpaceUseData.get(ll84Data.getSpaceUse2());
-    String occupancyGrp3 = occupancySpaceUseData.get(ll84Data.getSpaceUse3());
+    String occupancyGrp1 = occupancySpaceUseData.get(ll84Data.getLargestPropertyUseType());
+    String occupancyGrp2 = occupancySpaceUseData.get(ll84Data.getSecondLargestPropertyUseType());
+    String occupancyGrp3 = occupancySpaceUseData.get(ll84Data.getThirdLargestPropertyUseType());
 
     Map<String, BigDecimal> carbonLimitsGrp1 = carbonLimitData.get(occupancyGrp1);
     Map<String, BigDecimal> carbonLimitsGrp2 = carbonLimitData.get(occupancyGrp2);
@@ -72,7 +72,7 @@ public final class CarbonLimitCalculator {
             .withOccupancyGroup(occupancyGrp1)
             .withCarbonLimitPhase1(carbonLimitsGrp1.get(PHASE1))
             .withCarbonLimitPhase2(carbonLimitsGrp1.get(PHASE2))
-            .withOccupancyGroupArea(ll84Data.getSpaceUse1FloorArea())
+            .withOccupancyGroupArea(ll84Data.getLargestPropertyUseTypeGrossFloorArea())
             .build();
 
     OccupancyGroupInfo occupancyGroupInfo2 =
@@ -80,7 +80,7 @@ public final class CarbonLimitCalculator {
             .withOccupancyGroup(occupancyGrp2)
             .withCarbonLimitPhase1(carbonLimitsGrp2.get(PHASE1))
             .withCarbonLimitPhase2(carbonLimitsGrp2.get(PHASE2))
-            .withOccupancyGroupArea(ll84Data.getSpaceUse2FloorArea())
+            .withOccupancyGroupArea(ll84Data.getSecondLargestPropertyUseTypeGrossFloorArea())
             .build();
 
     OccupancyGroupInfo occupancyGroupInfo3 =
@@ -88,7 +88,7 @@ public final class CarbonLimitCalculator {
             .withOccupancyGroup(occupancyGrp3)
             .withCarbonLimitPhase1(carbonLimitsGrp3.get(PHASE1))
             .withCarbonLimitPhase2(carbonLimitsGrp3.get(PHASE2))
-            .withOccupancyGroupArea(ll84Data.getSpaceUse3FloorArea())
+            .withOccupancyGroupArea(ll84Data.getThirdLargestPropertyUseTypeGrossFloorArea())
             .build();
 
     return ImmutableList.of(occupancyGroupInfo1, occupancyGroupInfo2, occupancyGroupInfo3);

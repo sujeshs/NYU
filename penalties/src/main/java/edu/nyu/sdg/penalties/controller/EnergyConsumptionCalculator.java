@@ -33,14 +33,14 @@ public final class EnergyConsumptionCalculator {
             ? BigDecimal.valueOf(0)
             : ll84Data.getFuelOil4Use().multiply(energysrcGHCoeffData.get("FuelOil4"));
     BigDecimal emissionFromNaturalGas =
-        ll84Data.getNaturalGasUse() == null
+        ll84Data.getNaturalGasUsekBTU() == null
             ? BigDecimal.valueOf(0)
-            : ll84Data.getNaturalGasUse().multiply(energysrcGHCoeffData.get("Natural-Gas"));
+            : ll84Data.getNaturalGasUsekBTU().multiply(energysrcGHCoeffData.get("Natural-Gas"));
     BigDecimal emissionFromElectricity =
-        ll84Data.getElectricityUse() == null
+        ll84Data.getElectricityGridPurchasekWh() == null
             ? BigDecimal.valueOf(0)
             : ll84Data
-                .getElectricityUse()
+                .getElectricityGridPurchasekWh()
                 .multiply(energysrcGHCoeffData.get("Utility-Electricity"));
 
     return carbonEmission

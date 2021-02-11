@@ -1,47 +1,379 @@
 package edu.nyu.sdg.penalties.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
+import java.util.StringJoiner;
 
 public final class LL84Data {
 
-  private BigDecimal diesel2Use;
-  private BigDecimal districtSteamUse;
-  private BigDecimal electricityUse;
+  private int order;
+  private int propertyId;
+  private String propertyName;
+  private String parentPropertyId;
+  private String parentPropertyName;
+  private String cityBuilding;
+  private String email;
+  private String BBL10Digits;
+  private String NYCBBLSelfReported;
+  private String NYCBIN;
+  private String address1SelfReported;
+  private String address2SelfReported;
+  private int postalCode;
+  private int streetNumber;
+  private String streetName;
+  private String borough;
+  private BigDecimal dofGrossFloorArea;
+  private BigDecimal selfReportedGrossFloorArea;
+  private String primaryPropertyTypeSelfSelected;
+  private String listOfAllPropertyUseTypes;
+  private String largestPropertyUseType;
+  private BigDecimal largestPropertyUseTypeGrossFloorArea;
+  private String secondLargestPropertyUseType;
+  private BigDecimal secondLargestPropertyUseTypeGrossFloorArea;
+  private String thirdLargestPropertyUseType;
+  private BigDecimal thirdLargestPropertyUseTypeGrossFloorArea;
+  private int yearBuilt;
+  private int numberOfBuildings;
+  private int ocupancy;
+  private String energyMeteredAreas;
+  private String waterMeteredAreas;
+  private int energyStarScore;
+  private BigDecimal sourceEUI;
+  private BigDecimal weatherNormalizedSiteEUI;
+  private BigDecimal siteEUI;
+  private BigDecimal weatherNormalizedSourceEUI;
+  private BigDecimal weatherNormalizedElectricityIntensity;
+  private BigDecimal weatherNormalizedNaturalGasIntensity;
   private BigDecimal fuelOil1Use;
   private BigDecimal fuelOil2Use;
   private BigDecimal fuelOil4Use;
   private BigDecimal fuelOil5_6Use;
-  private BigDecimal naturalGasUse;
+  private BigDecimal diesel2Use;
+  private BigDecimal keroseneUse;
   private BigDecimal propaneUse;
-  private BigDecimal spaceUse1FloorArea;
-  private BigDecimal spaceUse2FloorArea;
-  private BigDecimal spaceUse3FloorArea;
-  private String spaceUse1;
-  private String spaceUse2;
-  private String spaceUse3;
+  private BigDecimal districtSteamUse;
+  private BigDecimal districtHotWaterUse;
+  private BigDecimal districtChilledWaterUse;
+  private BigDecimal naturalGasUsekBTU;
+  private BigDecimal naturalGasUseTherms;
+  private BigDecimal electricityGridPurchasekBTU;
+  private BigDecimal electricityGridPurchasekWh;
+  private BigDecimal weatherNormalizedSiteElectricity;
+  private BigDecimal annualMaximumDemandkW;
+  private Date annualMaximumDemandDate;
+  private int annualMaximumDemandMeterIDName;
+  private BigDecimal totalGHGEmissions;
+  private BigDecimal directGHGEmissions;
+  private BigDecimal indirectGHGEmissions;
+  private BigDecimal waterUseAllSources;
+  private BigDecimal waterUseINtensityAllSources;
+  private String waterRequired;
+  private Date generationDate;
+  private BigDecimal latitude;
+  private BigDecimal longitude;
 
-  public BigDecimal getDiesel2Use() {
-    return diesel2Use;
+  public int getOrder() {
+    return order;
   }
 
-  public void setDiesel2Use(BigDecimal diesel2Use) {
-    this.diesel2Use = diesel2Use;
+  public void setOrder(int order) {
+    this.order = order;
   }
 
-  public BigDecimal getDistrictSteamUse() {
-    return districtSteamUse;
+  public int getPropertyId() {
+    return propertyId;
   }
 
-  public void setDistrictSteamUse(BigDecimal districtSteamUse) {
-    this.districtSteamUse = districtSteamUse;
+  public void setPropertyId(int propertyId) {
+    this.propertyId = propertyId;
   }
 
-  public BigDecimal getElectricityUse() {
-    return electricityUse;
+  public String getPropertyName() {
+    return propertyName;
   }
 
-  public void setElectricityUse(BigDecimal electricityUse) {
-    this.electricityUse = electricityUse;
+  public void setPropertyName(String propertyName) {
+    this.propertyName = propertyName;
+  }
+
+  public String getParentPropertyId() {
+    return parentPropertyId;
+  }
+
+  public void setParentPropertyId(String parentPropertyId) {
+    this.parentPropertyId = parentPropertyId;
+  }
+
+  public String getParentPropertyName() {
+    return parentPropertyName;
+  }
+
+  public void setParentPropertyName(String parentPropertyName) {
+    this.parentPropertyName = parentPropertyName;
+  }
+
+  public String getCityBuilding() {
+    return cityBuilding;
+  }
+
+  public void setCityBuilding(String cityBuilding) {
+    this.cityBuilding = cityBuilding;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getBBL10Digits() {
+    return BBL10Digits;
+  }
+
+  public void setBBL10Digits(String BBL10Digits) {
+    this.BBL10Digits = BBL10Digits;
+  }
+
+  public String getNYCBBLSelfReported() {
+    return NYCBBLSelfReported;
+  }
+
+  public void setNYCBBLSelfReported(String NYCBBLSelfReported) {
+    this.NYCBBLSelfReported = NYCBBLSelfReported;
+  }
+
+  public String getNYCBIN() {
+    return NYCBIN;
+  }
+
+  public void setNYCBIN(String NYCBIN) {
+    this.NYCBIN = NYCBIN;
+  }
+
+  public String getAddress1SelfReported() {
+    return address1SelfReported;
+  }
+
+  public void setAddress1SelfReported(String address1SelfReported) {
+    this.address1SelfReported = address1SelfReported;
+  }
+
+  public String getAddress2SelfReported() {
+    return address2SelfReported;
+  }
+
+  public void setAddress2SelfReported(String address2SelfReported) {
+    this.address2SelfReported = address2SelfReported;
+  }
+
+  public int getPostalCode() {
+    return postalCode;
+  }
+
+  public void setPostalCode(int postalCode) {
+    this.postalCode = postalCode;
+  }
+
+  public int getStreetNumber() {
+    return streetNumber;
+  }
+
+  public void setStreetNumber(int streetNumber) {
+    this.streetNumber = streetNumber;
+  }
+
+  public String getStreetName() {
+    return streetName;
+  }
+
+  public void setStreetName(String streetName) {
+    this.streetName = streetName;
+  }
+
+  public String getBorough() {
+    return borough;
+  }
+
+  public void setBorough(String borough) {
+    this.borough = borough;
+  }
+
+  public BigDecimal getDofGrossFloorArea() {
+    return dofGrossFloorArea;
+  }
+
+  public void setDofGrossFloorArea(BigDecimal dofGrossFloorArea) {
+    this.dofGrossFloorArea = dofGrossFloorArea;
+  }
+
+  public BigDecimal getSelfReportedGrossFloorArea() {
+    return selfReportedGrossFloorArea;
+  }
+
+  public void setSelfReportedGrossFloorArea(BigDecimal selfReportedGrossFloorArea) {
+    this.selfReportedGrossFloorArea = selfReportedGrossFloorArea;
+  }
+
+  public String getPrimaryPropertyTypeSelfSelected() {
+    return primaryPropertyTypeSelfSelected;
+  }
+
+  public void setPrimaryPropertyTypeSelfSelected(String primaryPropertyTypeSelfSelected) {
+    this.primaryPropertyTypeSelfSelected = primaryPropertyTypeSelfSelected;
+  }
+
+  public String getListOfAllPropertyUseTypes() {
+    return listOfAllPropertyUseTypes;
+  }
+
+  public void setListOfAllPropertyUseTypes(String listOfAllPropertyUseTypes) {
+    this.listOfAllPropertyUseTypes = listOfAllPropertyUseTypes;
+  }
+
+  public String getLargestPropertyUseType() {
+    return largestPropertyUseType;
+  }
+
+  public void setLargestPropertyUseType(String largestPropertyUseType) {
+    this.largestPropertyUseType = largestPropertyUseType;
+  }
+
+  public BigDecimal getLargestPropertyUseTypeGrossFloorArea() {
+    return largestPropertyUseTypeGrossFloorArea;
+  }
+
+  public void setLargestPropertyUseTypeGrossFloorArea(BigDecimal largestPropertyUseTypeGrossFloorArea) {
+    this.largestPropertyUseTypeGrossFloorArea = largestPropertyUseTypeGrossFloorArea;
+  }
+
+  public String getSecondLargestPropertyUseType() {
+    return secondLargestPropertyUseType;
+  }
+
+  public void setSecondLargestPropertyUseType(String secondLargestPropertyUseType) {
+    this.secondLargestPropertyUseType = secondLargestPropertyUseType;
+  }
+
+  public BigDecimal getSecondLargestPropertyUseTypeGrossFloorArea() {
+    return secondLargestPropertyUseTypeGrossFloorArea;
+  }
+
+  public void setSecondLargestPropertyUseTypeGrossFloorArea(BigDecimal secondLargestPropertyUseTypeGrossFloorArea) {
+    this.secondLargestPropertyUseTypeGrossFloorArea = secondLargestPropertyUseTypeGrossFloorArea;
+  }
+
+  public String getThirdLargestPropertyUseType() {
+    return thirdLargestPropertyUseType;
+  }
+
+  public void setThirdLargestPropertyUseType(String thirdLargestPropertyUseType) {
+    this.thirdLargestPropertyUseType = thirdLargestPropertyUseType;
+  }
+
+  public BigDecimal getThirdLargestPropertyUseTypeGrossFloorArea() {
+    return thirdLargestPropertyUseTypeGrossFloorArea;
+  }
+
+  public void setThirdLargestPropertyUseTypeGrossFloorArea(BigDecimal thirdLargestPropertyUseTypeGrossFloorArea) {
+    this.thirdLargestPropertyUseTypeGrossFloorArea = thirdLargestPropertyUseTypeGrossFloorArea;
+  }
+
+  public int getYearBuilt() {
+    return yearBuilt;
+  }
+
+  public void setYearBuilt(int yearBuilt) {
+    this.yearBuilt = yearBuilt;
+  }
+
+  public int getNumberOfBuildings() {
+    return numberOfBuildings;
+  }
+
+  public void setNumberOfBuildings(int numberOfBuildings) {
+    this.numberOfBuildings = numberOfBuildings;
+  }
+
+  public int getOcupancy() {
+    return ocupancy;
+  }
+
+  public void setOcupancy(int ocupancy) {
+    this.ocupancy = ocupancy;
+  }
+
+  public String getEnergyMeteredAreas() {
+    return energyMeteredAreas;
+  }
+
+  public void setEnergyMeteredAreas(String energyMeteredAreas) {
+    this.energyMeteredAreas = energyMeteredAreas;
+  }
+
+  public String getWaterMeteredAreas() {
+    return waterMeteredAreas;
+  }
+
+  public void setWaterMeteredAreas(String waterMeteredAreas) {
+    this.waterMeteredAreas = waterMeteredAreas;
+  }
+
+  public int getEnergyStarScore() {
+    return energyStarScore;
+  }
+
+  public void setEnergyStarScore(int energyStarScore) {
+    this.energyStarScore = energyStarScore;
+  }
+
+  public BigDecimal getSourceEUI() {
+    return sourceEUI;
+  }
+
+  public void setSourceEUI(BigDecimal sourceEUI) {
+    this.sourceEUI = sourceEUI;
+  }
+
+  public BigDecimal getWeatherNormalizedSiteEUI() {
+    return weatherNormalizedSiteEUI;
+  }
+
+  public void setWeatherNormalizedSiteEUI(BigDecimal weatherNormalizedSiteEUI) {
+    this.weatherNormalizedSiteEUI = weatherNormalizedSiteEUI;
+  }
+
+  public BigDecimal getSiteEUI() {
+    return siteEUI;
+  }
+
+  public void setSiteEUI(BigDecimal siteEUI) {
+    this.siteEUI = siteEUI;
+  }
+
+  public BigDecimal getWeatherNormalizedSourceEUI() {
+    return weatherNormalizedSourceEUI;
+  }
+
+  public void setWeatherNormalizedSourceEUI(BigDecimal weatherNormalizedSourceEUI) {
+    this.weatherNormalizedSourceEUI = weatherNormalizedSourceEUI;
+  }
+
+  public BigDecimal getWeatherNormalizedElectricityIntensity() {
+    return weatherNormalizedElectricityIntensity;
+  }
+
+  public void setWeatherNormalizedElectricityIntensity(BigDecimal weatherNormalizedElectricityIntensity) {
+    this.weatherNormalizedElectricityIntensity = weatherNormalizedElectricityIntensity;
+  }
+
+  public BigDecimal getWeatherNormalizedNaturalGasIntensity() {
+    return weatherNormalizedNaturalGasIntensity;
+  }
+
+  public void setWeatherNormalizedNaturalGasIntensity(BigDecimal weatherNormalizedNaturalGasIntensity) {
+    this.weatherNormalizedNaturalGasIntensity = weatherNormalizedNaturalGasIntensity;
   }
 
   public BigDecimal getFuelOil1Use() {
@@ -76,12 +408,20 @@ public final class LL84Data {
     this.fuelOil5_6Use = fuelOil5_6Use;
   }
 
-  public BigDecimal getNaturalGasUse() {
-    return naturalGasUse;
+  public BigDecimal getDiesel2Use() {
+    return diesel2Use;
   }
 
-  public void setNaturalGasUse(BigDecimal naturalGasUse) {
-    this.naturalGasUse = naturalGasUse;
+  public void setDiesel2Use(BigDecimal diesel2Use) {
+    this.diesel2Use = diesel2Use;
+  }
+
+  public BigDecimal getKeroseneUse() {
+    return keroseneUse;
+  }
+
+  public void setKeroseneUse(BigDecimal keroseneUse) {
+    this.keroseneUse = keroseneUse;
   }
 
   public BigDecimal getPropaneUse() {
@@ -92,51 +432,234 @@ public final class LL84Data {
     this.propaneUse = propaneUse;
   }
 
-  public BigDecimal getSpaceUse1FloorArea() {
-    return spaceUse1FloorArea;
+  public BigDecimal getDistrictSteamUse() {
+    return districtSteamUse;
   }
 
-  public void setSpaceUse1FloorArea(BigDecimal spaceUse1FloorArea) {
-    this.spaceUse1FloorArea = spaceUse1FloorArea;
+  public void setDistrictSteamUse(BigDecimal districtSteamUse) {
+    this.districtSteamUse = districtSteamUse;
   }
 
-  public BigDecimal getSpaceUse2FloorArea() {
-    return spaceUse2FloorArea;
+  public BigDecimal getDistrictHotWaterUse() {
+    return districtHotWaterUse;
   }
 
-  public void setSpaceUse2FloorArea(BigDecimal spaceUse2FloorArea) {
-    this.spaceUse2FloorArea = spaceUse2FloorArea;
+  public void setDistrictHotWaterUse(BigDecimal districtHotWaterUse) {
+    this.districtHotWaterUse = districtHotWaterUse;
   }
 
-  public BigDecimal getSpaceUse3FloorArea() {
-    return spaceUse3FloorArea;
+  public BigDecimal getDistrictChilledWaterUse() {
+    return districtChilledWaterUse;
   }
 
-  public void setSpaceUse3FloorArea(BigDecimal spaceUse3FloorArea) {
-    this.spaceUse3FloorArea = spaceUse3FloorArea;
+  public void setDistrictChilledWaterUse(BigDecimal districtChilledWaterUse) {
+    this.districtChilledWaterUse = districtChilledWaterUse;
   }
 
-  public String getSpaceUse1() {
-    return spaceUse1;
+  public BigDecimal getNaturalGasUsekBTU() {
+    return naturalGasUsekBTU;
   }
 
-  public void setSpaceUse1(String spaceUse1) {
-    this.spaceUse1 = spaceUse1;
+  public void setNaturalGasUsekBTU(BigDecimal naturalGasUsekBTU) {
+    this.naturalGasUsekBTU = naturalGasUsekBTU;
   }
 
-  public String getSpaceUse2() {
-    return spaceUse2;
+  public BigDecimal getNaturalGasUseTherms() {
+    return naturalGasUseTherms;
   }
 
-  public void setSpaceUse2(String spaceUse2) {
-    this.spaceUse2 = spaceUse2;
+  public void setNaturalGasUseTherms(BigDecimal naturalGasUseTherms) {
+    this.naturalGasUseTherms = naturalGasUseTherms;
   }
 
-  public String getSpaceUse3() {
-    return spaceUse3;
+  public BigDecimal getElectricityGridPurchasekBTU() {
+    return electricityGridPurchasekBTU;
   }
 
-  public void setSpaceUse3(String spaceUse3) {
-    this.spaceUse3 = spaceUse3;
+  public void setElectricityGridPurchasekBTU(BigDecimal electricityGridPurchasekBTU) {
+    this.electricityGridPurchasekBTU = electricityGridPurchasekBTU;
+  }
+
+  public BigDecimal getElectricityGridPurchasekWh() {
+    return electricityGridPurchasekWh;
+  }
+
+  public void setElectricityGridPurchasekWh(BigDecimal electricityGridPurchasekWh) {
+    this.electricityGridPurchasekWh = electricityGridPurchasekWh;
+  }
+
+  public BigDecimal getWeatherNormalizedSiteElectricity() {
+    return weatherNormalizedSiteElectricity;
+  }
+
+  public void setWeatherNormalizedSiteElectricity(BigDecimal weatherNormalizedSiteElectricity) {
+    this.weatherNormalizedSiteElectricity = weatherNormalizedSiteElectricity;
+  }
+
+  public BigDecimal getAnnualMaximumDemandkW() {
+    return annualMaximumDemandkW;
+  }
+
+  public void setAnnualMaximumDemandkW(BigDecimal annualMaximumDemandkW) {
+    this.annualMaximumDemandkW = annualMaximumDemandkW;
+  }
+
+  public Date getAnnualMaximumDemandDate() {
+    return annualMaximumDemandDate;
+  }
+
+  public void setAnnualMaximumDemandDate(Date annualMaximumDemandDate) {
+    this.annualMaximumDemandDate = annualMaximumDemandDate;
+  }
+
+  public int getAnnualMaximumDemandMeterIDName() {
+    return annualMaximumDemandMeterIDName;
+  }
+
+  public void setAnnualMaximumDemandMeterIDName(int annualMaximumDemandMeterIDName) {
+    this.annualMaximumDemandMeterIDName = annualMaximumDemandMeterIDName;
+  }
+
+  public BigDecimal getTotalGHGEmissions() {
+    return totalGHGEmissions;
+  }
+
+  public void setTotalGHGEmissions(BigDecimal totalGHGEmissions) {
+    this.totalGHGEmissions = totalGHGEmissions;
+  }
+
+  public BigDecimal getDirectGHGEmissions() {
+    return directGHGEmissions;
+  }
+
+  public void setDirectGHGEmissions(BigDecimal directGHGEmissions) {
+    this.directGHGEmissions = directGHGEmissions;
+  }
+
+  public BigDecimal getIndirectGHGEmissions() {
+    return indirectGHGEmissions;
+  }
+
+  public void setIndirectGHGEmissions(BigDecimal indirectGHGEmissions) {
+    this.indirectGHGEmissions = indirectGHGEmissions;
+  }
+
+  public BigDecimal getWaterUseAllSources() {
+    return waterUseAllSources;
+  }
+
+  public void setWaterUseAllSources(BigDecimal waterUseAllSources) {
+    this.waterUseAllSources = waterUseAllSources;
+  }
+
+  public BigDecimal getWaterUseINtensityAllSources() {
+    return waterUseINtensityAllSources;
+  }
+
+  public void setWaterUseINtensityAllSources(BigDecimal waterUseINtensityAllSources) {
+    this.waterUseINtensityAllSources = waterUseINtensityAllSources;
+  }
+
+  public String getWaterRequired() {
+    return waterRequired;
+  }
+
+  public void setWaterRequired(String waterRequired) {
+    this.waterRequired = waterRequired;
+  }
+
+  public Date getGenerationDate() {
+    return generationDate;
+  }
+
+  public void setGenerationDate(Date generationDate) {
+    this.generationDate = generationDate;
+  }
+
+  public BigDecimal getLatitude() {
+    return latitude;
+  }
+
+  public void setLatitude(BigDecimal latitude) {
+    this.latitude = latitude;
+  }
+
+  public BigDecimal getLongitude() {
+    return longitude;
+  }
+
+  public void setLongitude(BigDecimal longitude) {
+    this.longitude = longitude;
+  }
+
+  @Override
+  public String toString() {
+    return new StringJoiner(", ", LL84Data.class.getSimpleName() + "[", "]")
+      .add("order=" + order)
+      .add("propertyId=" + propertyId)
+      .add("propertyName='" + propertyName + "'")
+      .add("parentPropertyId='" + parentPropertyId + "'")
+      .add("parentPropertyName='" + parentPropertyName + "'")
+      .add("cityBuilding='" + cityBuilding + "'")
+      .add("email='" + email + "'")
+      .add("BBL10Digits='" + BBL10Digits + "'")
+      .add("NYCBBLSelfReported='" + NYCBBLSelfReported + "'")
+      .add("NYCBIN='" + NYCBIN + "'")
+      .add("address1SelfReported='" + address1SelfReported + "'")
+      .add("address2SelfReported='" + address2SelfReported + "'")
+      .add("postalCode=" + postalCode)
+      .add("streetNumber=" + streetNumber)
+      .add("streetName='" + streetName + "'")
+      .add("borough='" + borough + "'")
+      .add("dofGrossFloorArea=" + dofGrossFloorArea)
+      .add("selfReportedGrossFloorArea=" + selfReportedGrossFloorArea)
+      .add("primaryPropertyTypeSelfSelected='" + primaryPropertyTypeSelfSelected + "'")
+      .add("listOfAllPropertyUseTypes='" + listOfAllPropertyUseTypes + "'")
+      .add("largestPropertyUseType='" + largestPropertyUseType + "'")
+      .add("largestPropertyUseTypeGrossFloorArea=" + largestPropertyUseTypeGrossFloorArea)
+      .add("secondLargestPropertyUseType='" + secondLargestPropertyUseType + "'")
+      .add("secondLargestPropertyUseTypeGrossFloorArea=" + secondLargestPropertyUseTypeGrossFloorArea)
+      .add("thirdLargestPropertyUseType='" + thirdLargestPropertyUseType + "'")
+      .add("thirdLargestPropertyUseTypeGrossFloorArea=" + thirdLargestPropertyUseTypeGrossFloorArea)
+      .add("yearBuilt=" + yearBuilt)
+      .add("numberOfBuildings=" + numberOfBuildings)
+      .add("ocupancy=" + ocupancy)
+      .add("energyMeteredAreas='" + energyMeteredAreas + "'")
+      .add("waterMeteredAreas='" + waterMeteredAreas + "'")
+      .add("energyStarScore=" + energyStarScore)
+      .add("sourceEUI=" + sourceEUI)
+      .add("weatherNormalizedSiteEUI=" + weatherNormalizedSiteEUI)
+      .add("siteEUI=" + siteEUI)
+      .add("weatherNormalizedSourceEUI=" + weatherNormalizedSourceEUI)
+      .add("weatherNormalizedElectricityIntensity=" + weatherNormalizedElectricityIntensity)
+      .add("weatherNormalizedNaturalGasIntensity=" + weatherNormalizedNaturalGasIntensity)
+      .add("fuelOil1Use=" + fuelOil1Use)
+      .add("fuelOil2Use=" + fuelOil2Use)
+      .add("fuelOil4Use=" + fuelOil4Use)
+      .add("fuelOil5_6Use=" + fuelOil5_6Use)
+      .add("diesel2Use=" + diesel2Use)
+      .add("keroseneUse=" + keroseneUse)
+      .add("propaneUse=" + propaneUse)
+      .add("districtSteamUse=" + districtSteamUse)
+      .add("districtHotWaterUse=" + districtHotWaterUse)
+      .add("districtChilledWaterUse=" + districtChilledWaterUse)
+      .add("naturalGasUsekBTU=" + naturalGasUsekBTU)
+      .add("naturalGasUseTherms=" + naturalGasUseTherms)
+      .add("electricityGridPurchasekBTU=" + electricityGridPurchasekBTU)
+      .add("electricityGridPurchasekWh=" + electricityGridPurchasekWh)
+      .add("weatherNormalizedSiteElectricity=" + weatherNormalizedSiteElectricity)
+      .add("annualMaximumDemandkW=" + annualMaximumDemandkW)
+      .add("annualMaximumDemandDate=" + annualMaximumDemandDate)
+      .add("annualMaximumDemandMeterIDName=" + annualMaximumDemandMeterIDName)
+      .add("totalGHGEmissions=" + totalGHGEmissions)
+      .add("directGHGEmissions=" + directGHGEmissions)
+      .add("indirectGHGEmissions=" + indirectGHGEmissions)
+      .add("waterUseAllSources=" + waterUseAllSources)
+      .add("waterUseINtensityAllSources=" + waterUseINtensityAllSources)
+      .add("waterRequired='" + waterRequired + "'")
+      .add("generationDate=" + generationDate)
+      .add("latitude=" + latitude)
+      .add("longitude=" + longitude)
+      .toString();
   }
 }
