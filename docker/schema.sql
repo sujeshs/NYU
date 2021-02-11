@@ -52,7 +52,6 @@ primary key (BBL, NYC_BIN)
 create table LOOKUP_CARBON_LIMIT(
 ID SERIAL,
 OCCUPANCY_GRP varchar(40) not null,
-SPACE_USE VARCHAR(40) not null,
 CARBON_LIMIT_2024_2029 decimal(4,2),
 CARBON_LIMIT_2030_2034 decimal(4,2)
 );
@@ -62,6 +61,12 @@ ID SERIAL,
 ENERGY_SOURCE VARCHAR(40) not null,
 GHG_COEFFICIENT decimal(12,12),
 GHG_COEFFICIENT_UNIT VARCHAR(40) not null
+);
+
+create table LOOKUP_OCCUPANCY_SPACEUSE_MAPPING(
+ID            serial       not null,
+OCCUPANCY_GRP varchar(40)  not null,
+SPACE_USE     varchar(100) not null
 );
 
 /** Computed values */
@@ -96,8 +101,8 @@ create table FEED_SOANA_OWNERSHIP_INFO(
 ID SERIAL,
 BBL BIGINT primary key not null,
 OWNER_1 VARCHAR(100),
-OWNER_2 VARCHAR(100),
-RECIPIENT_1 VARCHAR(100),
+OWNER_2 VARCHAR(100),//could be the LLC name
+RECIPIENT_1 VARCHAR(100), /* receives the mail from DOF */
 RECIPIENT_2 VARCHAR(100),
 MAILING_STREET_1 VARCHAR(300),
 MAILING_STREET_2 VARCHAR(300),

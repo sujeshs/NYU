@@ -1,18 +1,17 @@
 package edu.nyu.sdg.penalties.config;
 
+import static java.util.Objects.requireNonNull;
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import javax.sql.DataSource;
-
 import edu.nyu.sdg.penalties.dao.contract.LookupDAO;
 import edu.nyu.sdg.penalties.dao.postgres.impl.LookUpDAOPostgresImpl;
+import javax.sql.DataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import static java.util.Objects.requireNonNull;
 
 @Configuration
 @Profile("postgres")

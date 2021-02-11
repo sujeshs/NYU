@@ -1,16 +1,15 @@
 package edu.nyu.sdg.penalties.dao.postgres.impl;
 
+import static java.util.Objects.requireNonNull;
+
 import edu.nyu.sdg.penalties.dao.contract.LookupDAO;
 import edu.nyu.sdg.penalties.dao.postgres.rowmapper.CarbonLimitRowMapper;
 import edu.nyu.sdg.penalties.dao.postgres.rowmapper.EnergySrcGHGRowMapper;
 import edu.nyu.sdg.penalties.dao.postgres.rowmapper.OccupancySpaceUseRowMapper;
 import edu.nyu.sdg.penalties.dao.postgres.sql.LookupSql;
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import java.math.BigDecimal;
 import java.util.Map;
-
-import static java.util.Objects.requireNonNull;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 public final class LookUpDAOPostgresImpl implements LookupDAO {
 

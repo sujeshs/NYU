@@ -16,9 +16,13 @@ public final class CarbonLimitCalculator {
   private final Map<String, Map<String, BigDecimal>> carbonLimitData;
   private final Map<String, String> occupancySpaceUseData;
 
-  public CarbonLimitCalculator(Map<String, Map<String, BigDecimal>> carbonLimitData, Map<String, String> occupancySpaceUseData) {
-    this.carbonLimitData = requireNonNull(carbonLimitData, "carbonLimitData is required and missing.");
-    this.occupancySpaceUseData = requireNonNull(occupancySpaceUseData, "occupancySpaceUseData is required and missing.");
+  public CarbonLimitCalculator(
+      Map<String, Map<String, BigDecimal>> carbonLimitData,
+      Map<String, String> occupancySpaceUseData) {
+    this.carbonLimitData =
+        requireNonNull(carbonLimitData, "carbonLimitData is required and missing.");
+    this.occupancySpaceUseData =
+        requireNonNull(occupancySpaceUseData, "occupancySpaceUseData is required and missing.");
   }
 
   public CarbonLimits calculateCarbonLimit(LL84Data ll84Data) {

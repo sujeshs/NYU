@@ -42,15 +42,15 @@
       </dependency>
 
       <dependency>
-        <groupId>org.postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>${version.postgresql}</version>
-      </dependency>
-
-      <dependency>
         <groupId>com.zaxxer</groupId>
         <artifactId>HikariCP</artifactId>
         <version>${version.hikari}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>${version.postgresql}</version>
       </dependency>
 
       <dependency>

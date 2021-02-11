@@ -39,7 +39,9 @@ public final class EnergyConsumptionCalculator {
     BigDecimal emissionFromElectricity =
         ll84Data.getElectricityUse() == null
             ? BigDecimal.valueOf(0)
-            : ll84Data.getElectricityUse().multiply(energysrcGHCoeffData.get("Utility-Electricity"));
+            : ll84Data
+                .getElectricityUse()
+                .multiply(energysrcGHCoeffData.get("Utility-Electricity"));
 
     return carbonEmission
         .add(emissionFromDistrictSteam)

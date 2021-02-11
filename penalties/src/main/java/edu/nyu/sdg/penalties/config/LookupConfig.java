@@ -1,15 +1,13 @@
 package edu.nyu.sdg.penalties.config;
 
-import edu.nyu.sdg.penalties.dao.contract.LookupDAO;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import static java.util.Objects.requireNonNull;
 
+import edu.nyu.sdg.penalties.dao.contract.LookupDAO;
 import java.math.BigDecimal;
 import java.util.Map;
-
-import static java.util.Objects.requireNonNull;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class LookupConfig {
@@ -37,7 +35,4 @@ public class LookupConfig {
 
     return lookupDAO.getCarbonLimitData();
   }
-
-
-
 }
