@@ -5,8 +5,12 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
+
+import static org.apache.commons.lang.StringUtils.*;
 
 public final class EnergySrcGHGRowMapper implements ResultSetExtractor<Map<String, BigDecimal>> {
 
@@ -17,7 +21,7 @@ public final class EnergySrcGHGRowMapper implements ResultSetExtractor<Map<Strin
     ImmutableMap.Builder mapBuilder = new ImmutableMap.Builder();
 
     while (rs.next()) {
-      mapBuilder.put(rs.getString("energy_source"), rs.getBigDecimal("ghg_coefficient"));
+      mapBuilder.put(trim(rs.getString("energy_source")), rs.getBigDecimal("ghg_coefficient"));
     }
 
     return mapBuilder.build();

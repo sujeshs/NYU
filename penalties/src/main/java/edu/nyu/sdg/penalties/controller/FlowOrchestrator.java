@@ -56,6 +56,8 @@ public final class FlowOrchestrator {
     return Penalties.newBuilder()
         .withPhase1Penalties(phase1Penalty)
         .withPhase2Penalties(phase2Penalty)
+        .withPhase1PenaltiesUSD(AppConstants.CURRENCY_FORMAT.format(phase1Penalty))
+        .withPhase2PenaltiesUSD(AppConstants.CURRENCY_FORMAT.format(phase2Penalty))
         .build();
   }
 }
