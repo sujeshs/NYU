@@ -37,6 +37,8 @@ public final class FlowOrchestrator {
    *
    * <p>Step 3 : Calculate penalty at the defined rate for emissions over the limit
    *
+   * <p>Step 4 : Insert data into underlying datastore
+   *
    * @return penalties for excess carbon emission
    */
   public Penalties calculatePenalties(LL84Data ll84Data) {
@@ -72,7 +74,8 @@ public final class FlowOrchestrator {
       .withExcessEmissionPhase2(phase2ExcessEmission)
       .build();
 
-    sdgDataInsertDAO.writePenaltyInfo(ll84Data, derivedVariables);
+    //sdgDataInsertDAO.writePenaltyInfo(ll84Data, derivedVariables);
+    sdgDataInsertDAO.writeLL84Data(ll84Data);
 
     return calculatedPenalties;
   }

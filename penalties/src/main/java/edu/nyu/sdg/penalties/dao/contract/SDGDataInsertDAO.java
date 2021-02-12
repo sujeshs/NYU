@@ -7,4 +7,6 @@ public interface SDGDataInsertDAO {
 
   void writePenaltyInfo(LL84Data ll84Data, DerivedVariables derivedVariables);
 
+  void writeLL84Data(LL84Data ll84Data);
+
 }

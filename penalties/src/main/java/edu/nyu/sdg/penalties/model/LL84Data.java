@@ -72,81 +72,117 @@ public final class LL84Data {
   private Date generationDate;
   private BigDecimal latitude;
   private BigDecimal longitude;
+  private String communityBoard;
+  private String councilDistrict;
+  private String censusTract;
+  private String nta;
+
+  public String getCommunityBoard() {
+    return communityBoard;
+  }
+
+  public void setCommunityBoard(String communityBoard) {
+    this.communityBoard = communityBoard;
+  }
+
+  public String getCouncilDistrict() {
+    return councilDistrict;
+  }
+
+  public void setCouncilDistrict(String councilDistrict) {
+    this.councilDistrict = councilDistrict;
+  }
+
+  public String getCensusTract() {
+    return censusTract;
+  }
+
+  public void setCensusTract(String censusTract) {
+    this.censusTract = censusTract;
+  }
+
+  public String getNta() {
+    return nta;
+  }
+
+  public void setNta(String nta) {
+    this.nta = nta;
+  }
 
   @Override
   public String toString() {
     return new StringJoiner(", ", LL84Data.class.getSimpleName() + "[", "]")
-        .add("order=" + order)
-        .add("propertyId=" + propertyId)
-        .add("propertyName='" + propertyName + "'")
-        .add("parentPropertyId='" + parentPropertyId + "'")
-        .add("parentPropertyName='" + parentPropertyName + "'")
-        .add("cityBuilding='" + cityBuilding + "'")
-        .add("email='" + email + "'")
-        .add("BBL10Digits='" + BBL10Digits + "'")
-        .add("NYCBBLSelfReported='" + NYCBBLSelfReported + "'")
-        .add("NYCBIN='" + NYCBIN + "'")
-        .add("address1SelfReported='" + address1SelfReported + "'")
-        .add("address2SelfReported='" + address2SelfReported + "'")
-        .add("postalCode=" + postalCode)
-        .add("streetNumber=" + streetNumber)
-        .add("streetName='" + streetName + "'")
-        .add("borough='" + borough + "'")
-        .add("dofGrossFloorArea=" + dofGrossFloorArea)
-        .add("selfReportedGrossFloorArea=" + selfReportedGrossFloorArea)
-        .add("primaryPropertyTypeSelfSelected='" + primaryPropertyTypeSelfSelected + "'")
-        .add("listOfAllPropertyUseTypes='" + listOfAllPropertyUseTypes + "'")
-        .add("largestPropertyUseType='" + largestPropertyUseType + "'")
-        .add("largestPropertyUseTypeGrossFloorArea=" + largestPropertyUseTypeGrossFloorArea)
-        .add("secondLargestPropertyUseType='" + secondLargestPropertyUseType + "'")
-        .add(
-            "secondLargestPropertyUseTypeGrossFloorArea="
-                + secondLargestPropertyUseTypeGrossFloorArea)
-        .add("thirdLargestPropertyUseType='" + thirdLargestPropertyUseType + "'")
-        .add(
-            "thirdLargestPropertyUseTypeGrossFloorArea="
-                + thirdLargestPropertyUseTypeGrossFloorArea)
-        .add("yearBuilt=" + yearBuilt)
-        .add("numberOfBuildings=" + numberOfBuildings)
-        .add("occupancy=" + occupancy)
-        .add("energyMeteredAreas='" + energyMeteredAreas + "'")
-        .add("waterMeteredAreas='" + waterMeteredAreas + "'")
-        .add("energyStarScore=" + energyStarScore)
-        .add("sourceEUI=" + sourceEUI)
-        .add("weatherNormalizedSiteEUI=" + weatherNormalizedSiteEUI)
-        .add("siteEUI=" + siteEUI)
-        .add("weatherNormalizedSourceEUI=" + weatherNormalizedSourceEUI)
-        .add("weatherNormalizedElectricityIntensity=" + weatherNormalizedElectricityIntensity)
-        .add("weatherNormalizedNaturalGasIntensity=" + weatherNormalizedNaturalGasIntensity)
-        .add("fuelOil1Use=" + fuelOil1Use)
-        .add("fuelOil2Use=" + fuelOil2Use)
-        .add("fuelOil4Use=" + fuelOil4Use)
-        .add("fuelOil5_6Use=" + fuelOil5_6Use)
-        .add("diesel2Use=" + diesel2Use)
-        .add("keroseneUse=" + keroseneUse)
-        .add("propaneUse=" + propaneUse)
-        .add("districtSteamUse=" + districtSteamUse)
-        .add("districtHotWaterUse=" + districtHotWaterUse)
-        .add("districtChilledWaterUse=" + districtChilledWaterUse)
-        .add("naturalGasUsekBTU=" + naturalGasUsekBTU)
-        .add("naturalGasUseTherms=" + naturalGasUseTherms)
-        .add("weatherNormalizedSiteNaturalGasUseTherms=" + weatherNormalizedSiteNaturalGasUseTherms)
-        .add("electricityGridPurchasekBTU=" + electricityGridPurchasekBTU)
-        .add("electricityGridPurchasekWh=" + electricityGridPurchasekWh)
-        .add("weatherNormalizedSiteElectricity=" + weatherNormalizedSiteElectricity)
-        .add("annualMaximumDemandkW=" + annualMaximumDemandkW)
-        .add("annualMaximumDemandDate=" + annualMaximumDemandDate)
-        .add("annualMaximumDemandMeterIDName=" + annualMaximumDemandMeterIDName)
-        .add("totalGHGEmissions=" + totalGHGEmissions)
-        .add("directGHGEmissions=" + directGHGEmissions)
-        .add("indirectGHGEmissions=" + indirectGHGEmissions)
-        .add("waterUseAllSources=" + waterUseAllSources)
-        .add("waterUseINtensityAllSources=" + waterUseINtensityAllSources)
-        .add("waterRequired='" + waterRequired + "'")
-        .add("generationDate=" + generationDate)
-        .add("latitude=" + latitude)
-        .add("longitude=" + longitude)
-        .toString();
+      .add("order=" + order)
+      .add("propertyId=" + propertyId)
+      .add("propertyName='" + propertyName + "'")
+      .add("parentPropertyId='" + parentPropertyId + "'")
+      .add("parentPropertyName='" + parentPropertyName + "'")
+      .add("cityBuilding='" + cityBuilding + "'")
+      .add("email='" + email + "'")
+      .add("BBL10Digits='" + BBL10Digits + "'")
+      .add("NYCBBLSelfReported='" + NYCBBLSelfReported + "'")
+      .add("NYCBIN='" + NYCBIN + "'")
+      .add("address1SelfReported='" + address1SelfReported + "'")
+      .add("address2SelfReported='" + address2SelfReported + "'")
+      .add("postalCode=" + postalCode)
+      .add("streetNumber=" + streetNumber)
+      .add("streetName='" + streetName + "'")
+      .add("borough='" + borough + "'")
+      .add("dofGrossFloorArea=" + dofGrossFloorArea)
+      .add("selfReportedGrossFloorArea=" + selfReportedGrossFloorArea)
+      .add("primaryPropertyTypeSelfSelected='" + primaryPropertyTypeSelfSelected + "'")
+      .add("listOfAllPropertyUseTypes='" + listOfAllPropertyUseTypes + "'")
+      .add("largestPropertyUseType='" + largestPropertyUseType + "'")
+      .add("largestPropertyUseTypeGrossFloorArea=" + largestPropertyUseTypeGrossFloorArea)
+      .add("secondLargestPropertyUseType='" + secondLargestPropertyUseType + "'")
+      .add("secondLargestPropertyUseTypeGrossFloorArea=" + secondLargestPropertyUseTypeGrossFloorArea)
+      .add("thirdLargestPropertyUseType='" + thirdLargestPropertyUseType + "'")
+      .add("thirdLargestPropertyUseTypeGrossFloorArea=" + thirdLargestPropertyUseTypeGrossFloorArea)
+      .add("yearBuilt=" + yearBuilt)
+      .add("numberOfBuildings=" + numberOfBuildings)
+      .add("occupancy=" + occupancy)
+      .add("energyMeteredAreas='" + energyMeteredAreas + "'")
+      .add("waterMeteredAreas='" + waterMeteredAreas + "'")
+      .add("energyStarScore=" + energyStarScore)
+      .add("sourceEUI=" + sourceEUI)
+      .add("weatherNormalizedSiteEUI=" + weatherNormalizedSiteEUI)
+      .add("siteEUI=" + siteEUI)
+      .add("weatherNormalizedSourceEUI=" + weatherNormalizedSourceEUI)
+      .add("weatherNormalizedElectricityIntensity=" + weatherNormalizedElectricityIntensity)
+      .add("weatherNormalizedNaturalGasIntensity=" + weatherNormalizedNaturalGasIntensity)
+      .add("fuelOil1Use=" + fuelOil1Use)
+      .add("fuelOil2Use=" + fuelOil2Use)
+      .add("fuelOil4Use=" + fuelOil4Use)
+      .add("fuelOil5_6Use=" + fuelOil5_6Use)
+      .add("diesel2Use=" + diesel2Use)
+      .add("keroseneUse=" + keroseneUse)
+      .add("propaneUse=" + propaneUse)
+      .add("districtSteamUse=" + districtSteamUse)
+      .add("districtHotWaterUse=" + districtHotWaterUse)
+      .add("districtChilledWaterUse=" + districtChilledWaterUse)
+      .add("naturalGasUsekBTU=" + naturalGasUsekBTU)
+      .add("naturalGasUseTherms=" + naturalGasUseTherms)
+      .add("weatherNormalizedSiteNaturalGasUseTherms=" + weatherNormalizedSiteNaturalGasUseTherms)
+      .add("electricityGridPurchasekBTU=" + electricityGridPurchasekBTU)
+      .add("electricityGridPurchasekWh=" + electricityGridPurchasekWh)
+      .add("weatherNormalizedSiteElectricity=" + weatherNormalizedSiteElectricity)
+      .add("annualMaximumDemandkW=" + annualMaximumDemandkW)
+      .add("annualMaximumDemandDate=" + annualMaximumDemandDate)
+      .add("annualMaximumDemandMeterIDName='" + annualMaximumDemandMeterIDName + "'")
+      .add("totalGHGEmissions=" + totalGHGEmissions)
+      .add("directGHGEmissions=" + directGHGEmissions)
+      .add("indirectGHGEmissions=" + indirectGHGEmissions)
+      .add("waterUseAllSources=" + waterUseAllSources)
+      .add("waterUseINtensityAllSources=" + waterUseINtensityAllSources)
+      .add("waterRequired='" + waterRequired + "'")
+      .add("generationDate=" + generationDate)
+      .add("latitude=" + latitude)
+      .add("longitude=" + longitude)
+      .add("communityBoard='" + communityBoard + "'")
+      .add("councilDistrict='" + councilDistrict + "'")
+      .add("censusTract='" + censusTract + "'")
+      .add("nta='" + nta + "'")
+      .toString();
   }
 
   public BigDecimal getWeatherNormalizedSiteNaturalGasUseTherms() {
