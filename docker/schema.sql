@@ -1,124 +1,135 @@
-
-/* Utility functions */
-create extension if not exists "uuid-ossp";
-
-create table FEED_LL84_BBL(
-ID SERIAL,
-BBL varchar(1000) not null,
-NYC_BIN BIGINT varchar(1000) null,
-PROPERTY_ID varchar(1000),
-PROPERTY_NAME VARCHAR(40),
-CITY_BUILDING VARCHAR(4),
-EMAIL VARCHAR(60),
-ADDRESS_LINE_1 VARCHAR(100),
-ADDRESS_LINE_2 VARCHAR(100),
-POSTAL_CODE varchar(100),
-BOROUGH VARCHAR(50),
-DOF_GROSS_FLOOR_AREA DECIMAL(24,2),
-SELF_REPORTED_GROSS_FLOOR_AREA DECIMAL(24,2),
-PROPERTY_USE_TYPES VARCHAR(100), /*TODO: better data structure*/
-LARGEST_PROPERTY_USE_TYPE VARCHAR(100),
-LARGEST_PROPERTY_USE_TYPE_GROSS_FLOOR_AREA DECIMAL(24,2),
-SECOND_LARGEST_PROPERTY_USE_TYPE VARCHAR(100),
-SECOND_LARGEST_PROPERTY_USE_TYPE_GROSS_FLOOR_AREA DECIMAL(24,2),
-THIRD_LARGEST_PROPERTY_USE_TYPE VARCHAR(100),
-THIRD_LARGEST_PROPERTY_USE_TYPE_GROSS_FLOOR_AREA DECIMAL(24,2),
-YEAR_BUILT INT,
-NUMBER_OF_BUILDINGS INT,
-OCCUPANCY INT,
-LATITUDE_LONGITUDE_COORDINATES POINT,
-COMMUNITY_BOARD DECIMAL(24,2),
-COUNCIL_DISTRICT DECIMAL(24,2),
-CENSUS_TRACT DECIMAL(24,2),
-NTA VARCHAR(100),
-FUEL_OIL_1_USE DECIMAL(24,2),
-FUEL_OIL_2_USE DECIMAL(24,2),
-FUEL_OIL_4_USE DECIMAL(24,2),
-FUEL_OIL_5_6_USE DECIMAL(24,2),
-DISEL_2_USE DECIMAL(24,2),
-PROPANE_USE DECIMAL(24,2),
-DISTRICT_STEAM_USE DECIMAL(24,2),
-DISTRICT_CHILLEDWATER_USE DECIMAL(24,2),
-NATURALGAS_USE DECIMAL(24,2),
-ELECTRICITY_USE_GRID_PURCHASE_KWH DECIMAL(24,2),/**TODO: what if elec is only available in KBTU ? do we convert ? */
-TOTAL_GHG_EMISSIONS_METRIC_TON_CO2 DECIMAL(24,2),
-ENERGY_STAR_SCORE INT,
-SITE_EUI DECIMAL(24,2),/**TODO: check if this datatype can hold possible values */
-primary key (BBL, NYC_BIN)
-);
-
-
-/* Lookup tables */
-create table LOOKUP_CARBON_LIMIT(
-ID SERIAL,
-OCCUPANCY_GRP varchar(40) not null,
-CARBON_LIMIT_2024_2029 decimal(4,2),
-CARBON_LIMIT_2030_2034 decimal(4,2)
-);
-
-create table LOOKUP_ENERGY_SRC_GHG_COEFF(
-ID SERIAL,
-ENERGY_SOURCE VARCHAR(40) not null,
-GHG_COEFFICIENT decimal(12,12),
-GHG_COEFFICIENT_UNIT VARCHAR(40) not null
-);
-
-create table LOOKUP_OCCUPANCY_SPACEUSE_MAPPING(
-ID            serial       not null,
-OCCUPANCY_GRP varchar(40)  not null,
-SPACE_USE     varchar(100) not null
-);
-
-/** Computed values */
-create table DERIVED_PENALTY_EXEMPTION(
-ID SERIAL,
-BBL varchar(1000) primary key not null, /** TODO: check with Alejandro if penalty exemptions can be tracked at BBL level */
-POWER_GENERATION BOOLEAN,
-CITY_BUILDING BOOLEAN,
-NYCHA BOOLEAN,
-RENT_STABLIZED_APTMT BOOLEAN,
-HOUSE_OF_WORSHIP BOOLEAN,
-HDFC BOOLEAN,
-PROJECT_BASED_FED_HOUSING_PROGRAM BOOLEAN,
-PENALTY_EXEMPT_FLAG BOOLEAN
-);
-
-create table DERIVED_PENALTY_VARIABLES
+create table lookup_carbon_limit
 (
-    ID                                        serial        not null,
-    BBL                                       varchar(1000) not null,
-    NYC_BIN                                   varchar(1000) not null,
-    TOTAL_CARBON_EMISSION_THRESHOLD_2024_2029 numeric(24, 2),
-    TOTAL_CARBON_EMISSION_THRESHOLD_2030_2034 numeric(24, 2),
-    TOTAL_ACTUAL_EMISSION                     numeric(24, 2),
-    EMISSION_EXCESS_2024_2029                 numeric(24, 2),
-    EMISSION_EXCESS_2030_2034                 numeric(24, 2),
-    EMISSION_PENALTY_2024_2029                varchar(100),
-    EMISSION_PENALTY_2030_2034                varchar(100),
-    constraint derived_penalty_variables_pkey
-        primary key (bbl, nyc_bin)
+    id                     serial      not null,
+    occupancy_grp          varchar(40) not null,
+    carbon_limit_2024_2029 numeric(4, 2) not null,
+    carbon_limit_2030_2034 numeric(4, 2) not null,
+    primary key (occupancy_grp)
 );
 
-create table FEED_SOANA_OWNERSHIP_INFO(
-ID SERIAL,
-BBL BIGINT primary key not null,
-OWNER_1 VARCHAR(100),
-OWNER_2 VARCHAR(100),//could be the LLC name
-RECIPIENT_1 VARCHAR(100), /* receives the mail from DOF */
-RECIPIENT_2 VARCHAR(100),
-MAILING_STREET_1 VARCHAR(300),
-MAILING_STREET_2 VARCHAR(300),
-MAILING_CITY_1 VARCHAR(40),
-MAILING_CITY_2 VARCHAR(40),/**TODO: Check with Alejandro why there is no mailing city 2 in drive doc */
-MAILING_STATE_1 VARCHAR(40),
-MAILING_STATE_2 VARCHAR(40),/**TODO: Check with Alejandro why there is no mailing state 2 in drive doc */
-MAILING_ZIP_1 VARCHAR(40),
-MAILING_ZIP_2 VARCHAR(40),/**TODO: Check with Alejandro why there is no mailing zip 2 in drive doc */
-MAILING_COUNTRY VARCHAR(40) /** TODO : Check if owner can be living/registered outside US*/
+create table lookup_energy_src_ghg_coeff
+(
+    id                   serial      not null,
+    energy_source        varchar(40) not null,
+    ghg_coefficient      numeric(12, 12) not null,
+    ghg_coefficient_unit varchar(40) not null,
+    primary key (energy_source)
 );
 
+create table lookup_occupancy_spaceuse_mapping
+(
+    id            serial       not null,
+    occupancy_grp varchar(40)  not null,
+    space_use     varchar(100) not null
+);
 
+create table derived_penalty_exemption
+(
+    id                                serial        not null,
+    bbl                               varchar(1000) not null,
+    power_generation                  boolean,
+    city_building                     boolean,
+    nycha                             boolean,
+    rent_stablized_aptmt              boolean,
+    house_of_worship                  boolean,
+    hdfc                              boolean,
+    project_based_fed_housing_program boolean,
+    penalty_exempt_flag               boolean
+);
 
+create table derived_penalty_variables
+(
+    id                                        serial        not null,
+    bbl                                       varchar(1000) not null,
+    nyc_bin                                   varchar(1000) not null,
+    total_carbon_emission_threshold_2024_2029 numeric(24, 2),
+    total_carbon_emission_threshold_2030_2034 numeric(24, 2),
+    total_actual_emission                     numeric(24, 2),
+    emission_excess_2024_2029                 numeric(24, 2),
+    emission_excess_2030_2034                 numeric(24, 2),
+    emission_penalty_2024_2029                varchar(100),
+    emission_penalty_2030_2034                varchar(100),
+    primary key (bbl, nyc_bin)
+);
 
+create table feed_acris_mortgage_info
+(
+    id                          serial         not null,
+    bbl                         varchar(100)   not null,
+    document_id                 varchar(100)   not null,
+    document_type               varchar(100)   not null,
+    document_amount             numeric(24, 2) not null,
+    document_recorded_timestamp timestamp,
+    party_type                  varchar(100),
+    name                        varchar(1000),
+    address_1                   varchar(1000),
+    zipcode                     varchar(40)
+);
 
+create table feed_soana_ownership_info
+(
+    id               serial        not null,
+    bbl              varchar(1000) not null,
+    owner_1          varchar(1000),
+    owner_2          varchar(1000),
+    recipient_1      varchar(1000),
+    recipient_2      varchar(1000),
+    mailing_street_1 varchar(1000),
+    mailing_street_2 varchar(1000),
+    mailing_city_1   varchar(100),
+    mailing_city_2   varchar(100),
+    mailing_state_1  varchar(100),
+    mailing_state_2  varchar(100),
+    mailing_zip_1    varchar(40),
+    mailing_zip_2    varchar(40),
+    mailing_country  varchar(40),
+    src              varchar(1000),
+    easement         varchar(1000),
+    primary key(bbl)
+);
 
+create table feed_ll84_bbl
+(
+    id                                                serial        not null,
+    bbl                                               varchar(1000) not null,
+    nyc_bin                                           varchar(1000) not null,
+    property_id                                       varchar(40),
+    property_name                                     varchar(40),
+    city_building                                     varchar(4),
+    email                                             varchar(60),
+    address_line_1                                    varchar(100),
+    address_line_2                                    varchar(100),
+    postal_code                                       bigint,
+    borough                                           varchar(50),
+    dof_gross_floor_area                              numeric(24, 2),
+    self_reported_gross_floor_area                    numeric(24, 2),
+    property_use_types                                varchar(100),
+    largest_property_use_type                         varchar(100),
+    largest_property_use_type_gross_floor_area        numeric(24, 2),
+    second_largest_property_use_type                  varchar(100),
+    second_largest_property_use_type_gross_floor_area numeric(24, 2),
+    third_largest_property_use_type                   varchar(100),
+    third_largest_property_use_type_gross_floor_area  numeric(24, 2),
+    year_built                                        integer,
+    number_of_buildings                               integer,
+    occupancy                                         integer,
+    latitude_longitude_coordinates                    point,
+    community_board                                   varchar(40),
+    council_district                                  varchar(40),
+    census_tract                                      varchar(40),
+    nta                                               varchar(1000),
+    fuel_oil_1_use                                    numeric(24, 2),
+    fuel_oil_2_use                                    numeric(24, 2),
+    fuel_oil_4_use                                    numeric(24, 2),
+    fuel_oil_5_6_use                                  numeric(24, 2),
+    disel_2_use                                       numeric(24, 2),
+    propane_use                                       numeric(24, 2),
+    district_steam_use                                numeric(24, 2),
+    district_chilledwater_use                         numeric(24, 2),
+    naturalgas_use                                    numeric(24, 2),
+    electricity_use_grid_purchase_kwh                 numeric(24, 2),
+    total_ghg_emissions_metric_ton_co2                numeric(24, 2),
+    energy_star_score                                 integer,
+    site_eui                                          numeric(24, 2),
+    primary key (bbl, nyc_bin)
+);
