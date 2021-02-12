@@ -14,7 +14,7 @@
 
   <appender name="RollingFile"
             class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOGS}/spring-boot-logger.log</file>
+    <file>${LOGS}/penalties.log</file>
     <encoder
       class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
       <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
@@ -22,12 +22,12 @@
 
     <rollingPolicy
       class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <!-- rollover daily and when the file reaches 10 MegaBytes -->
-      <fileNamePattern>${LOGS}/archived/spring-boot-logger-%d{yyyy-MM-dd}.%i.log
+      <!-- rollover daily and when the file reaches 50 MegaBytes -->
+      <fileNamePattern>${LOGS}/archived/penalties-%d{yyyy-MM-dd}.%i.log
       </fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy
         class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-        <maxFileSize>10MB</maxFileSize>
+        <maxFileSize>50MB</maxFileSize>
       </timeBasedFileNamingAndTriggeringPolicy>
     </rollingPolicy>
   </appender>
@@ -35,13 +35,11 @@
   <!-- LOG everything at INFO level -->
   <root level="info">
     <appender-ref ref="RollingFile" />
-    <appender-ref ref="Console" />
   </root>
 
-  <!-- LOG "com.baeldung*" at TRACE level -->
+  <!-- LOG "edu.nyu.sdg.penalties*" at TRACE level -->
   <logger name="edu.nyu.sdg.penalties" level="trace" additivity="false">
     <appender-ref ref="RollingFile" />
-    <appender-ref ref="Console" />
   </logger>
 
 </configuration>
