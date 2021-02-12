@@ -95,6 +95,6 @@ public final class CarbonLimitCalculator {
   }
 
   private BigDecimal getNullSafeCarbonLimit(Map<String, BigDecimal> carbonLimits, String key) {
-    return carbonLimits == null ? BigDecimal.ZERO : carbonLimits.get(PHASE1);
+    return carbonLimits == null ? BigDecimal.ZERO : carbonLimits.get(key);
   }
 }

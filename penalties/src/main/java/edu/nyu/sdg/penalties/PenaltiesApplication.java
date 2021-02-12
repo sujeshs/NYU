@@ -20,7 +20,8 @@ public class PenaltiesApplication {
 
     CSVFileLoader fileLoader = ctx.getBean(CSVFileLoader.class);
 
-    String sourceFile = "/Users/ssuku24/cas/personal/NYU/docs/samples/subset_ll84.csv";
+    //String sourceFile = "/Users/ssuku24/cas/personal/NYU/docs/samples/subset_ll84.csv";
+    String sourceFile = "/Users/sujeshs/Documents/PACE/merged_ll84_parties.csv";
 
     fileLoader.loadCSV(sourceFile);
   }

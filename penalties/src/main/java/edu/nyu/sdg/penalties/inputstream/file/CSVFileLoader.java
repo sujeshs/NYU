@@ -2,6 +2,7 @@ package edu.nyu.sdg.penalties.inputstream.file;
 
 import edu.nyu.sdg.penalties.controller.FlowOrchestrator;
 import edu.nyu.sdg.penalties.model.LL84Data;
+import edu.nyu.sdg.penalties.model.Penalties;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -54,91 +55,83 @@ public final class CSVFileLoader {
     for (CSVRecord record : csvParser) {
       if (null != record) {
 
-        try {
-
         LL84Data ll84Data = new LL84Data();
 
-        ll84Data.setOrder(parseIntoInt(record, "Order"));
-        ll84Data.setPropertyId(parseIntoInt(record, "Property Id"));
-          ll84Data.setPropertyName(parseIntoString(record,"Property Name"));
-          ll84Data.setParentPropertyId(parseIntoString(record,"Parent Property Id"));
-          ll84Data.setParentPropertyName(parseIntoString(record,"Parent Property Name"));
-          ll84Data.setCityBuilding(parseIntoString(record,"City Building"));
-          ll84Data.setEmail(parseIntoString(record,"Email"));
-          ll84Data.setBBL10Digits(parseIntoString(record,"BBL - 10 digits"));
+        try {
+
+          ll84Data.setOrder(parseIntoInt(record, "Order"));
+          ll84Data.setPropertyId(parseIntoInt(record, "Property Id"));
+          ll84Data.setPropertyName(parseIntoString(record, "Property Name"));
+          ll84Data.setParentPropertyId(parseIntoString(record, "Parent Property Id"));
+          ll84Data.setParentPropertyName(parseIntoString(record, "Parent Property Name"));
+          ll84Data.setCityBuilding(parseIntoString(record, "City Building"));
+          ll84Data.setEmail(parseIntoString(record, "Email"));
+          ll84Data.setBBL10Digits(parseIntoString(record, "BBL - 10 digits"));
           ll84Data.setNYCBBLSelfReported(
-              parseIntoString(record, "NYC Borough Block and Lot (BBL) self-reported"));
-          ll84Data.setNYCBIN(parseIntoString(record,"NYC Building Identification Number (BIN)"));
-          ll84Data.setAddress1SelfReported(parseIntoString(record,"Address 1 (self-reported)"));
-          ll84Data.setAddress2SelfReported(parseIntoString(record,"Address 2 (self reported)"));
-          ll84Data.setPostalCode(parseIntoInt(record,"Postal Code"));
-          ll84Data.setStreetNumber(parseIntoInt(record,"Street Number"));
-          ll84Data.setStreetName(parseIntoString(record,"Street Name"));
-          ll84Data.setBorough(parseIntoString(record,"Borough"));
-          ll84Data.setDofGrossFloorArea(parseIntoBigDecimal(record,"DOF Gross Floor Area (ft¬≤)"));
-          ll84Data.setSelfReportedGrossFloorArea(parseIntoBigDecimal(record,"Self-Reported Gross Floor Area (ft¬≤)"));
-          ll84Data.setPrimaryPropertyTypeSelfSelected(parseIntoString(record,"Primary Property Type - Self Selected"));
-          ll84Data.setListOfAllPropertyUseTypes(parseIntoString(record,"List of All Property Use Types at Property"));
-          ll84Data.setLargestPropertyUseType(parseIntoString(record,"Largest Property Use Type"));
-          ll84Data.setLargestPropertyUseTypeGrossFloorArea(parseIntoBigDecimal(record,"Largest Property Use Type - Gross Floor Area (ft¬≤)"));
-          ll84Data.setSecondLargestPropertyUseType(parseIntoString(record,"2nd Largest Property Use Type"));
-          ll84Data.setSecondLargestPropertyUseTypeGrossFloorArea(parseIntoBigDecimal(record,"2nd Largest Property Use - Gross Floor Area (ft¬≤)"));
-          ll84Data.setThirdLargestPropertyUseType(parseIntoString(record,"3rd Largest Property Use Type"));
-          ll84Data.setThirdLargestPropertyUseTypeGrossFloorArea(parseIntoBigDecimal(record,"3rd Largest Property Use Type - Gross Floor Area (ft¬≤)"));
-          ll84Data.setYearBuilt(parseIntoInt(record,"Year Built"));
-          ll84Data.setNumberOfBuildings(parseIntoInt(record,"Number of Buildings"));
-          ll84Data.setOccupancy(parseIntoInt(record,"Occupancy"));
-          ll84Data.setEnergyMeteredAreas(parseIntoString(record,"Metered Areas (Energy)"));
-          ll84Data.setWaterMeteredAreas(parseIntoString(record,"Metered Areas (Water)"));
-          ll84Data.setEnergyStarScore(parseIntoInt(record,"ENERGY STAR Score"));
-          ll84Data.setSourceEUI(parseIntoBigDecimal(record,"Source EUI (kBtu/ft¬≤)"));
-          ll84Data.setWeatherNormalizedSiteEUI(parseIntoBigDecimal(record,"Weather Normalized Site EUI (kBtu/ft¬≤)"));
-          ll84Data.setSiteEUI(parseIntoBigDecimal(record,"Site EUI (kBtu/ft¬≤)"));
-          ll84Data.setWeatherNormalizedSourceEUI(parseIntoBigDecimal(record,"Weather Normalized Source EUI (kBtu/ft¬≤)"));
-          ll84Data.setWeatherNormalizedSiteElectricity(parseIntoBigDecimal(record,"Weather Normalized Site Electricity Intensity (kWh/ft¬≤)"));
-          ll84Data.setWeatherNormalizedNaturalGasIntensity(parseIntoBigDecimal(record,"Weather Normalized Site Natural Gas Intensity (therms/ft¬≤)"));
-          ll84Data.setFuelOil1Use(parseIntoBigDecimal(record,"Fuel Oil #1 Use (kBtu)"));
-          ll84Data.setFuelOil2Use(parseIntoBigDecimal(record,"Fuel Oil #2 Use (kBtu)"));
-          ll84Data.setFuelOil4Use(parseIntoBigDecimal(record,"Fuel Oil #4 Use (kBtu)"));
-          ll84Data.setFuelOil5_6Use(parseIntoBigDecimal(record,"Fuel Oil #5 & 6 Use (kBtu)"));
-          ll84Data.setDiesel2Use(parseIntoBigDecimal(record,"Diesel #2 Use (kBtu)"));
-          ll84Data.setKeroseneUse(parseIntoBigDecimal(record,"Kerosene Use (kBtu)"));
-          ll84Data.setPropaneUse(parseIntoBigDecimal(record,"Propane Use (kBtu)"));
-          ll84Data.setDistrictSteamUse(parseIntoBigDecimal(record,"District Steam Use (kBtu)"));
-          ll84Data.setDistrictHotWaterUse(parseIntoBigDecimal(record,"District Hot Water Use (kBtu)"));
-          ll84Data.setDistrictChilledWaterUse(parseIntoBigDecimal(record,"District Chilled Water Use (kBtu)"));
-          ll84Data.setNaturalGasUsekBTU(parseIntoBigDecimal(record,"Natural Gas Use (kBtu)"));
-          ll84Data.setNaturalGasUseTherms(parseIntoBigDecimal(record,"Natural Gas Use (therms)"));
-          ll84Data.setWeatherNormalizedSiteNaturalGasUseTherms(parseIntoBigDecimal(record,"Weather Normalized Site Natural Gas Use (therms)"));
-          ll84Data.setElectricityGridPurchasekBTU(parseIntoBigDecimal(record,"Electricity Use - Grid Purchase (kBtu)"));
-          ll84Data.setElectricityGridPurchasekWh(parseIntoBigDecimal(record,"Electricity Use - Grid Purchase (kWh)"));
-          ll84Data.setWeatherNormalizedSiteElectricity(parseIntoBigDecimal(record,"Weather Normalized Site Electricity (kWh)"));
-          ll84Data.setAnnualMaximumDemandkW(parseIntoBigDecimal(record,"Annual Maximum Demand (kW)"));
-          ll84Data.setAnnualMaximumDemandDate(parseIntoDate(record,"Annual Maximum Demand (MM/YYYY)"));
-          ll84Data.setAnnualMaximumDemandMeterIDName(parseIntoString(record,"Annual Maximum Demand (Meter Name (Meter ID))"));
-          ll84Data.setTotalGHGEmissions(parseIntoBigDecimal(record,"Total GHG Emissions (Metric Tons CO2e)"));
-          ll84Data.setDirectGHGEmissions(parseIntoBigDecimal(record,"Direct GHG Emissions (Metric Tons CO2e)"));
-          ll84Data.setIndirectGHGEmissions(parseIntoBigDecimal(record,"Indirect GHG Emissions (Metric Tons CO2e)"));
-          ll84Data.setWaterUseAllSources(parseIntoBigDecimal(record,"Water Use (All Water Sources) (kgal)"));
-          ll84Data.setWaterUseINtensityAllSources(parseIntoBigDecimal(record,"Water Use Intensity (All Water Sources) (gal/ft¬≤)"));
-          ll84Data.setWaterRequired(parseIntoString(record,"Water Required"));
-          ll84Data.setGenerationDate(parseIntoDate(record,"Generation Date"));
-          ll84Data.setLatitude(parseIntoBigDecimal(record,"Latitude"));
-          ll84Data.setLongitude(parseIntoBigDecimal(record,"Longitude"));
+            parseIntoString(record, "NYC Borough Block and Lot (BBL) self-reported"));
+          ll84Data.setNYCBIN(parseIntoString(record, "NYC Building Identification Number (BIN)"));
+          ll84Data.setAddress1SelfReported(parseIntoString(record, "Address 1 (self-reported)"));
+          ll84Data.setAddress2SelfReported(parseIntoString(record, "Address 2 (self reported)"));
+          ll84Data.setPostalCode(parseIntoInt(record, "Postal Code"));
+          ll84Data.setStreetNumber(parseIntoInt(record, "Street Number"));
+          ll84Data.setStreetName(parseIntoString(record, "Street Name"));
+          ll84Data.setBorough(parseIntoString(record, "Borough"));
+          ll84Data.setDofGrossFloorArea(parseIntoBigDecimal(record, "DOF Gross Floor Area (ft¬≤)"));
+          ll84Data.setSelfReportedGrossFloorArea(parseIntoBigDecimal(record, "Self-Reported Gross Floor Area (ft¬≤)"));
+          ll84Data.setPrimaryPropertyTypeSelfSelected(parseIntoString(record, "Primary Property Type - Self Selected"));
+          ll84Data.setListOfAllPropertyUseTypes(parseIntoString(record, "List of All Property Use Types at Property"));
+          ll84Data.setLargestPropertyUseType(parseIntoString(record, "Largest Property Use Type"));
+          ll84Data.setLargestPropertyUseTypeGrossFloorArea(parseIntoBigDecimal(record, "Largest Property Use Type - Gross Floor Area (ft¬≤)"));
+          ll84Data.setSecondLargestPropertyUseType(parseIntoString(record, "2nd Largest Property Use Type"));
+          ll84Data.setSecondLargestPropertyUseTypeGrossFloorArea(parseIntoBigDecimal(record, "2nd Largest Property Use - Gross Floor Area (ft¬≤)"));
+          ll84Data.setThirdLargestPropertyUseType(parseIntoString(record, "3rd Largest Property Use Type"));
+          ll84Data.setThirdLargestPropertyUseTypeGrossFloorArea(parseIntoBigDecimal(record, "3rd Largest Property Use Type - Gross Floor Area (ft¬≤)"));
+          ll84Data.setYearBuilt(parseIntoInt(record, "Year Built"));
+          ll84Data.setNumberOfBuildings(parseIntoInt(record, "Number of Buildings"));
+          ll84Data.setOccupancy(parseIntoInt(record, "Occupancy"));
+          ll84Data.setEnergyMeteredAreas(parseIntoString(record, "Metered Areas (Energy)"));
+          ll84Data.setWaterMeteredAreas(parseIntoString(record, "Metered Areas (Water)"));
+          ll84Data.setEnergyStarScore(parseIntoInt(record, "ENERGY STAR Score"));
+          ll84Data.setSourceEUI(parseIntoBigDecimal(record, "Source EUI (kBtu/ft¬≤)"));
+          ll84Data.setWeatherNormalizedSiteEUI(parseIntoBigDecimal(record, "Weather Normalized Site EUI (kBtu/ft¬≤)"));
+          ll84Data.setSiteEUI(parseIntoBigDecimal(record, "Site EUI (kBtu/ft¬≤)"));
+          ll84Data.setWeatherNormalizedSourceEUI(parseIntoBigDecimal(record, "Weather Normalized Source EUI (kBtu/ft¬≤)"));
+          ll84Data.setWeatherNormalizedSiteElectricity(parseIntoBigDecimal(record, "Weather Normalized Site Electricity Intensity (kWh/ft¬≤)"));
+          ll84Data.setWeatherNormalizedNaturalGasIntensity(parseIntoBigDecimal(record, "Weather Normalized Site Natural Gas Intensity (therms/ft¬≤)"));
+          ll84Data.setFuelOil1Use(parseIntoBigDecimal(record, "Fuel Oil #1 Use (kBtu)"));
+          ll84Data.setFuelOil2Use(parseIntoBigDecimal(record, "Fuel Oil #2 Use (kBtu)"));
+          ll84Data.setFuelOil4Use(parseIntoBigDecimal(record, "Fuel Oil #4 Use (kBtu)"));
+          ll84Data.setFuelOil5_6Use(parseIntoBigDecimal(record, "Fuel Oil #5 & 6 Use (kBtu)"));
+          ll84Data.setDiesel2Use(parseIntoBigDecimal(record, "Diesel #2 Use (kBtu)"));
+          ll84Data.setKeroseneUse(parseIntoBigDecimal(record, "Kerosene Use (kBtu)"));
+          ll84Data.setPropaneUse(parseIntoBigDecimal(record, "Propane Use (kBtu)"));
+          ll84Data.setDistrictSteamUse(parseIntoBigDecimal(record, "District Steam Use (kBtu)"));
+          ll84Data.setDistrictHotWaterUse(parseIntoBigDecimal(record, "District Hot Water Use (kBtu)"));
+          ll84Data.setDistrictChilledWaterUse(parseIntoBigDecimal(record, "District Chilled Water Use (kBtu)"));
+          ll84Data.setNaturalGasUsekBTU(parseIntoBigDecimal(record, "Natural Gas Use (kBtu)"));
+          ll84Data.setNaturalGasUseTherms(parseIntoBigDecimal(record, "Natural Gas Use (therms)"));
+          ll84Data.setWeatherNormalizedSiteNaturalGasUseTherms(parseIntoBigDecimal(record, "Weather Normalized Site Natural Gas Use (therms)"));
+          ll84Data.setElectricityGridPurchasekBTU(parseIntoBigDecimal(record, "Electricity Use - Grid Purchase (kBtu)"));
+          ll84Data.setElectricityGridPurchasekWh(parseIntoBigDecimal(record, "Electricity Use - Grid Purchase (kWh)"));
+          ll84Data.setWeatherNormalizedSiteElectricity(parseIntoBigDecimal(record, "Weather Normalized Site Electricity (kWh)"));
+          ll84Data.setAnnualMaximumDemandkW(parseIntoBigDecimal(record, "Annual Maximum Demand (kW)"));
+          ll84Data.setAnnualMaximumDemandDate(parseIntoDate(record, "Annual Maximum Demand (MM/YYYY)"));
+          ll84Data.setAnnualMaximumDemandMeterIDName(parseIntoString(record, "Annual Maximum Demand (Meter Name (Meter ID))"));
+          ll84Data.setTotalGHGEmissions(parseIntoBigDecimal(record, "Total GHG Emissions (Metric Tons CO2e)"));
+          ll84Data.setDirectGHGEmissions(parseIntoBigDecimal(record, "Direct GHG Emissions (Metric Tons CO2e)"));
+          ll84Data.setIndirectGHGEmissions(parseIntoBigDecimal(record, "Indirect GHG Emissions (Metric Tons CO2e)"));
+          ll84Data.setWaterUseAllSources(parseIntoBigDecimal(record, "Water Use (All Water Sources) (kgal)"));
+          ll84Data.setWaterUseINtensityAllSources(parseIntoBigDecimal(record, "Water Use Intensity (All Water Sources) (gal/ft¬≤)"));
+          ll84Data.setWaterRequired(parseIntoString(record, "Water Required"));
+          ll84Data.setGenerationDate(parseIntoDate(record, "Generation Date"));
+          ll84Data.setLatitude(parseIntoBigDecimal(record, "Latitude"));
+          ll84Data.setLongitude(parseIntoBigDecimal(record, "Longitude"));
 
+          flowOrchestrator.calculatePenalties(ll84Data);
 
-
-          System.out.println("ll84Data = " + ll84Data);
-          System.out.println("penalty = " + flowOrchestrator.calculatePenalties(ll84Data));
-
-}
-        catch (Exception excp) {
-          excp.printStackTrace();
+        } catch (Exception excp) {
+          System.err.println("Exception while processing BBL:" + ll84Data.getBBL10Digits() + " msg:" + excp);
         }
-
-
-        // TODO : finish this impl
-
 
       }
     }
@@ -150,7 +143,7 @@ public final class CSVFileLoader {
     checkState(isNotEmpty(columnName), "columnName is required and missing.");
 
     String data = trim(record.get(columnName));
-    return BIGDECIMAL_VALIDATOR.isValid(data)?new BigDecimal(data):BigDecimal.ZERO;
+    return BIGDECIMAL_VALIDATOR.isValid(data) ? new BigDecimal(data) : BigDecimal.ZERO;
   }
 
 
@@ -159,7 +152,7 @@ public final class CSVFileLoader {
     checkState(isNotEmpty(columnName), "columnName is required and missing.");
 
     String data = trim(record.get(columnName));
-    return StringUtils.isNumeric(data)? NumberUtils.createInteger(data):0;
+    return StringUtils.isNumeric(data) ? NumberUtils.createInteger(data) : 0;
   }
 
   private static String parseIntoString(CSVRecord record, String columnName) {
@@ -176,7 +169,6 @@ public final class CSVFileLoader {
     String data = trim(record.get(columnName));
     return DATE_VALIDATOR.validate(data, DATE_PATTERN);
   }
-
 
 
 }

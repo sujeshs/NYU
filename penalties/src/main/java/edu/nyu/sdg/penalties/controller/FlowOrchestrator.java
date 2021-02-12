@@ -74,7 +74,7 @@ public final class FlowOrchestrator {
       .withExcessEmissionPhase2(phase2ExcessEmission)
       .build();
 
-    //sdgDataInsertDAO.writePenaltyInfo(ll84Data, derivedVariables);
+    sdgDataInsertDAO.writePenaltyInfo(ll84Data, derivedVariables);
     sdgDataInsertDAO.writeLL84Data(ll84Data);
 
     return calculatedPenalties;
