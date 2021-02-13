@@ -5,7 +5,7 @@ import static java.util.Objects.*;
 
 import com.google.common.collect.ImmutableList;
 import edu.nyu.sdg.penalties.model.CarbonLimits;
-import edu.nyu.sdg.penalties.model.LL84Data;
+import edu.nyu.sdg.penalties.model.LL84FeedData;
 import edu.nyu.sdg.penalties.model.OccupancyGroupInfo;
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,10 +25,10 @@ public final class CarbonLimitCalculator {
         requireNonNull(occupancySpaceUseData, "occupancySpaceUseData is required and missing.");
   }
 
-  public CarbonLimits calculateCarbonLimit(LL84Data ll84Data) {
-    requireNonNull(ll84Data, "ll84Data is required and missing.");
+  public CarbonLimits calculateCarbonLimit(LL84FeedData ll84FeedData) {
+    requireNonNull(ll84FeedData, "ll84Data is required and missing.");
 
-    List<OccupancyGroupInfo> occupancyGroupInfos = constructOccupancyGroupInfo(ll84Data);
+    List<OccupancyGroupInfo> occupancyGroupInfos = constructOccupancyGroupInfo(ll84FeedData);
 
     BigDecimal totalCarbonLimitPhase1 = BigDecimal.valueOf(0);
     BigDecimal totalCarbonLimitPhase2 = BigDecimal.valueOf(0);
@@ -55,13 +55,13 @@ public final class CarbonLimitCalculator {
         .build();
   }
 
-  private List<OccupancyGroupInfo> constructOccupancyGroupInfo(LL84Data ll84Data) {
+  private List<OccupancyGroupInfo> constructOccupancyGroupInfo(LL84FeedData ll84FeedData) {
 
-    requireNonNull(ll84Data, "ll84Data is required and missing.");
+    requireNonNull(ll84FeedData, "ll84Data is required and missing.");
 
-    String occupancyGrp1 = occupancySpaceUseData.get(ll84Data.getLargestPropertyUseType());
-    String occupancyGrp2 = occupancySpaceUseData.get(ll84Data.getSecondLargestPropertyUseType());
-    String occupancyGrp3 = occupancySpaceUseData.get(ll84Data.getThirdLargestPropertyUseType());
+    String occupancyGrp1 = occupancySpaceUseData.get(ll84FeedData.getLargestPropertyUseType());
+    String occupancyGrp2 = occupancySpaceUseData.get(ll84FeedData.getSecondLargestPropertyUseType());
+    String occupancyGrp3 = occupancySpaceUseData.get(ll84FeedData.getThirdLargestPropertyUseType());
 
     Map<String, BigDecimal> carbonLimitsGrp1 = carbonLimitData.get(occupancyGrp1);
     Map<String, BigDecimal> carbonLimitsGrp2 = carbonLimitData.get(occupancyGrp2);
@@ -72,7 +72,7 @@ public final class CarbonLimitCalculator {
             .withOccupancyGroup(occupancyGrp1)
             .withCarbonLimitPhase1(getNullSafeCarbonLimit(carbonLimitsGrp1, PHASE1))
             .withCarbonLimitPhase2(getNullSafeCarbonLimit(carbonLimitsGrp1, PHASE2))
-            .withOccupancyGroupArea(ll84Data.getLargestPropertyUseTypeGrossFloorArea())
+            .withOccupancyGroupArea(ll84FeedData.getLargestPropertyUseTypeGrossFloorArea())
             .build();
 
     OccupancyGroupInfo occupancyGroupInfo2 =
@@ -80,7 +80,7 @@ public final class CarbonLimitCalculator {
             .withOccupancyGroup(occupancyGrp2)
             .withCarbonLimitPhase1(getNullSafeCarbonLimit(carbonLimitsGrp2,PHASE1))
             .withCarbonLimitPhase2(getNullSafeCarbonLimit(carbonLimitsGrp2,PHASE2))
-            .withOccupancyGroupArea(ll84Data.getSecondLargestPropertyUseTypeGrossFloorArea())
+            .withOccupancyGroupArea(ll84FeedData.getSecondLargestPropertyUseTypeGrossFloorArea())
             .build();
 
     OccupancyGroupInfo occupancyGroupInfo3 =
@@ -88,7 +88,7 @@ public final class CarbonLimitCalculator {
             .withOccupancyGroup(occupancyGrp3)
             .withCarbonLimitPhase1(getNullSafeCarbonLimit(carbonLimitsGrp3,PHASE1))
             .withCarbonLimitPhase2(getNullSafeCarbonLimit(carbonLimitsGrp3,PHASE2))
-            .withOccupancyGroupArea(ll84Data.getThirdLargestPropertyUseTypeGrossFloorArea())
+            .withOccupancyGroupArea(ll84FeedData.getThirdLargestPropertyUseTypeGrossFloorArea())
             .build();
 
     return ImmutableList.of(occupancyGroupInfo1, occupancyGroupInfo2, occupancyGroupInfo3);

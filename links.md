@@ -13,3 +13,7 @@
 * [BBL polygons (from mappluto, regularly updated for most recent versions)](https://thefurmancenter.carto.com/u/nyufc/tables/bblpoly_spatial)
 
 * [BBL points (from mappluto, regularly updated for most recent versions)](https://thefurmancenter.carto.com/u/nyufc/tables/bblpoint_spatial)
+
+# References
+
+* [BE exchange calculator](https://be-exchange.org/calculator/)

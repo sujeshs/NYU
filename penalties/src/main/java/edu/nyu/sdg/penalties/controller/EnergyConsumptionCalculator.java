@@ -2,7 +2,7 @@ package edu.nyu.sdg.penalties.controller;
 
 import static java.util.Objects.requireNonNull;
 
-import edu.nyu.sdg.penalties.model.LL84Data;
+import edu.nyu.sdg.penalties.model.LL84FeedData;
 import java.math.BigDecimal;
 import java.util.Map;
 
@@ -14,32 +14,32 @@ public final class EnergyConsumptionCalculator {
     this.energysrcGHCoeffData = energysrcGHCoeffData;
   }
 
-  public BigDecimal calculateCarbonEmission(LL84Data ll84Data) {
-    requireNonNull(ll84Data, "ll84Data is required and missing.");
+  public BigDecimal calculateCarbonEmission(LL84FeedData ll84FeedData) {
+    requireNonNull(ll84FeedData, "ll84Data is required and missing.");
 
     BigDecimal carbonEmission = BigDecimal.valueOf(0);
 
     // TODO add all possible energy sources
     BigDecimal emissionFromDistrictSteam =
-        ll84Data.getDistrictSteamUse() == null
+        ll84FeedData.getDistrictSteamUse() == null
             ? BigDecimal.valueOf(0)
-            : ll84Data.getDistrictSteamUse().multiply(energysrcGHCoeffData.get("DistrictSteam"));
+            : ll84FeedData.getDistrictSteamUse().multiply(energysrcGHCoeffData.get("DistrictSteam"));
     BigDecimal emissionFromFuelOil2 =
-        ll84Data.getFuelOil2Use() == null
+        ll84FeedData.getFuelOil2Use() == null
             ? BigDecimal.valueOf(0)
-            : ll84Data.getFuelOil2Use().multiply(energysrcGHCoeffData.get("FuelOil2"));
+            : ll84FeedData.getFuelOil2Use().multiply(energysrcGHCoeffData.get("FuelOil2"));
     BigDecimal emissionFromFuelOil4 =
-        ll84Data.getFuelOil4Use() == null
+        ll84FeedData.getFuelOil4Use() == null
             ? BigDecimal.valueOf(0)
-            : ll84Data.getFuelOil4Use().multiply(energysrcGHCoeffData.get("FuelOil4"));
+            : ll84FeedData.getFuelOil4Use().multiply(energysrcGHCoeffData.get("FuelOil4"));
     BigDecimal emissionFromNaturalGas =
-        ll84Data.getNaturalGasUsekBTU() == null
+        ll84FeedData.getNaturalGasUsekBTU() == null
             ? BigDecimal.valueOf(0)
-            : ll84Data.getNaturalGasUsekBTU().multiply(energysrcGHCoeffData.get("Natural-Gas"));
+            : ll84FeedData.getNaturalGasUsekBTU().multiply(energysrcGHCoeffData.get("Natural-Gas"));
     BigDecimal emissionFromElectricity =
-        ll84Data.getElectricityGridPurchasekWh() == null
+        ll84FeedData.getElectricityGridPurchasekWh() == null
             ? BigDecimal.valueOf(0)
-            : ll84Data
+            : ll84FeedData
                 .getElectricityGridPurchasekWh()
                 .multiply(energysrcGHCoeffData.get("Utility-Electricity"));
 

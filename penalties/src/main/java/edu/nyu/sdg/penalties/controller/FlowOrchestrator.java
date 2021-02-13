@@ -7,7 +7,7 @@ import edu.nyu.sdg.penalties.AppConstants;
 import edu.nyu.sdg.penalties.dao.contract.SDGDataInsertDAO;
 import edu.nyu.sdg.penalties.model.CarbonLimits;
 import edu.nyu.sdg.penalties.model.DerivedVariables;
-import edu.nyu.sdg.penalties.model.LL84Data;
+import edu.nyu.sdg.penalties.model.LL84FeedData;
 import edu.nyu.sdg.penalties.model.Penalties;
 import java.math.BigDecimal;
 
@@ -41,11 +41,11 @@ public final class FlowOrchestrator {
    *
    * @return penalties for excess carbon emission
    */
-  public Penalties calculatePenalties(LL84Data ll84Data) {
-    requireNonNull(ll84Data, "ll84Data is required and missing.");
+  public Penalties calculatePenalties(LL84FeedData ll84FeedData) {
+    requireNonNull(ll84FeedData, "ll84Data is required and missing.");
 
-    CarbonLimits carbonLimits = carbonLimitCalculator.calculateCarbonLimit(ll84Data);
-    BigDecimal emissions = energyConsumptionCalculator.calculateCarbonEmission(ll84Data);
+    CarbonLimits carbonLimits = carbonLimitCalculator.calculateCarbonLimit(ll84FeedData);
+    BigDecimal emissions = energyConsumptionCalculator.calculateCarbonEmission(ll84FeedData);
 
     BigDecimal phase1ExcessEmission = emissions.subtract(carbonLimits.getCarbonLimitPhase1());
     BigDecimal phase2ExcessEmission = emissions.subtract(carbonLimits.getCarbonLimitPhase2());
@@ -74,8 +74,9 @@ public final class FlowOrchestrator {
       .withExcessEmissionPhase2(phase2ExcessEmission)
       .build();
 
-    sdgDataInsertDAO.writePenaltyInfo(ll84Data, derivedVariables);
-    sdgDataInsertDAO.writeLL84Data(ll84Data);
+    sdgDataInsertDAO.writePenaltyInfo(ll84FeedData, derivedVariables);
+    sdgDataInsertDAO.writeLL84Data(ll84FeedData);
+    sdgDataInsertDAO.writeAcrisData(ll84FeedData);
 
     return calculatedPenalties;
   }
