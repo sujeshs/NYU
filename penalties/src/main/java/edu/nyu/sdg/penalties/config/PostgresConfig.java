@@ -7,9 +7,8 @@ import com.zaxxer.hikari.HikariDataSource;
 import edu.nyu.sdg.penalties.dao.contract.LookupDAO;
 import edu.nyu.sdg.penalties.dao.contract.SDGDataInsertDAO;
 import edu.nyu.sdg.penalties.dao.postgres.impl.LookUpDAOPostgresImpl;
-import javax.sql.DataSource;
-
 import edu.nyu.sdg.penalties.dao.postgres.impl.SDGDataInsertPostgresImpl;
+import javax.sql.DataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

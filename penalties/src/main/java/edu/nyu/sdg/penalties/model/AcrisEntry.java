@@ -89,16 +89,32 @@ public final class AcrisEntry {
 
   @Override
   public String toString() {
-    return "AcrisEntries{" +
-      "BBL10Digits='" + BBL10Digits + '\'' +
-      ", documentId='" + documentId + '\'' +
-      ", documentType='" + documentType + '\'' +
-      ", documentAmount=" + documentAmount +
-      ", documentRecordedTimestamp=" + documentRecordedTimestamp +
-      ", partyType='" + partyType + '\'' +
-      ", name='" + name + '\'' +
-      ", address1='" + address1 + '\'' +
-      ", zipCode='" + zipCode + '\'' +
-      '}';
+    return "AcrisEntries{"
+        + "BBL10Digits='"
+        + BBL10Digits
+        + '\''
+        + ", documentId='"
+        + documentId
+        + '\''
+        + ", documentType='"
+        + documentType
+        + '\''
+        + ", documentAmount="
+        + documentAmount
+        + ", documentRecordedTimestamp="
+        + documentRecordedTimestamp
+        + ", partyType='"
+        + partyType
+        + '\''
+        + ", name='"
+        + name
+        + '\''
+        + ", address1='"
+        + address1
+        + '\''
+        + ", zipCode='"
+        + zipCode
+        + '\''
+        + '}';
   }
 }

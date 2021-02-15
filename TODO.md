@@ -1,5 +1,6 @@
 #Sujesh
 1. App accepts only data without spaces and special characters. Enhance this.
+2. While loading ll84 populate `No` instead of `blanks` for city building.
 
 #Questions to Alejandro/ Miles
 ##Space Use - Occupancy Grp mapping

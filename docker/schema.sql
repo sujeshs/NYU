@@ -66,6 +66,14 @@ create table feed_acris_mortgage_info
     zipcode                     varchar(40)
 );
 
+create table feed_nycha_info
+(
+    id          serial         not null,
+    bbl         varchar(100)   not null,
+    development varchar(1000)  not null,
+    primary key (bbl)
+);
+
 create table feed_soana_ownership_info
 (
     id               serial        not null,

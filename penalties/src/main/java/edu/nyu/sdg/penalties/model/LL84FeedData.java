@@ -250,7 +250,8 @@ public final class LL84FeedData {
     return largestPropertyUseTypeGrossFloorArea;
   }
 
-  public void setLargestPropertyUseTypeGrossFloorArea(BigDecimal largestPropertyUseTypeGrossFloorArea) {
+  public void setLargestPropertyUseTypeGrossFloorArea(
+      BigDecimal largestPropertyUseTypeGrossFloorArea) {
     this.largestPropertyUseTypeGrossFloorArea = largestPropertyUseTypeGrossFloorArea;
   }
 
@@ -266,7 +267,8 @@ public final class LL84FeedData {
     return secondLargestPropertyUseTypeGrossFloorArea;
   }
 
-  public void setSecondLargestPropertyUseTypeGrossFloorArea(BigDecimal secondLargestPropertyUseTypeGrossFloorArea) {
+  public void setSecondLargestPropertyUseTypeGrossFloorArea(
+      BigDecimal secondLargestPropertyUseTypeGrossFloorArea) {
     this.secondLargestPropertyUseTypeGrossFloorArea = secondLargestPropertyUseTypeGrossFloorArea;
   }
 
@@ -282,7 +284,8 @@ public final class LL84FeedData {
     return thirdLargestPropertyUseTypeGrossFloorArea;
   }
 
-  public void setThirdLargestPropertyUseTypeGrossFloorArea(BigDecimal thirdLargestPropertyUseTypeGrossFloorArea) {
+  public void setThirdLargestPropertyUseTypeGrossFloorArea(
+      BigDecimal thirdLargestPropertyUseTypeGrossFloorArea) {
     this.thirdLargestPropertyUseTypeGrossFloorArea = thirdLargestPropertyUseTypeGrossFloorArea;
   }
 
@@ -370,7 +373,8 @@ public final class LL84FeedData {
     return weatherNormalizedElectricityIntensity;
   }
 
-  public void setWeatherNormalizedElectricityIntensity(BigDecimal weatherNormalizedElectricityIntensity) {
+  public void setWeatherNormalizedElectricityIntensity(
+      BigDecimal weatherNormalizedElectricityIntensity) {
     this.weatherNormalizedElectricityIntensity = weatherNormalizedElectricityIntensity;
   }
 
@@ -378,7 +382,8 @@ public final class LL84FeedData {
     return weatherNormalizedNaturalGasIntensity;
   }
 
-  public void setWeatherNormalizedNaturalGasIntensity(BigDecimal weatherNormalizedNaturalGasIntensity) {
+  public void setWeatherNormalizedNaturalGasIntensity(
+      BigDecimal weatherNormalizedNaturalGasIntensity) {
     this.weatherNormalizedNaturalGasIntensity = weatherNormalizedNaturalGasIntensity;
   }
 
@@ -482,7 +487,8 @@ public final class LL84FeedData {
     return weatherNormalizedSiteNaturalGasUseTherms;
   }
 
-  public void setWeatherNormalizedSiteNaturalGasUseTherms(BigDecimal weatherNormalizedSiteNaturalGasUseTherms) {
+  public void setWeatherNormalizedSiteNaturalGasUseTherms(
+      BigDecimal weatherNormalizedSiteNaturalGasUseTherms) {
     this.weatherNormalizedSiteNaturalGasUseTherms = weatherNormalizedSiteNaturalGasUseTherms;
   }
 
@@ -648,78 +654,174 @@ public final class LL84FeedData {
 
   @Override
   public String toString() {
-    return "LL84FeedData{" +
-      "order=" + order +
-      ", propertyId=" + propertyId +
-      ", propertyName='" + propertyName + '\'' +
-      ", parentPropertyId='" + parentPropertyId + '\'' +
-      ", parentPropertyName='" + parentPropertyName + '\'' +
-      ", cityBuilding='" + cityBuilding + '\'' +
-      ", email='" + email + '\'' +
-      ", BBL10Digits='" + BBL10Digits + '\'' +
-      ", NYCBBLSelfReported='" + NYCBBLSelfReported + '\'' +
-      ", NYCBIN='" + NYCBIN + '\'' +
-      ", address1SelfReported='" + address1SelfReported + '\'' +
-      ", address2SelfReported='" + address2SelfReported + '\'' +
-      ", postalCode=" + postalCode +
-      ", streetNumber=" + streetNumber +
-      ", streetName='" + streetName + '\'' +
-      ", borough='" + borough + '\'' +
-      ", dofGrossFloorArea=" + dofGrossFloorArea +
-      ", selfReportedGrossFloorArea=" + selfReportedGrossFloorArea +
-      ", primaryPropertyTypeSelfSelected='" + primaryPropertyTypeSelfSelected + '\'' +
-      ", listOfAllPropertyUseTypes='" + listOfAllPropertyUseTypes + '\'' +
-      ", largestPropertyUseType='" + largestPropertyUseType + '\'' +
-      ", largestPropertyUseTypeGrossFloorArea=" + largestPropertyUseTypeGrossFloorArea +
-      ", secondLargestPropertyUseType='" + secondLargestPropertyUseType + '\'' +
-      ", secondLargestPropertyUseTypeGrossFloorArea=" + secondLargestPropertyUseTypeGrossFloorArea +
-      ", thirdLargestPropertyUseType='" + thirdLargestPropertyUseType + '\'' +
-      ", thirdLargestPropertyUseTypeGrossFloorArea=" + thirdLargestPropertyUseTypeGrossFloorArea +
-      ", yearBuilt=" + yearBuilt +
-      ", numberOfBuildings=" + numberOfBuildings +
-      ", occupancy=" + occupancy +
-      ", energyMeteredAreas='" + energyMeteredAreas + '\'' +
-      ", waterMeteredAreas='" + waterMeteredAreas + '\'' +
-      ", energyStarScore=" + energyStarScore +
-      ", sourceEUI=" + sourceEUI +
-      ", weatherNormalizedSiteEUI=" + weatherNormalizedSiteEUI +
-      ", siteEUI=" + siteEUI +
-      ", weatherNormalizedSourceEUI=" + weatherNormalizedSourceEUI +
-      ", weatherNormalizedElectricityIntensity=" + weatherNormalizedElectricityIntensity +
-      ", weatherNormalizedNaturalGasIntensity=" + weatherNormalizedNaturalGasIntensity +
-      ", fuelOil1Use=" + fuelOil1Use +
-      ", fuelOil2Use=" + fuelOil2Use +
-      ", fuelOil4Use=" + fuelOil4Use +
-      ", fuelOil5_6Use=" + fuelOil5_6Use +
-      ", diesel2Use=" + diesel2Use +
-      ", keroseneUse=" + keroseneUse +
-      ", propaneUse=" + propaneUse +
-      ", districtSteamUse=" + districtSteamUse +
-      ", districtHotWaterUse=" + districtHotWaterUse +
-      ", districtChilledWaterUse=" + districtChilledWaterUse +
-      ", naturalGasUsekBTU=" + naturalGasUsekBTU +
-      ", naturalGasUseTherms=" + naturalGasUseTherms +
-      ", weatherNormalizedSiteNaturalGasUseTherms=" + weatherNormalizedSiteNaturalGasUseTherms +
-      ", electricityGridPurchasekBTU=" + electricityGridPurchasekBTU +
-      ", electricityGridPurchasekWh=" + electricityGridPurchasekWh +
-      ", weatherNormalizedSiteElectricity=" + weatherNormalizedSiteElectricity +
-      ", annualMaximumDemandkW=" + annualMaximumDemandkW +
-      ", annualMaximumDemandDate=" + annualMaximumDemandDate +
-      ", annualMaximumDemandMeterIDName='" + annualMaximumDemandMeterIDName + '\'' +
-      ", totalGHGEmissions=" + totalGHGEmissions +
-      ", directGHGEmissions=" + directGHGEmissions +
-      ", indirectGHGEmissions=" + indirectGHGEmissions +
-      ", waterUseAllSources=" + waterUseAllSources +
-      ", waterUseIntensityAllSources=" + waterUseIntensityAllSources +
-      ", waterRequired='" + waterRequired + '\'' +
-      ", generationDate=" + generationDate +
-      ", latitude=" + latitude +
-      ", longitude=" + longitude +
-      ", communityBoard='" + communityBoard + '\'' +
-      ", councilDistrict='" + councilDistrict + '\'' +
-      ", censusTract='" + censusTract + '\'' +
-      ", nta='" + nta + '\'' +
-      ", acrisEntries=" + acrisEntries +
-      '}';
+    return "LL84FeedData{"
+        + "order="
+        + order
+        + ", propertyId="
+        + propertyId
+        + ", propertyName='"
+        + propertyName
+        + '\''
+        + ", parentPropertyId='"
+        + parentPropertyId
+        + '\''
+        + ", parentPropertyName='"
+        + parentPropertyName
+        + '\''
+        + ", cityBuilding='"
+        + cityBuilding
+        + '\''
+        + ", email='"
+        + email
+        + '\''
+        + ", BBL10Digits='"
+        + BBL10Digits
+        + '\''
+        + ", NYCBBLSelfReported='"
+        + NYCBBLSelfReported
+        + '\''
+        + ", NYCBIN='"
+        + NYCBIN
+        + '\''
+        + ", address1SelfReported='"
+        + address1SelfReported
+        + '\''
+        + ", address2SelfReported='"
+        + address2SelfReported
+        + '\''
+        + ", postalCode="
+        + postalCode
+        + ", streetNumber="
+        + streetNumber
+        + ", streetName='"
+        + streetName
+        + '\''
+        + ", borough='"
+        + borough
+        + '\''
+        + ", dofGrossFloorArea="
+        + dofGrossFloorArea
+        + ", selfReportedGrossFloorArea="
+        + selfReportedGrossFloorArea
+        + ", primaryPropertyTypeSelfSelected='"
+        + primaryPropertyTypeSelfSelected
+        + '\''
+        + ", listOfAllPropertyUseTypes='"
+        + listOfAllPropertyUseTypes
+        + '\''
+        + ", largestPropertyUseType='"
+        + largestPropertyUseType
+        + '\''
+        + ", largestPropertyUseTypeGrossFloorArea="
+        + largestPropertyUseTypeGrossFloorArea
+        + ", secondLargestPropertyUseType='"
+        + secondLargestPropertyUseType
+        + '\''
+        + ", secondLargestPropertyUseTypeGrossFloorArea="
+        + secondLargestPropertyUseTypeGrossFloorArea
+        + ", thirdLargestPropertyUseType='"
+        + thirdLargestPropertyUseType
+        + '\''
+        + ", thirdLargestPropertyUseTypeGrossFloorArea="
+        + thirdLargestPropertyUseTypeGrossFloorArea
+        + ", yearBuilt="
+        + yearBuilt
+        + ", numberOfBuildings="
+        + numberOfBuildings
+        + ", occupancy="
+        + occupancy
+        + ", energyMeteredAreas='"
+        + energyMeteredAreas
+        + '\''
+        + ", waterMeteredAreas='"
+        + waterMeteredAreas
+        + '\''
+        + ", energyStarScore="
+        + energyStarScore
+        + ", sourceEUI="
+        + sourceEUI
+        + ", weatherNormalizedSiteEUI="
+        + weatherNormalizedSiteEUI
+        + ", siteEUI="
+        + siteEUI
+        + ", weatherNormalizedSourceEUI="
+        + weatherNormalizedSourceEUI
+        + ", weatherNormalizedElectricityIntensity="
+        + weatherNormalizedElectricityIntensity
+        + ", weatherNormalizedNaturalGasIntensity="
+        + weatherNormalizedNaturalGasIntensity
+        + ", fuelOil1Use="
+        + fuelOil1Use
+        + ", fuelOil2Use="
+        + fuelOil2Use
+        + ", fuelOil4Use="
+        + fuelOil4Use
+        + ", fuelOil5_6Use="
+        + fuelOil5_6Use
+        + ", diesel2Use="
+        + diesel2Use
+        + ", keroseneUse="
+        + keroseneUse
+        + ", propaneUse="
+        + propaneUse
+        + ", districtSteamUse="
+        + districtSteamUse
+        + ", districtHotWaterUse="
+        + districtHotWaterUse
+        + ", districtChilledWaterUse="
+        + districtChilledWaterUse
+        + ", naturalGasUsekBTU="
+        + naturalGasUsekBTU
+        + ", naturalGasUseTherms="
+        + naturalGasUseTherms
+        + ", weatherNormalizedSiteNaturalGasUseTherms="
+        + weatherNormalizedSiteNaturalGasUseTherms
+        + ", electricityGridPurchasekBTU="
+        + electricityGridPurchasekBTU
+        + ", electricityGridPurchasekWh="
+        + electricityGridPurchasekWh
+        + ", weatherNormalizedSiteElectricity="
+        + weatherNormalizedSiteElectricity
+        + ", annualMaximumDemandkW="
+        + annualMaximumDemandkW
+        + ", annualMaximumDemandDate="
+        + annualMaximumDemandDate
+        + ", annualMaximumDemandMeterIDName='"
+        + annualMaximumDemandMeterIDName
+        + '\''
+        + ", totalGHGEmissions="
+        + totalGHGEmissions
+        + ", directGHGEmissions="
+        + directGHGEmissions
+        + ", indirectGHGEmissions="
+        + indirectGHGEmissions
+        + ", waterUseAllSources="
+        + waterUseAllSources
+        + ", waterUseIntensityAllSources="
+        + waterUseIntensityAllSources
+        + ", waterRequired='"
+        + waterRequired
+        + '\''
+        + ", generationDate="
+        + generationDate
+        + ", latitude="
+        + latitude
+        + ", longitude="
+        + longitude
+        + ", communityBoard='"
+        + communityBoard
+        + '\''
+        + ", councilDistrict='"
+        + councilDistrict
+        + '\''
+        + ", censusTract='"
+        + censusTract
+        + '\''
+        + ", nta='"
+        + nta
+        + '\''
+        + ", acrisEntries="
+        + acrisEntries
+        + '}';
   }
 }

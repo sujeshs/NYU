@@ -12,10 +12,10 @@ public final class Penalties {
   /** Phase 2 penalties (2030-2034) */
   private final BigDecimal phase2Penalties;
 
-  /** USD String representation of Phase 1 penalties (2024-2029)*/
+  /** USD String representation of Phase 1 penalties (2024-2029) */
   private final String phase1PenaltiesUSD;
 
-  /** USD String representation of Phase 2 penalties (2030-2034)*/
+  /** USD String representation of Phase 2 penalties (2030-2034) */
   private final String phase2PenaltiesUSD;
 
   private Penalties(Builder builder) {
@@ -60,8 +60,7 @@ public final class Penalties {
     private String phase1PenaltiesUSD;
     private String phase2PenaltiesUSD;
 
-    private Builder() {
-    }
+    private Builder() {}
 
     public Builder withPhase1Penalties(BigDecimal val) {
       phase1Penalties = val;
@@ -93,10 +92,10 @@ public final class Penalties {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Penalties penalties = (Penalties) o;
-    return Objects.equals(phase1Penalties, penalties.phase1Penalties) &&
-      Objects.equals(phase2Penalties, penalties.phase2Penalties) &&
-      Objects.equals(phase1PenaltiesUSD, penalties.phase1PenaltiesUSD) &&
-      Objects.equals(phase2PenaltiesUSD, penalties.phase2PenaltiesUSD);
+    return Objects.equals(phase1Penalties, penalties.phase1Penalties)
+        && Objects.equals(phase2Penalties, penalties.phase2Penalties)
+        && Objects.equals(phase1PenaltiesUSD, penalties.phase1PenaltiesUSD)
+        && Objects.equals(phase2PenaltiesUSD, penalties.phase2PenaltiesUSD);
   }
 
   @Override
@@ -107,10 +106,10 @@ public final class Penalties {
   @Override
   public String toString() {
     return new StringJoiner(", ", Penalties.class.getSimpleName() + "[", "]")
-      .add("phase1Penalties=" + phase1Penalties)
-      .add("phase2Penalties=" + phase2Penalties)
-      .add("phase1PenaltiesUSD='" + phase1PenaltiesUSD + "'")
-      .add("phase2PenaltiesUSD='" + phase2PenaltiesUSD + "'")
-      .toString();
+        .add("phase1Penalties=" + phase1Penalties)
+        .add("phase2Penalties=" + phase2Penalties)
+        .add("phase1PenaltiesUSD='" + phase1PenaltiesUSD + "'")
+        .add("phase2PenaltiesUSD='" + phase2PenaltiesUSD + "'")
+        .toString();
   }
 }

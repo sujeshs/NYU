@@ -5,10 +5,7 @@ import static java.util.Objects.requireNonNull;
 
 import edu.nyu.sdg.penalties.AppConstants;
 import edu.nyu.sdg.penalties.dao.contract.SDGDataInsertDAO;
-import edu.nyu.sdg.penalties.model.CarbonLimits;
-import edu.nyu.sdg.penalties.model.DerivedVariables;
-import edu.nyu.sdg.penalties.model.LL84FeedData;
-import edu.nyu.sdg.penalties.model.Penalties;
+import edu.nyu.sdg.penalties.model.*;
 import java.math.BigDecimal;
 
 public final class FlowOrchestrator {
@@ -18,14 +15,16 @@ public final class FlowOrchestrator {
   private final SDGDataInsertDAO sdgDataInsertDAO;
 
   public FlowOrchestrator(
-    CarbonLimitCalculator carbonLimitCalculator,
-    EnergyConsumptionCalculator energyConsumptionCalculator, SDGDataInsertDAO sdgDataInsertDAO) {
+      CarbonLimitCalculator carbonLimitCalculator,
+      EnergyConsumptionCalculator energyConsumptionCalculator,
+      SDGDataInsertDAO sdgDataInsertDAO) {
     this.carbonLimitCalculator =
         requireNonNull(carbonLimitCalculator, "carbonLimitCalculator is required and missing.");
     this.energyConsumptionCalculator =
         requireNonNull(
             energyConsumptionCalculator, "energyConsumptionCalculator is required and missing.");
-    this.sdgDataInsertDAO = requireNonNull(sdgDataInsertDAO, "sdgDataInsertDAO is required and missing.");
+    this.sdgDataInsertDAO =
+        requireNonNull(sdgDataInsertDAO, "sdgDataInsertDAO is required and missing.");
   }
 
   /**
@@ -59,25 +58,33 @@ public final class FlowOrchestrator {
             ? phase2ExcessEmission.multiply(AppConstants.PENALTY_PER_TON)
             : ZERO;
 
-    Penalties calculatedPenalties = Penalties.newBuilder()
-        .withPhase1Penalties(phase1Penalty)
-        .withPhase2Penalties(phase2Penalty)
-        .withPhase1PenaltiesUSD(AppConstants.CURRENCY_FORMAT.format(phase1Penalty))
-        .withPhase2PenaltiesUSD(AppConstants.CURRENCY_FORMAT.format(phase2Penalty))
-        .build();
+    Penalties calculatedPenalties =
+        Penalties.newBuilder()
+            .withPhase1Penalties(phase1Penalty)
+            .withPhase2Penalties(phase2Penalty)
+            .withPhase1PenaltiesUSD(AppConstants.CURRENCY_FORMAT.format(phase1Penalty))
+            .withPhase2PenaltiesUSD(AppConstants.CURRENCY_FORMAT.format(phase2Penalty))
+            .build();
 
-    DerivedVariables derivedVariables = DerivedVariables.newBuilder()
-      .withPenalties(calculatedPenalties)
-      .withCarbonLimits(carbonLimits)
-      .withTotalActualEmissions(emissions)
-      .withExcessEmissionPhase1(phase1ExcessEmission)
-      .withExcessEmissionPhase2(phase2ExcessEmission)
-      .build();
+    DerivedVariables derivedVariables =
+        DerivedVariables.newBuilder()
+            .withPenalties(calculatedPenalties)
+            .withCarbonLimits(carbonLimits)
+            .withTotalActualEmissions(emissions)
+            .withExcessEmissionPhase1(phase1ExcessEmission)
+            .withExcessEmissionPhase2(phase2ExcessEmission)
+            .build();
 
     sdgDataInsertDAO.writePenaltyInfo(ll84FeedData, derivedVariables);
     sdgDataInsertDAO.writeLL84Data(ll84FeedData);
     sdgDataInsertDAO.writeAcrisData(ll84FeedData);
 
     return calculatedPenalties;
+  }
+
+  public void loadNYCHAData(NYCHAFeedData nychaFeedData) {
+    requireNonNull(nychaFeedData, "nychaFeedData is required and missing.");
+
+    sdgDataInsertDAO.writeNYCHAData(nychaFeedData);
   }
 }

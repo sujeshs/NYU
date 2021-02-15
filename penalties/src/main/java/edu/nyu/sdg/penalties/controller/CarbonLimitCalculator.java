@@ -60,7 +60,8 @@ public final class CarbonLimitCalculator {
     requireNonNull(ll84FeedData, "ll84Data is required and missing.");
 
     String occupancyGrp1 = occupancySpaceUseData.get(ll84FeedData.getLargestPropertyUseType());
-    String occupancyGrp2 = occupancySpaceUseData.get(ll84FeedData.getSecondLargestPropertyUseType());
+    String occupancyGrp2 =
+        occupancySpaceUseData.get(ll84FeedData.getSecondLargestPropertyUseType());
     String occupancyGrp3 = occupancySpaceUseData.get(ll84FeedData.getThirdLargestPropertyUseType());
 
     Map<String, BigDecimal> carbonLimitsGrp1 = carbonLimitData.get(occupancyGrp1);
@@ -78,16 +79,16 @@ public final class CarbonLimitCalculator {
     OccupancyGroupInfo occupancyGroupInfo2 =
         OccupancyGroupInfo.newBuilder()
             .withOccupancyGroup(occupancyGrp2)
-            .withCarbonLimitPhase1(getNullSafeCarbonLimit(carbonLimitsGrp2,PHASE1))
-            .withCarbonLimitPhase2(getNullSafeCarbonLimit(carbonLimitsGrp2,PHASE2))
+            .withCarbonLimitPhase1(getNullSafeCarbonLimit(carbonLimitsGrp2, PHASE1))
+            .withCarbonLimitPhase2(getNullSafeCarbonLimit(carbonLimitsGrp2, PHASE2))
             .withOccupancyGroupArea(ll84FeedData.getSecondLargestPropertyUseTypeGrossFloorArea())
             .build();
 
     OccupancyGroupInfo occupancyGroupInfo3 =
         OccupancyGroupInfo.newBuilder()
             .withOccupancyGroup(occupancyGrp3)
-            .withCarbonLimitPhase1(getNullSafeCarbonLimit(carbonLimitsGrp3,PHASE1))
-            .withCarbonLimitPhase2(getNullSafeCarbonLimit(carbonLimitsGrp3,PHASE2))
+            .withCarbonLimitPhase1(getNullSafeCarbonLimit(carbonLimitsGrp3, PHASE1))
+            .withCarbonLimitPhase2(getNullSafeCarbonLimit(carbonLimitsGrp3, PHASE2))
             .withOccupancyGroupArea(ll84FeedData.getThirdLargestPropertyUseTypeGrossFloorArea())
             .build();
 

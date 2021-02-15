@@ -23,7 +23,9 @@ public final class EnergyConsumptionCalculator {
     BigDecimal emissionFromDistrictSteam =
         ll84FeedData.getDistrictSteamUse() == null
             ? BigDecimal.valueOf(0)
-            : ll84FeedData.getDistrictSteamUse().multiply(energysrcGHCoeffData.get("DistrictSteam"));
+            : ll84FeedData
+                .getDistrictSteamUse()
+                .multiply(energysrcGHCoeffData.get("DistrictSteam"));
     BigDecimal emissionFromFuelOil2 =
         ll84FeedData.getFuelOil2Use() == null
             ? BigDecimal.valueOf(0)

@@ -60,8 +60,7 @@ public final class DerivedVariables {
     private CarbonLimits carbonLimits;
     private Penalties penalties;
 
-    private Builder() {
-    }
+    private Builder() {}
 
     public Builder withExcessEmissionPhase1(BigDecimal val) {
       excessEmissionPhase1 = val;
@@ -96,11 +95,11 @@ public final class DerivedVariables {
   @Override
   public String toString() {
     return new StringJoiner(", ", DerivedVariables.class.getSimpleName() + "[", "]")
-      .add("excessEmissionPhase1=" + excessEmissionPhase1)
-      .add("excessEmissionPhase2=" + excessEmissionPhase2)
-      .add("totalActualEmissions=" + totalActualEmissions)
-      .add("carbonLimits=" + carbonLimits)
-      .add("penalties=" + penalties)
-      .toString();
+        .add("excessEmissionPhase1=" + excessEmissionPhase1)
+        .add("excessEmissionPhase2=" + excessEmissionPhase2)
+        .add("totalActualEmissions=" + totalActualEmissions)
+        .add("carbonLimits=" + carbonLimits)
+        .add("penalties=" + penalties)
+        .toString();
   }
 }
