@@ -10,6 +10,8 @@ import edu.nyu.sdg.penalties.inputstream.file.LL84CSVFileLoader;
 import edu.nyu.sdg.penalties.inputstream.file.NYCHAFileLoader;
 import java.math.BigDecimal;
 import java.util.Map;
+
+import edu.nyu.sdg.penalties.inputstream.file.RentStabilizedFileLoader;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -61,5 +63,12 @@ public class PenaltiesAppBeans {
     requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
 
     return new NYCHAFileLoader(flowOrchestrator);
+  }
+
+  @Bean
+  RentStabilizedFileLoader rentStabilizedFileLoader(FlowOrchestrator flowOrchestrator) {
+    requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
+
+    return new RentStabilizedFileLoader(flowOrchestrator);
   }
 }

@@ -87,4 +87,10 @@ public final class FlowOrchestrator {
 
     sdgDataInsertDAO.writeNYCHAData(nychaFeedData);
   }
+
+  public void loadRentStabilizedUnitsData(RentStabilizedBBLFeedData rentStabilizedBBLFeedData) {
+    requireNonNull(rentStabilizedBBLFeedData, "rentStabilizedBBLFeedData is required and missing.");
+
+    sdgDataInsertDAO.writeRentStabilizedUnitsData(rentStabilizedBBLFeedData);
+  }
 }

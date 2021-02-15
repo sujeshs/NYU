@@ -74,6 +74,18 @@ create table feed_nycha_info
     primary key (bbl)
 );
 
+create table feed_rent_stabilized_units_info
+(
+    id                  serial        not null,
+    bbl                 varchar(100)  not null,
+    mp_version          varchar(100)  not null,
+    mp_res_units        int,
+    dof_stab_units_2018 int,
+    dof_stab_units_2019 int,
+    stab_unit_pct       numeric(3, 2),
+    primary key (bbl)
+);
+
 create table feed_soana_ownership_info
 (
     id               serial        not null,

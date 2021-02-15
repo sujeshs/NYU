@@ -13,4 +13,7 @@ public final class LoadSql {
 
   public static final String PUT_FEED_NYCHA_DATA =
       "INSERT INTO PUBLIC.feed_nycha_info ( bbl, development) VALUES (?,?)";
+
+  public static final String PUT_FEED_RENT_STABILIZED_UNITS_DATA =
+    "INSERT INTO PUBLIC.feed_rent_stabilized_units_info ( bbl, mp_version, mp_res_units, dof_stab_units_2018, dof_stab_units_2019, stab_unit_pct) VALUES (?,?,?,?,?,?)";
 }
