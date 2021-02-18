@@ -1,6 +1,7 @@
 package edu.nyu.sdg.penalties;
 
 import edu.nyu.sdg.penalties.dao.contract.LookupDAO;
+import edu.nyu.sdg.penalties.inputstream.file.LL84CSVFileLoader;
 import edu.nyu.sdg.penalties.inputstream.file.NYCHAFileLoader;
 import edu.nyu.sdg.penalties.inputstream.file.RentStabilizedFileLoader;
 import org.slf4j.Logger;
@@ -23,17 +24,16 @@ public class PenaltiesApplication {
     LOG.debug("carbon limit => " + dataFromDB.getCarbonLimitData());
     LOG.debug("space occupancy => " + dataFromDB.getLL84SpaceOccupancyGrpData());
 
-    /*    LL84CSVFileLoader ll84CSVFileLoader = ctx.getBean( LL84CSVFileLoader.class);
-    // String ll84FeedData = "/Users/ssuku24/cas/personal/NYU/docs/samples/subset_ll84.csv";
+    LL84CSVFileLoader ll84CSVFileLoader = ctx.getBean( LL84CSVFileLoader.class);
     String ll84FeedData = "/Users/sujeshs/Documents/PACE/merged_ll84_parties.csv";
     ll84CSVFileLoader.loadCSV(ll84FeedData);
 
     NYCHAFileLoader nychaFileLoader = ctx.getBean(NYCHAFileLoader.class);
     String nychaFeedData = "/Users/sujeshs/Documents/PACE/nycha-bbls.csv";
-    nychaFileLoader.loadCSV(nychaFeedData);*/
+    //nychaFileLoader.loadCSV(nychaFeedData);
 
     RentStabilizedFileLoader rentStabilizedFileLoader = ctx.getBean(RentStabilizedFileLoader.class);
     String rentFeedData = "/Users/sujeshs/IdeaProjects/NYU/docs/furman-center_rent-stabilized-units.csv";
-    rentStabilizedFileLoader.loadCSV(rentFeedData);
+    //rentStabilizedFileLoader.loadCSV(rentFeedData);
   }
 }

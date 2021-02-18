@@ -33,7 +33,9 @@ public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
       derivedVariables.getExcessEmissionPhase1(),
       derivedVariables.getExcessEmissionPhase2(),
       derivedVariables.getPenalties().getPhase1PenaltiesUSD(),
-      derivedVariables.getPenalties().getPhase2PenaltiesUSD()
+      derivedVariables.getPenalties().getPhase2PenaltiesUSD(),
+      derivedVariables.getPenalties().getPhase1Penalties(),
+      derivedVariables.getPenalties().getPhase2Penalties()
     );
   }
 
