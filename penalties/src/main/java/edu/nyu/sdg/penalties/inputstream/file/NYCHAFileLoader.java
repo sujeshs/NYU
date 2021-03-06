@@ -29,6 +29,8 @@ public final class NYCHAFileLoader {
     String csvHeader = "development,borough,bbl";
 
     csvFormat = CSVFormat.RFC4180.withHeader(csvHeader.split(",")).withSkipHeaderRecord();
+
+    //throw new RuntimeException("Implement this later !!");
   }
 
   public void loadCSV(String sourceFile) throws Exception {

@@ -4,10 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import edu.nyu.sdg.penalties.dao.contract.SDGDataInsertDAO;
 import edu.nyu.sdg.penalties.dao.postgres.sql.LoadSql;
-import edu.nyu.sdg.penalties.model.DerivedVariables;
-import edu.nyu.sdg.penalties.model.LL84FeedData;
-import edu.nyu.sdg.penalties.model.NYCHAFeedData;
-import edu.nyu.sdg.penalties.model.RentStabilizedBBLFeedData;
+import edu.nyu.sdg.penalties.model.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
@@ -67,6 +64,7 @@ public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
       ll84FeedData.getYearBuilt(),
       ll84FeedData.getNumberOfBuildings(),
       ll84FeedData.getOccupancy(),
+      ll84FeedData.getGenerationDate(),
       ll84FeedData.getLatitude(),
       ll84FeedData.getLongitude(),
       ll84FeedData.getCommunityBoard(),
@@ -134,6 +132,53 @@ public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
       rentStabilizedBBLFeedData.getStabilizedUnits2018(),
       rentStabilizedBBLFeedData.getStabilizedUnits2019(),
       rentStabilizedBBLFeedData.getStabilizedUnitPercentage()
+    );
+  }
+
+  @Override
+  public void writeSoanaData(SoanaFeedData soanaFeedData) {
+    requireNonNull(soanaFeedData,"soanaFeedData is required and missing.");
+
+    template.update(
+      LoadSql.PUT_FEED_SOANA_DATA,
+      soanaFeedData.getBBL(),
+      soanaFeedData.getMail_Sequence(),
+      soanaFeedData.getMail_Recipient_Type(),
+      soanaFeedData.getBorough(),
+      soanaFeedData.getBlock(),
+      soanaFeedData.getLot(),
+      soanaFeedData.getEasement(),
+      soanaFeedData.getTax_Class(),
+      soanaFeedData.getBuilding_Class(),
+      soanaFeedData.getOwner_Name_1(),
+      soanaFeedData.getOwner_Name_2(),
+      soanaFeedData.getProp_Housenum(),
+      soanaFeedData.getProp_Street(),
+      soanaFeedData.getProp_Unit(),
+      soanaFeedData.getProp_City(),
+      soanaFeedData.getProp_State(),
+      soanaFeedData.getProp_Zip(),
+      soanaFeedData.getProp_Chg_Date(),
+      soanaFeedData.getMortgage_Service_Co(),
+      soanaFeedData.getGovt_Owned(),
+      soanaFeedData.getMail_Recipient_Name(),
+      soanaFeedData.getMail_CareOf(),
+      soanaFeedData.getMail_Address_1(),
+      soanaFeedData.getMail_Address_2(),
+      soanaFeedData.getMail_City(),
+      soanaFeedData.getMail_State(),
+      soanaFeedData.getMail_Zip(),
+      soanaFeedData.getMail_Country(),
+      soanaFeedData.getMail_Country_CD(),
+      soanaFeedData.getRecip_Chg_Date(),
+      soanaFeedData.getMail_Chg_Date(),
+      soanaFeedData.getOwn_Chg_Date(),
+      soanaFeedData.getOwn2_Chg_Date(),
+      soanaFeedData.getPhone(),
+      soanaFeedData.getEmail(),
+      soanaFeedData.getUSPS_Verified(),
+      soanaFeedData.getReturned_Mail(),
+      soanaFeedData.getUSPS_Address()
     );
   }
 }

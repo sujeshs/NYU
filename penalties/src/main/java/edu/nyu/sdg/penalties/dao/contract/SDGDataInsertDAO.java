@@ -1,9 +1,6 @@
 package edu.nyu.sdg.penalties.dao.contract;
 
-import edu.nyu.sdg.penalties.model.DerivedVariables;
-import edu.nyu.sdg.penalties.model.LL84FeedData;
-import edu.nyu.sdg.penalties.model.NYCHAFeedData;
-import edu.nyu.sdg.penalties.model.RentStabilizedBBLFeedData;
+import edu.nyu.sdg.penalties.model.*;
 
 public interface SDGDataInsertDAO {
 
@@ -16,4 +13,6 @@ public interface SDGDataInsertDAO {
   void writeNYCHAData(NYCHAFeedData nychaFeedData);
 
   void writeRentStabilizedUnitsData(RentStabilizedBBLFeedData rentStabilizedBBLFeedData);
+
+  void writeSoanaData(SoanaFeedData soanaFeedData);
 }

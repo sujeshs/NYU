@@ -6,12 +6,11 @@ import edu.nyu.sdg.penalties.controller.CarbonLimitCalculator;
 import edu.nyu.sdg.penalties.controller.EnergyConsumptionCalculator;
 import edu.nyu.sdg.penalties.controller.FlowOrchestrator;
 import edu.nyu.sdg.penalties.dao.contract.SDGDataInsertDAO;
-import edu.nyu.sdg.penalties.inputstream.file.LL84CSVFileLoader;
-import edu.nyu.sdg.penalties.inputstream.file.NYCHAFileLoader;
+import edu.nyu.sdg.penalties.inputstream.file.*;
+
 import java.math.BigDecimal;
 import java.util.Map;
 
-import edu.nyu.sdg.penalties.inputstream.file.RentStabilizedFileLoader;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -52,6 +51,11 @@ public class PenaltiesAppBeans {
   }
 
   @Bean
+  CleanUpLL84CSVFile cleanUpLL84CSVFile() {
+    return new CleanUpLL84CSVFile();
+  }
+
+  @Bean
   LL84CSVFileLoader ll84FileLoader(FlowOrchestrator flowOrchestrator) {
     requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
 
@@ -71,4 +75,12 @@ public class PenaltiesAppBeans {
 
     return new RentStabilizedFileLoader(flowOrchestrator);
   }
+
+  @Bean
+  SOANAFileLoader soanaFileLoader(FlowOrchestrator flowOrchestrator) {
+    requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
+
+    return new SOANAFileLoader(flowOrchestrator);
+  }
+
 }

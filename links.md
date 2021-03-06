@@ -17,3 +17,6 @@
 # References
 
 * [BE exchange calculator](https://be-exchange.org/calculator/)
+
+# Data
+* [Soana data](https://drive.google.com/drive/folders/1xjAs3ClJBWbZVT3Dmq6ssShNSlnpbyFB)

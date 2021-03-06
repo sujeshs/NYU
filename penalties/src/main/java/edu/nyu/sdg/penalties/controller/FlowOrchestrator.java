@@ -75,9 +75,9 @@ public final class FlowOrchestrator {
             .withExcessEmissionPhase2(phase2ExcessEmission)
             .build();
 
-    sdgDataInsertDAO.writePenaltyInfo(ll84FeedData, derivedVariables);
+    //sdgDataInsertDAO.writePenaltyInfo(ll84FeedData, derivedVariables);
     sdgDataInsertDAO.writeLL84Data(ll84FeedData);
-    sdgDataInsertDAO.writeAcrisData(ll84FeedData);
+    //sdgDataInsertDAO.writeAcrisData(ll84FeedData);
 
     return calculatedPenalties;
   }
@@ -86,6 +86,12 @@ public final class FlowOrchestrator {
     requireNonNull(nychaFeedData, "nychaFeedData is required and missing.");
 
     sdgDataInsertDAO.writeNYCHAData(nychaFeedData);
+  }
+
+  public void loadSoanaData(SoanaFeedData soanaFeedData) {
+    requireNonNull(soanaFeedData, "soanaFeedData is required and missing.");
+
+    sdgDataInsertDAO.writeSoanaData(soanaFeedData);
   }
 
   public void loadRentStabilizedUnitsData(RentStabilizedBBLFeedData rentStabilizedBBLFeedData) {
