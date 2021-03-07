@@ -23,13 +23,12 @@ public class PenaltiesApplication {
     LOG.debug("space occupancy => " + dataFromDB.getLL84SpaceOccupancyGrpData());
 
     CleanUpLL84CSVFile cleanUpLL84CSVFile = ctx.getBean( CleanUpLL84CSVFile.class);
-    String ll84DataDump = "/Users/sujeshs/Documents/PACE/subset_ll84.csv";
-    String ll84FormattedData = "/Users/sujeshs/Documents/PACE/processed_ll84.csv";
-    //cleanUpLL84CSVFile.loadCSV(ll84DataDump, ll84FormattedData);
+    String ll84DataDump = "/Users/ssuku24/cas/personal/NYU/docs/samples/subset_ll84.csv";
+    cleanUpLL84CSVFile.loadCSV(ll84DataDump);
 
     LL84CSVFileLoader ll84CSVFileLoader = ctx.getBean( LL84CSVFileLoader.class);
     String ll84FeedData = "/Users/sujeshs/Documents/PACE/merged_ll84_parties.csv";
-    ll84CSVFileLoader.loadCSV(ll84FeedData);
+    //ll84CSVFileLoader.loadCSV(ll84FeedData);
 
     NYCHAFileLoader nychaFileLoader = ctx.getBean(NYCHAFileLoader.class);
     String nychaFeedData = "/Users/sujeshs/Documents/PACE/nycha-bbls.csv";

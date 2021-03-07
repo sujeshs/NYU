@@ -51,7 +51,7 @@ public class PenaltiesAppBeans {
   }
 
   @Bean
-  CleanUpLL84CSVFile cleanUpLL84CSVFile() {
+  CleanUpLL84CSVFile cleanUpLL84CSVFile() throws Exception {
     return new CleanUpLL84CSVFile();
   }
 
