@@ -41,7 +41,7 @@ public final class CleanUpLL84CSVFile {
 
     BufferedWriter writer =
       Files.newBufferedWriter(
-        Paths.get("/Users/ssuku24/cas/personal/NYU/docs/samples/processed_ll84.csv"));
+        Paths.get("/Users/sujeshs/IdeaProjects/NYU/docs/samples/processed_ll84.csv"));
 
     csvFormat = CSVFormat.RFC4180.withHeader(csvHeader.split(",")).withSkipHeaderRecord();
     csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT);
@@ -64,7 +64,6 @@ public final class CleanUpLL84CSVFile {
     for (CSVRecord record : csvParser) {
       if (null != record) {
 
-        lineCounter++;
         LL84FeedData ll84FeedData = new LL84FeedData();
 
         try {
@@ -73,7 +72,7 @@ public final class CleanUpLL84CSVFile {
 
           Date genDateFromCollection = bblGenDates.get(bblCurrentRecord);
 
-          if ( genDateFromCollection == null || genDateFromCollection.compareTo(genDateCurrentRecord)<0) {
+          if (genDateFromCollection == null || genDateFromCollection.compareTo(genDateCurrentRecord) < 0) {
             bblGenDates.put(bblCurrentRecord, genDateCurrentRecord);
           } else {
             errorCounter++;
@@ -86,7 +85,7 @@ public final class CleanUpLL84CSVFile {
       }
     }
 
-    LOG.info("Number of unique BBLs : {}",bblGenDates.size());
+    LOG.info("Number of unique BBLs : {}", bblGenDates.size());
 
     LOG.info(
       "Hydration complete. {}/{} rows loaded successfully",

@@ -18,5 +18,7 @@
 
 * [BE exchange calculator](https://be-exchange.org/calculator/)
 
+* [NYU App Geo](https://thefurmancenter.carto.com/u/nyufc/tables/property_info/public?redirected=true)
+
 # Data
 * [Soana data](https://drive.google.com/drive/folders/1xjAs3ClJBWbZVT3Dmq6ssShNSlnpbyFB)

@@ -23,7 +23,7 @@ public class PenaltiesApplication {
     LOG.debug("space occupancy => " + dataFromDB.getLL84SpaceOccupancyGrpData());
 
     CleanUpLL84CSVFile cleanUpLL84CSVFile = ctx.getBean( CleanUpLL84CSVFile.class);
-    String ll84DataDump = "/Users/ssuku24/cas/personal/NYU/docs/samples/subset_ll84.csv";
+    String ll84DataDump = "/Users/sujeshs/IdeaProjects/NYU/docs/samples/subset_ll84.csv";
     cleanUpLL84CSVFile.loadCSV(ll84DataDump);
 
     LL84CSVFileLoader ll84CSVFileLoader = ctx.getBean( LL84CSVFileLoader.class);
