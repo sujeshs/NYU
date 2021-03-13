@@ -24,7 +24,7 @@ public class PenaltiesApplication {
 
     CleanUpLL84CSVFile cleanUpLL84CSVFile = ctx.getBean( CleanUpLL84CSVFile.class);
     String ll84DataDump = "/Users/sujeshs/IdeaProjects/NYU/docs/samples/subset_ll84.csv";
-    cleanUpLL84CSVFile.loadCSV(ll84DataDump);
+    //cleanUpLL84CSVFile.loadCSV(ll84DataDump);
 
     LL84CSVFileLoader ll84CSVFileLoader = ctx.getBean( LL84CSVFileLoader.class);
     String ll84FeedData = "/Users/sujeshs/Documents/PACE/merged_ll84_parties.csv";

@@ -46,6 +46,7 @@ public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
       ll84FeedData.getNYCBIN(),
       ll84FeedData.getPropertyId(),
       ll84FeedData.getPropertyName(),
+      ll84FeedData.getParentPropertyId(),
       ll84FeedData.getCityBuilding(),
       ll84FeedData.getEmail(),
       ll84FeedData.getAddress1SelfReported(),

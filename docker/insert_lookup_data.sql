@@ -94,7 +94,3 @@ INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_u
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (54, 'B-Business', 'Personal Services (Health/Beauty, Dry Cleaning, etc)');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (57, 'B-Business', 'Other - Public Services');
 INSERT INTO public.lookup_occupancy_spaceuse_mapping (id, occupancy_grp, space_use) VALUES (65, 'A-Assembly', 'Transportation Terminal/Station');
-
-INSERT INTO public.feed_acris_mortgage_info (id, bbl, document_id, document_type, document_amount, document_recorded_timestamp, party_type, name, address_1, zipcode) VALUES (1, '1009970029', 'FT_1080004897508', 'MTGE', 85000000.00, '1995-11-01 00:00:00.000000', '1', '1133 BUILDING CORP.', '1155 6TH AVENUE', '10036');
-INSERT INTO public.feed_acris_mortgage_info (id, bbl, document_id, document_type, document_amount, document_recorded_timestamp, party_type, name, address_1, zipcode) VALUES (2, '1009970029', 'FT_1080004897508', 'MTGE', 85000000.00, '1995-11-01 00:00:00.000000', '1', '1155 AVAMER REALTY CORP.', '1155 6TH AVENUE', '10036');
-

@@ -5,9 +5,11 @@ Queries/Analysis – ideally, we would create an interface that would allow the 
 
 For NYC as a whole and for each borough:
 
-1)    Rank buildings by total carbon
-2)    Rank buildings by carbon intensity
+1)    Rank buildings by total carbon - check with Alejandro
+2)    Rank buildings by carbon intensity - check with Alejandro
 3)    Sort buildings into groups of buildings under common ownership (in the case of buildings held by an LLC infer common ownership of contact details are similar)
+      - select owner and give me top 10 buildings
+      - find owners of top 10 polluting buildings
 4)    Rank ownership groups by carbon intensity
 5)    Rank ownership groups by total carbon
 6)    Rank lenders by carbon intensity (by weighted average carbon intensity of lending portfolio – where weights are the notional of each NYC mortgage/total NYC mortgage portfolio)
@@ -35,3 +37,6 @@ A few ad hoc calculations (that we don’t really need this application to perfo
 2)  Total carbon of NYC owned buildings in each borough as % of total carbon of all buildings in the borough (or all buildings in the borough > 25k square feet).
 3) Total carbon of all CIGS as % of total carbon of all NYC buildings (or all NYC buildings > 25k square feet).
 4) Total carbon of all CIGS in Manhattan as % of total carbon of all buildings in Manhattan (or all buildings in Manhattan > 25k square feet).
+
+
+Scenario - filter - map view - table view
