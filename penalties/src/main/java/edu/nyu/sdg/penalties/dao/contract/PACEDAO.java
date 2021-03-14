@@ -1,7 +1,6 @@
 package edu.nyu.sdg.penalties.dao.contract;
 
 import edu.nyu.sdg.penalties.model.*;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;

@@ -23,8 +23,7 @@ public final class FlowOrchestrator {
     this.energyConsumptionCalculator =
         requireNonNull(
             energyConsumptionCalculator, "energyConsumptionCalculator is required and missing.");
-    this.PACEDAO =
-        requireNonNull(PACEDAO, "sdgDataInsertDAO is required and missing.");
+    this.PACEDAO = requireNonNull(PACEDAO, "sdgDataInsertDAO is required and missing.");
   }
 
   /**

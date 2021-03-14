@@ -1,24 +1,17 @@
 package edu.nyu.sdg.penalties.dao.postgres.rowmapper;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import edu.nyu.sdg.penalties.AppConstants;
 import edu.nyu.sdg.penalties.model.LL84FeedData;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.ResultSetExtractor;
-
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
 
-public final class LL84RowMapper
-    implements ResultSetExtractor<List<LL84FeedData>> {
+public final class LL84RowMapper implements ResultSetExtractor<List<LL84FeedData>> {
 
   @Override
-  public List<LL84FeedData> extractData(ResultSet rs)
-      throws SQLException, DataAccessException {
+  public List<LL84FeedData> extractData(ResultSet rs) throws SQLException, DataAccessException {
 
     ImmutableList.Builder builder = new ImmutableList.Builder();
 
@@ -33,11 +26,14 @@ public final class LL84RowMapper
       feedData.setSelfReportedGrossFloorArea(rs.getBigDecimal("self_reported_gross_floor_area"));
       feedData.setListOfAllPropertyUseTypes(rs.getString("property_use_types"));
       feedData.setLargestPropertyUseType(rs.getString("largest_property_use_type"));
-      feedData.setLargestPropertyUseTypeGrossFloorArea(rs.getBigDecimal("largest_property_use_type_gross_floor_area"));
+      feedData.setLargestPropertyUseTypeGrossFloorArea(
+          rs.getBigDecimal("largest_property_use_type_gross_floor_area"));
       feedData.setSecondLargestPropertyUseType(rs.getString("second_largest_property_use_type"));
-      feedData.setSecondLargestPropertyUseTypeGrossFloorArea(rs.getBigDecimal("second_largest_property_use_type_gross_floor_area"));
+      feedData.setSecondLargestPropertyUseTypeGrossFloorArea(
+          rs.getBigDecimal("second_largest_property_use_type_gross_floor_area"));
       feedData.setThirdLargestPropertyUseType(rs.getString("third_largest_property_use_type"));
-      feedData.setThirdLargestPropertyUseTypeGrossFloorArea(rs.getBigDecimal("third_largest_property_use_type_gross_floor_area"));
+      feedData.setThirdLargestPropertyUseTypeGrossFloorArea(
+          rs.getBigDecimal("third_largest_property_use_type_gross_floor_area"));
       feedData.setFuelOil1Use(rs.getBigDecimal("fuel_oil_1_use"));
       feedData.setFuelOil2Use(rs.getBigDecimal("fuel_oil_2_use"));
       feedData.setFuelOil4Use(rs.getBigDecimal("fuel_oil_4_use"));

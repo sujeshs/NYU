@@ -347,45 +347,121 @@ public final class SoanaFeedData {
 
   @Override
   public String toString() {
-    return "SoanaFeedData{" +
-      "BBL='" + BBL + '\'' +
-      ", Mail_Sequence='" + Mail_Sequence + '\'' +
-      ", Mail_Recipient_Type='" + Mail_Recipient_Type + '\'' +
-      ", Borough='" + Borough + '\'' +
-      ", Block='" + Block + '\'' +
-      ", Lot='" + Lot + '\'' +
-      ", Easement='" + Easement + '\'' +
-      ", Tax_Class='" + Tax_Class + '\'' +
-      ", Building_Class='" + Building_Class + '\'' +
-      ", Owner_Name_1='" + Owner_Name_1 + '\'' +
-      ", Owner_Name_2='" + Owner_Name_2 + '\'' +
-      ", Prop_Housenum='" + Prop_Housenum + '\'' +
-      ", Prop_Street='" + Prop_Street + '\'' +
-      ", Prop_Unit='" + Prop_Unit + '\'' +
-      ", Prop_City='" + Prop_City + '\'' +
-      ", Prop_State='" + Prop_State + '\'' +
-      ", Prop_Zip='" + Prop_Zip + '\'' +
-      ", Prop_Chg_Date='" + Prop_Chg_Date + '\'' +
-      ", Mortgage_Service_Co='" + Mortgage_Service_Co + '\'' +
-      ", Govt_Owned='" + Govt_Owned + '\'' +
-      ", Mail_Recipient_Name='" + Mail_Recipient_Name + '\'' +
-      ", Mail_CareOf='" + Mail_CareOf + '\'' +
-      ", Mail_Address_1='" + Mail_Address_1 + '\'' +
-      ", Mail_Address_2='" + Mail_Address_2 + '\'' +
-      ", Mail_City='" + Mail_City + '\'' +
-      ", Mail_State='" + Mail_State + '\'' +
-      ", Mail_Zip='" + Mail_Zip + '\'' +
-      ", Mail_Country='" + Mail_Country + '\'' +
-      ", Mail_Country_CD='" + Mail_Country_CD + '\'' +
-      ", Recip_Chg_Date='" + Recip_Chg_Date + '\'' +
-      ", Mail_Chg_Date='" + Mail_Chg_Date + '\'' +
-      ", Own_Chg_Date='" + Own_Chg_Date + '\'' +
-      ", Own2_Chg_Date='" + Own2_Chg_Date + '\'' +
-      ", Phone='" + Phone + '\'' +
-      ", Email='" + Email + '\'' +
-      ", USPS_Verified='" + USPS_Verified + '\'' +
-      ", Returned_Mail='" + Returned_Mail + '\'' +
-      ", USPS_Address='" + USPS_Address + '\'' +
-      '}';
+    return "SoanaFeedData{"
+        + "BBL='"
+        + BBL
+        + '\''
+        + ", Mail_Sequence='"
+        + Mail_Sequence
+        + '\''
+        + ", Mail_Recipient_Type='"
+        + Mail_Recipient_Type
+        + '\''
+        + ", Borough='"
+        + Borough
+        + '\''
+        + ", Block='"
+        + Block
+        + '\''
+        + ", Lot='"
+        + Lot
+        + '\''
+        + ", Easement='"
+        + Easement
+        + '\''
+        + ", Tax_Class='"
+        + Tax_Class
+        + '\''
+        + ", Building_Class='"
+        + Building_Class
+        + '\''
+        + ", Owner_Name_1='"
+        + Owner_Name_1
+        + '\''
+        + ", Owner_Name_2='"
+        + Owner_Name_2
+        + '\''
+        + ", Prop_Housenum='"
+        + Prop_Housenum
+        + '\''
+        + ", Prop_Street='"
+        + Prop_Street
+        + '\''
+        + ", Prop_Unit='"
+        + Prop_Unit
+        + '\''
+        + ", Prop_City='"
+        + Prop_City
+        + '\''
+        + ", Prop_State='"
+        + Prop_State
+        + '\''
+        + ", Prop_Zip='"
+        + Prop_Zip
+        + '\''
+        + ", Prop_Chg_Date='"
+        + Prop_Chg_Date
+        + '\''
+        + ", Mortgage_Service_Co='"
+        + Mortgage_Service_Co
+        + '\''
+        + ", Govt_Owned='"
+        + Govt_Owned
+        + '\''
+        + ", Mail_Recipient_Name='"
+        + Mail_Recipient_Name
+        + '\''
+        + ", Mail_CareOf='"
+        + Mail_CareOf
+        + '\''
+        + ", Mail_Address_1='"
+        + Mail_Address_1
+        + '\''
+        + ", Mail_Address_2='"
+        + Mail_Address_2
+        + '\''
+        + ", Mail_City='"
+        + Mail_City
+        + '\''
+        + ", Mail_State='"
+        + Mail_State
+        + '\''
+        + ", Mail_Zip='"
+        + Mail_Zip
+        + '\''
+        + ", Mail_Country='"
+        + Mail_Country
+        + '\''
+        + ", Mail_Country_CD='"
+        + Mail_Country_CD
+        + '\''
+        + ", Recip_Chg_Date='"
+        + Recip_Chg_Date
+        + '\''
+        + ", Mail_Chg_Date='"
+        + Mail_Chg_Date
+        + '\''
+        + ", Own_Chg_Date='"
+        + Own_Chg_Date
+        + '\''
+        + ", Own2_Chg_Date='"
+        + Own2_Chg_Date
+        + '\''
+        + ", Phone='"
+        + Phone
+        + '\''
+        + ", Email='"
+        + Email
+        + '\''
+        + ", USPS_Verified='"
+        + USPS_Verified
+        + '\''
+        + ", Returned_Mail='"
+        + Returned_Mail
+        + '\''
+        + ", USPS_Address='"
+        + USPS_Address
+        + '\''
+        + '}';
   }
 }

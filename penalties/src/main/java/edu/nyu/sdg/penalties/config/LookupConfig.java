@@ -2,10 +2,9 @@ package edu.nyu.sdg.penalties.config;
 
 import static java.util.Objects.requireNonNull;
 
+import edu.nyu.sdg.penalties.dao.contract.PACEDAO;
 import java.math.BigDecimal;
 import java.util.Map;
-
-import edu.nyu.sdg.penalties.dao.contract.PACEDAO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

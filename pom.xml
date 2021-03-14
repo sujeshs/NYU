@@ -120,6 +120,12 @@
         <version>${version.spring-boot}</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.springframework.booy</groupId>
+        <artifactId>spring-actuator</artifactId>
+        <version>${version.spring}</version>
+      </dependency>
+
     </dependencies>
 
   </dependencyManagement>
@@ -151,7 +157,7 @@
                 <style>GOOGLE</style>
               </googleJavaFormat>
 
-              <removeUnusedImports/>
+              <removeUnusedImports />
             </java>
 
           </configuration>
@@ -221,8 +227,8 @@
       </plugin>
 
       <plugin>
-      <groupId>pl.project13.maven</groupId>
-      <artifactId>git-commit-id-plugin</artifactId>
+        <groupId>pl.project13.maven</groupId>
+        <artifactId>git-commit-id-plugin</artifactId>
       </plugin>
 
     </plugins>

@@ -57,6 +57,8 @@ create table feed_ll84_bbl
     property_id                                       text,
     property_name                                     text,
     parent_property_id                                text,
+    is_standalone_property                            boolean,
+    is_parent_property                                boolean,
     city_building                                     text,
     email                                             text,
     address_line_1                                    text,

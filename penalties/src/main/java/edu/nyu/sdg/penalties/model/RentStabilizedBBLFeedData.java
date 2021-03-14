@@ -61,13 +61,21 @@ public final class RentStabilizedBBLFeedData {
 
   @Override
   public String toString() {
-    return "RentStabilizedBBLFeedData{" +
-      "BBL='" + BBL + '\'' +
-      ", mpVersion='" + mpVersion + '\'' +
-      ", mpResidentialUnits=" + mpResidentialUnits +
-      ", stabilizedUnits2018=" + stabilizedUnits2018 +
-      ", stabilizedUnits2019=" + stabilizedUnits2019 +
-      ", stabilizedUnitPercentage=" + stabilizedUnitPercentage +
-      '}';
+    return "RentStabilizedBBLFeedData{"
+        + "BBL='"
+        + BBL
+        + '\''
+        + ", mpVersion='"
+        + mpVersion
+        + '\''
+        + ", mpResidentialUnits="
+        + mpResidentialUnits
+        + ", stabilizedUnits2018="
+        + stabilizedUnits2018
+        + ", stabilizedUnits2019="
+        + stabilizedUnits2019
+        + ", stabilizedUnitPercentage="
+        + stabilizedUnitPercentage
+        + '}';
   }
 }

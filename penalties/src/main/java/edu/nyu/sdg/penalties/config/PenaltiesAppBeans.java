@@ -7,10 +7,8 @@ import edu.nyu.sdg.penalties.controller.EnergyConsumptionCalculator;
 import edu.nyu.sdg.penalties.controller.FlowOrchestrator;
 import edu.nyu.sdg.penalties.dao.contract.PACEDAO;
 import edu.nyu.sdg.penalties.inputstream.file.*;
-
 import java.math.BigDecimal;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +26,7 @@ public class PenaltiesAppBeans {
         energyConsumptionCalculator, "energyConsumptionCalculator is required and missing.");
     requireNonNull(PACEDAO, "sdgDataInsertDAO is required and missing.");
 
-    return new FlowOrchestrator(
-        carbonLimitCalculator, energyConsumptionCalculator, PACEDAO);
+    return new FlowOrchestrator(carbonLimitCalculator, energyConsumptionCalculator, PACEDAO);
   }
 
   @Bean
@@ -82,5 +79,4 @@ public class PenaltiesAppBeans {
 
     return new SOANAFileLoader(flowOrchestrator);
   }
-
 }

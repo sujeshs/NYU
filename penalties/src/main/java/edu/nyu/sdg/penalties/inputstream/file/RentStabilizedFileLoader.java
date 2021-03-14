@@ -1,8 +1,16 @@
 package edu.nyu.sdg.penalties.inputstream.file;
 
+import static com.google.common.base.Charsets.UTF_8;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
+import static java.util.Objects.requireNonNull;
+import static org.apache.commons.lang3.StringUtils.*;
+
 import edu.nyu.sdg.penalties.controller.FlowOrchestrator;
-import edu.nyu.sdg.penalties.model.NYCHAFeedData;
 import edu.nyu.sdg.penalties.model.RentStabilizedBBLFeedData;
+import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -11,16 +19,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.validator.routines.BigDecimalValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
-import static com.google.common.base.Charsets.UTF_8;
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkState;
-import static java.util.Objects.requireNonNull;
-import static org.apache.commons.lang3.StringUtils.*;
 
 public final class RentStabilizedFileLoader {
 
@@ -34,7 +32,8 @@ public final class RentStabilizedFileLoader {
     this.flowOrchestrator =
         requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
 
-    String csvHeader = "bbl,mp_version,mp_res_units,dof_stab_units_2018,dof_stab_units_2019,stab_unit_pct";
+    String csvHeader =
+        "bbl,mp_version,mp_res_units,dof_stab_units_2018,dof_stab_units_2019,stab_unit_pct";
 
     csvFormat = CSVFormat.RFC4180.withHeader(csvHeader.split(",")).withSkipHeaderRecord();
   }
@@ -61,10 +60,13 @@ public final class RentStabilizedFileLoader {
 
           rentStabilizedBBLFeedData.setBBL(parseIntoString(record, "bbl"));
           rentStabilizedBBLFeedData.setMpVersion(parseIntoString(record, "mp_version"));
-          rentStabilizedBBLFeedData.setMpResidentialUnits(parseIntoInt(record,"mp_res_units"));
-          rentStabilizedBBLFeedData.setStabilizedUnits2018(parseIntoInt(record,"dof_stab_units_2018"));
-          rentStabilizedBBLFeedData.setStabilizedUnits2019(parseIntoInt(record,"dof_stab_units_2019"));
-          rentStabilizedBBLFeedData.setStabilizedUnitPercentage(parseIntoBigDecimal(record,"stab_unit_pct"));
+          rentStabilizedBBLFeedData.setMpResidentialUnits(parseIntoInt(record, "mp_res_units"));
+          rentStabilizedBBLFeedData.setStabilizedUnits2018(
+              parseIntoInt(record, "dof_stab_units_2018"));
+          rentStabilizedBBLFeedData.setStabilizedUnits2019(
+              parseIntoInt(record, "dof_stab_units_2019"));
+          rentStabilizedBBLFeedData.setStabilizedUnitPercentage(
+              parseIntoBigDecimal(record, "stab_unit_pct"));
 
           flowOrchestrator.loadRentStabilizedUnitsData(rentStabilizedBBLFeedData);
 
@@ -101,8 +103,8 @@ public final class RentStabilizedFileLoader {
     checkState(isNotEmpty(columnName), "columnName is required and missing.");
 
     String data = trim(record.get(columnName));
-    return BIGDECIMAL_VALIDATOR.isValid(data) ? new BigDecimal(data).setScale(2, RoundingMode.DOWN) : BigDecimal.ZERO;
+    return BIGDECIMAL_VALIDATOR.isValid(data)
+        ? new BigDecimal(data).setScale(2, RoundingMode.DOWN)
+        : BigDecimal.ZERO;
   }
-
-
 }
