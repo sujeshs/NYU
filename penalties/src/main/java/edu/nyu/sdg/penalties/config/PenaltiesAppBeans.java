@@ -5,7 +5,7 @@ import static java.util.Objects.*;
 import edu.nyu.sdg.penalties.controller.CarbonLimitCalculator;
 import edu.nyu.sdg.penalties.controller.EnergyConsumptionCalculator;
 import edu.nyu.sdg.penalties.controller.FlowOrchestrator;
-import edu.nyu.sdg.penalties.dao.contract.SDGDataInsertDAO;
+import edu.nyu.sdg.penalties.dao.contract.PACEDAO;
 import edu.nyu.sdg.penalties.inputstream.file.*;
 
 import java.math.BigDecimal;
@@ -22,14 +22,14 @@ public class PenaltiesAppBeans {
   FlowOrchestrator flowOrchestrator(
       CarbonLimitCalculator carbonLimitCalculator,
       EnergyConsumptionCalculator energyConsumptionCalculator,
-      SDGDataInsertDAO sdgDataInsertDAO) {
+      PACEDAO PACEDAO) {
     requireNonNull(carbonLimitCalculator, "carbonLimitCalculator is required and missing.");
     requireNonNull(
         energyConsumptionCalculator, "energyConsumptionCalculator is required and missing.");
-    requireNonNull(sdgDataInsertDAO, "sdgDataInsertDAO is required and missing.");
+    requireNonNull(PACEDAO, "sdgDataInsertDAO is required and missing.");
 
     return new FlowOrchestrator(
-        carbonLimitCalculator, energyConsumptionCalculator, sdgDataInsertDAO);
+        carbonLimitCalculator, energyConsumptionCalculator, PACEDAO);
   }
 
   @Bean

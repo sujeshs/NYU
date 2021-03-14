@@ -1,6 +1,6 @@
 package edu.nyu.sdg.penalties;
 
-import edu.nyu.sdg.penalties.dao.contract.LookupDAO;
+import edu.nyu.sdg.penalties.dao.contract.PACEDAO;
 import edu.nyu.sdg.penalties.inputstream.file.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ public class PenaltiesApplication {
 
     ConfigurableApplicationContext ctx = SpringApplication.run(PenaltiesApplication.class, args);
 
-    LookupDAO dataFromDB = ctx.getBean(LookupDAO.class);
+    PACEDAO dataFromDB = ctx.getBean(PACEDAO.class);
     LOG.debug("energy coeff => " + dataFromDB.getEnergysrcGHCoeffData());
     LOG.debug("carbon limit => " + dataFromDB.getCarbonLimitData());
     LOG.debug("space occupancy => " + dataFromDB.getLL84SpaceOccupancyGrpData());

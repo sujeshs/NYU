@@ -10,7 +10,6 @@ import static org.apache.commons.lang3.StringUtils.trim;
 
 import com.google.common.collect.ImmutableList;
 import edu.nyu.sdg.penalties.controller.FlowOrchestrator;
-import edu.nyu.sdg.penalties.dao.postgres.impl.GeneralQueriesPostgresImpl;
 import edu.nyu.sdg.penalties.model.AcrisEntry;
 import edu.nyu.sdg.penalties.model.LL84FeedData;
 
@@ -75,7 +74,7 @@ public final class LL84CSVFileLoader {
         try {
 
           ll84FeedData.setOrder(parseIntoInt(record, "Order"));
-          ll84FeedData.setPropertyId(parseIntoInt(record, "Property Id"));
+          ll84FeedData.setPropertyId(parseIntoString(record, "Property Id"));
           ll84FeedData.setPropertyName(parseIntoString(record, "Property Name"));
           ll84FeedData.setParentPropertyId(parseIntoString(record, "Parent Property Id"));
           ll84FeedData.setParentPropertyName(parseIntoString(record, "Parent Property Name"));
@@ -196,7 +195,7 @@ public final class LL84CSVFileLoader {
 
           ll84FeedData.setAcrisEntries(acrisBuilder.build());
 
-          flowOrchestrator.calculatePenalties(ll84FeedData);
+          flowOrchestrator.loadLL84AndAcrisData(ll84FeedData);
 
         } catch (Exception excp) {
           errorCounter++;

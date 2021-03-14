@@ -7,7 +7,7 @@ import java.util.List;
 public final class LL84FeedData {
 
   private int order;
-  private int propertyId;
+  private String propertyId;
   private String propertyName;
   private String parentPropertyId;
   private String parentPropertyName;
@@ -86,11 +86,11 @@ public final class LL84FeedData {
     this.order = order;
   }
 
-  public int getPropertyId() {
+  public String getPropertyId() {
     return propertyId;
   }
 
-  public void setPropertyId(int propertyId) {
+  public void setPropertyId(String propertyId) {
     this.propertyId = propertyId;
   }
 

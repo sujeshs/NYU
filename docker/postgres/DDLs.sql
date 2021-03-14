@@ -16,8 +16,12 @@ create table derived_penalty_exemption
 create table derived_penalty_variables
 (
     id                                        serial        not null,
-    bbl                                       text not null,
-    nyc_bin                                   text not null,
+    bbl                                       text,
+    nyc_bin                                   text,
+    parent_property_id                        text,
+    property_id                               text,
+    largest_property_use_type                 text,
+    generation_date                           timestamp,
     total_carbon_emission_threshold_2024_2029 numeric(24, 2),
     total_carbon_emission_threshold_2030_2034 numeric(24, 2),
     total_actual_emission                     numeric(24, 2),
@@ -26,9 +30,7 @@ create table derived_penalty_variables
     emission_penalty_2024_2029                text,
     emission_penalty_2030_2034                text,
     phase1_penalty                            numeric(24, 2),
-    phase2_penalty                            numeric(24, 2),
-    constraint derived_penalty_variables_pkey
-        primary key (bbl, nyc_bin)
+    phase2_penalty                            numeric(24, 2)
 );
 
 

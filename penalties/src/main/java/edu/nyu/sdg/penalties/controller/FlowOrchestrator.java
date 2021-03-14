@@ -4,7 +4,7 @@ import static java.math.BigDecimal.ZERO;
 import static java.util.Objects.requireNonNull;
 
 import edu.nyu.sdg.penalties.AppConstants;
-import edu.nyu.sdg.penalties.dao.contract.SDGDataInsertDAO;
+import edu.nyu.sdg.penalties.dao.contract.PACEDAO;
 import edu.nyu.sdg.penalties.model.*;
 import java.math.BigDecimal;
 
@@ -12,19 +12,19 @@ public final class FlowOrchestrator {
 
   private final CarbonLimitCalculator carbonLimitCalculator;
   private final EnergyConsumptionCalculator energyConsumptionCalculator;
-  private final SDGDataInsertDAO sdgDataInsertDAO;
+  private final PACEDAO PACEDAO;
 
   public FlowOrchestrator(
       CarbonLimitCalculator carbonLimitCalculator,
       EnergyConsumptionCalculator energyConsumptionCalculator,
-      SDGDataInsertDAO sdgDataInsertDAO) {
+      PACEDAO PACEDAO) {
     this.carbonLimitCalculator =
         requireNonNull(carbonLimitCalculator, "carbonLimitCalculator is required and missing.");
     this.energyConsumptionCalculator =
         requireNonNull(
             energyConsumptionCalculator, "energyConsumptionCalculator is required and missing.");
-    this.sdgDataInsertDAO =
-        requireNonNull(sdgDataInsertDAO, "sdgDataInsertDAO is required and missing.");
+    this.PACEDAO =
+        requireNonNull(PACEDAO, "sdgDataInsertDAO is required and missing.");
   }
 
   /**
@@ -75,9 +75,7 @@ public final class FlowOrchestrator {
             .withExcessEmissionPhase2(phase2ExcessEmission)
             .build();
 
-    //sdgDataInsertDAO.writePenaltyInfo(ll84FeedData, derivedVariables);
-    sdgDataInsertDAO.writeLL84Data(ll84FeedData);
-    //sdgDataInsertDAO.writeAcrisData(ll84FeedData);
+    PACEDAO.writePenaltyInfo(ll84FeedData, derivedVariables);
 
     return calculatedPenalties;
   }
@@ -85,18 +83,25 @@ public final class FlowOrchestrator {
   public void loadNYCHAData(NYCHAFeedData nychaFeedData) {
     requireNonNull(nychaFeedData, "nychaFeedData is required and missing.");
 
-    sdgDataInsertDAO.writeNYCHAData(nychaFeedData);
+    PACEDAO.writeNYCHAData(nychaFeedData);
   }
 
   public void loadSoanaData(SoanaFeedData soanaFeedData) {
     requireNonNull(soanaFeedData, "soanaFeedData is required and missing.");
 
-    sdgDataInsertDAO.writeSoanaData(soanaFeedData);
+    PACEDAO.writeSoanaData(soanaFeedData);
   }
 
   public void loadRentStabilizedUnitsData(RentStabilizedBBLFeedData rentStabilizedBBLFeedData) {
     requireNonNull(rentStabilizedBBLFeedData, "rentStabilizedBBLFeedData is required and missing.");
 
-    sdgDataInsertDAO.writeRentStabilizedUnitsData(rentStabilizedBBLFeedData);
+    PACEDAO.writeRentStabilizedUnitsData(rentStabilizedBBLFeedData);
+  }
+
+  public void loadLL84AndAcrisData(LL84FeedData ll84FeedData) {
+    requireNonNull(ll84FeedData, "ll84FeedData is required and missing.");
+
+    PACEDAO.writeLL84Data(ll84FeedData);
+    PACEDAO.writeAcrisData(ll84FeedData);
   }
 }

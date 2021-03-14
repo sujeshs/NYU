@@ -2,17 +2,53 @@ package edu.nyu.sdg.penalties.dao.postgres.impl;
 
 import static java.util.Objects.requireNonNull;
 
-import edu.nyu.sdg.penalties.dao.contract.SDGDataInsertDAO;
-import edu.nyu.sdg.penalties.dao.postgres.sql.LoadSql;
+import edu.nyu.sdg.penalties.dao.contract.PACEDAO;
+import edu.nyu.sdg.penalties.dao.postgres.rowmapper.CarbonLimitRowMapper;
+import edu.nyu.sdg.penalties.dao.postgres.rowmapper.EnergySrcGHGRowMapper;
+import edu.nyu.sdg.penalties.dao.postgres.rowmapper.LL84RowMapper;
+import edu.nyu.sdg.penalties.dao.postgres.rowmapper.OccupancySpaceUseRowMapper;
+import edu.nyu.sdg.penalties.dao.postgres.sql.PACESql;
 import edu.nyu.sdg.penalties.model.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
+public final class PACEPostgresImpl implements PACEDAO {
+
+  private final CarbonLimitRowMapper carbonLimitRowMapper;
+  private final EnergySrcGHGRowMapper energySrcGHGRowMapper;
   private final JdbcTemplate template;
+  private final LL84RowMapper ll84RowMapper;
+  private final OccupancySpaceUseRowMapper occupancySpaceUseRowMapper;
 
-  public SDGDataInsertPostgresImpl(JdbcTemplate template) {
-    this.template = template;
+  public PACEPostgresImpl(JdbcTemplate template) {
+    carbonLimitRowMapper = new CarbonLimitRowMapper();
+    energySrcGHGRowMapper = new EnergySrcGHGRowMapper();
+    occupancySpaceUseRowMapper = new OccupancySpaceUseRowMapper();
+    ll84RowMapper = new LL84RowMapper();
+    this.template = requireNonNull(template,"template is required and missing.");;
+  }
+
+  @Override
+  public Map<String, BigDecimal> getEnergysrcGHCoeffData() {
+    return template.query(PACESql.GET_ENERGYSRCGHCOEFF_DATA, energySrcGHGRowMapper);
+  }
+
+  @Override
+  public Map<String, Map<String, BigDecimal>> getCarbonLimitData() {
+    return template.query(PACESql.GET_CARBONLIMIT_DATA, carbonLimitRowMapper);
+  }
+
+  @Override
+  public Map<String, String> getLL84SpaceOccupancyGrpData() {
+    return template.query(PACESql.GET_OCCUPANCY_SPACEUSE_DATA, occupancySpaceUseRowMapper);
+  }
+
+  @Override
+  public List<LL84FeedData> readLL84Data() {
+    return template.query(PACESql.READ_LL84_DATA, ll84RowMapper);
   }
 
   @Override
@@ -21,9 +57,13 @@ public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
     requireNonNull(derivedVariables, "derivedVariables is required and missing.");
 
     template.update(
-      LoadSql.PUT_DERIVED_VARS_DATA,
+      PACESql.PUT_DERIVED_VARS_DATA,
       ll84FeedData.getBBL10Digits(),
       ll84FeedData.getNYCBIN(),
+      ll84FeedData.getParentPropertyId(),
+      ll84FeedData.getPropertyId(),
+      ll84FeedData.getLargestPropertyUseType(),
+      ll84FeedData.getGenerationDate(),
       derivedVariables.getCarbonLimits().getCarbonLimitPhase1(),
       derivedVariables.getCarbonLimits().getCarbonLimitPhase2(),
       derivedVariables.getTotalActualEmissions(),
@@ -41,7 +81,7 @@ public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
     requireNonNull(ll84FeedData, "ll84Data is required and missing.");
 
     template.update(
-      LoadSql.PUT_FEED_LL84_DATA,
+      PACESql.PUT_FEED_LL84_DATA,
       ll84FeedData.getBBL10Digits(),
       ll84FeedData.getNYCBIN(),
       ll84FeedData.getPropertyId(),
@@ -97,7 +137,7 @@ public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
       .forEach(
         entry ->
           template.update(
-            LoadSql.PUT_FEED_ACRIS_DATA,
+            PACESql.PUT_FEED_ACRIS_DATA,
             entry.getBBL10Digits(),
             entry.getDocumentId(),
             entry.getDocumentType(),
@@ -115,7 +155,7 @@ public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
     requireNonNull(nychaFeedData, "nychaFeedData is required and missing.");
 
     template.update(
-      LoadSql.PUT_FEED_NYCHA_DATA,
+      PACESql.PUT_FEED_NYCHA_DATA,
       nychaFeedData.getBBL(),
       nychaFeedData.getDevelopment()
     );
@@ -126,7 +166,7 @@ public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
     requireNonNull(rentStabilizedBBLFeedData, "rentStabilizedBBLFeedData is required and missing.");
 
     template.update(
-      LoadSql.PUT_FEED_RENT_STABILIZED_UNITS_DATA,
+      PACESql.PUT_FEED_RENT_STABILIZED_UNITS_DATA,
       rentStabilizedBBLFeedData.getBBL(),
       rentStabilizedBBLFeedData.getMpVersion(),
       rentStabilizedBBLFeedData.getMpResidentialUnits(),
@@ -141,7 +181,7 @@ public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
     requireNonNull(soanaFeedData,"soanaFeedData is required and missing.");
 
     template.update(
-      LoadSql.PUT_FEED_SOANA_DATA,
+      PACESql.PUT_FEED_SOANA_DATA,
       soanaFeedData.getBBL(),
       soanaFeedData.getMail_Sequence(),
       soanaFeedData.getMail_Recipient_Type(),
@@ -182,4 +222,5 @@ public final class SDGDataInsertPostgresImpl implements SDGDataInsertDAO {
       soanaFeedData.getUSPS_Address()
     );
   }
+
 }
