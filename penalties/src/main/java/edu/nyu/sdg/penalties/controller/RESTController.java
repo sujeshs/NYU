@@ -80,7 +80,7 @@ public class RESTController {
   public String loadRentStabilizedData(@RequestBody String rentStabilizedDataFile)
       throws Exception {
     requireNonNull(rentStabilizedDataFile, "rentStabilizedDataFile is required and missing.");
-    soanaFileLoader.loadCSV(rentStabilizedDataFile);
+    rentStabilizedFileLoader.loadCSV(rentStabilizedDataFile);
 
     return "Rent Stabilized Data load complete";
   }

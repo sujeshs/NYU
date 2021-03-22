@@ -8,10 +8,10 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>penalties</artifactId>
+  <artifactId>pace-app</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>penalties</name>
-  <description>Penalties calculator</description>
+  <name>pace-app</name>
+  <description>PACE lending application</description>
 
   <dependencies>
 

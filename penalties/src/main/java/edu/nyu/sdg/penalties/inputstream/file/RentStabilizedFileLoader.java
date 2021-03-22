@@ -72,7 +72,7 @@ public final class RentStabilizedFileLoader {
 
         } catch (Exception excp) {
           errorCounter++;
-          LOG.error("Exception while processing BBL:{}", rentStabilizedBBLFeedData.getBBL(), excp);
+          LOG.error("Exception while processing BBL:{}:{}", rentStabilizedBBLFeedData.getBBL(), excp.getMessage());
         }
       }
     }

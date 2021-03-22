@@ -58,7 +58,7 @@ public final class NYCHAFileLoader {
 
         } catch (Exception excp) {
           errorCounter++;
-          LOG.error("Exception while processing BBL:{}", nychaFeedData.getBBL(), excp);
+          LOG.error("Exception while processing BBL:{}:{}", nychaFeedData.getBBL(), excp.getMessage());
         }
       }
     }

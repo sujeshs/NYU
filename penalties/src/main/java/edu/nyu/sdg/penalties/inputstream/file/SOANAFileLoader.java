@@ -95,7 +95,7 @@ public final class SOANAFileLoader {
 
         } catch (Exception excp) {
           errorCounter++;
-          LOG.error("Exception while processing BBL:{}", soanaFeedData.getBBL(), excp);
+          LOG.error("Exception while processing BBL:{}:{}", soanaFeedData.getBBL(), excp.getMessage());
         }
       }
     }

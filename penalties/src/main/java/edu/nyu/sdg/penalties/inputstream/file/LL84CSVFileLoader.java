@@ -197,7 +197,7 @@ public final class LL84CSVFileLoader {
 
         } catch (Exception excp) {
           errorCounter++;
-          LOG.error("Exception while processing BBL:{}", ll84FeedData.getBBL10Digits(), excp);
+          LOG.error("Exception while processing BBL:{}:{}", ll84FeedData.getBBL10Digits(), excp.getMessage());
         }
       }
     }
