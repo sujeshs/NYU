@@ -70,7 +70,7 @@ public final class LL84CSVFileLoader {
     AtomicInteger errorCounter = new AtomicInteger(0);
     AtomicInteger lineCounter = new AtomicInteger(0);
 
-    LOG.info("Started loading file:{}", csvDataFile.getName());
+    LOG.info("Started loading file {}", csvDataFile.getName());
     Instant startTime = clock.instant();
 
     for (CSVRecord record : csvParser) {
@@ -227,10 +227,10 @@ public final class LL84CSVFileLoader {
     }
 
     LOG.info(
-        "Hydration complete. {}/{} rows loaded successfully in {}",
+        "Hydration complete. {}/{} rows loaded successfully in {} seconds",
         (lineCounter.get() - errorCounter.get()),
         lineCounter,
-        Duration.between(startTime, clock.instant()));
+        Duration.between(startTime, clock.instant()).getSeconds());
   }
 
   private AcrisEntry constructAcrisEntry(CSVRecord record, int iteration) throws ParseException {
@@ -243,7 +243,7 @@ public final class LL84CSVFileLoader {
     acrisEntry.setDocumentAmount(parseIntoBigDecimal(record, iteration + " document_amt"));
     acrisEntry.setDocumentRecordedTimestamp(
         parseAcrisDate(record, iteration + " recorded_datetime"));
-    acrisEntry.setPartyType(parseIntoString(record, iteration + " party_type"));
+    acrisEntry.setPartyType(iteration <= 5 ? "1" : "2");
     acrisEntry.setName(parseIntoString(record, iteration + " name"));
     acrisEntry.setAddress1(parseIntoString(record, iteration + " address_1"));
     acrisEntry.setZipCode(parseIntoString(record, iteration + " zip"));

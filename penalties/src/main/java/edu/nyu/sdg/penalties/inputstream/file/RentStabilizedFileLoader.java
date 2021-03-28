@@ -58,7 +58,7 @@ public final class RentStabilizedFileLoader {
     AtomicInteger errorCounter = new AtomicInteger(0);
     AtomicInteger lineCounter = new AtomicInteger(0);
 
-    LOG.info("Started loading file:{}", csvDataFile.getName());
+    LOG.info("Started loading file {}", csvDataFile.getName());
     Instant startTime = clock.instant();
 
     for (CSVRecord record : csvParser) {
@@ -96,10 +96,10 @@ public final class RentStabilizedFileLoader {
     }
 
     LOG.info(
-        "Hydration complete. {}/{} rows loaded successfully in {}",
+        "Hydration complete. {}/{} rows loaded successfully in {} seconds",
         (lineCounter.get() - errorCounter.get()),
         lineCounter,
-        Duration.between(startTime, clock.instant()));
+        Duration.between(startTime, clock.instant()).getSeconds());
   }
 
   private static String parseIntoString(CSVRecord record, String columnName) {
