@@ -21,6 +21,5 @@ public class PenaltiesApplication {
     LOG.debug("energy coeff => " + dataFromDB.getEnergysrcGHCoeffData());
     LOG.debug("carbon limit => " + dataFromDB.getCarbonLimitData());
     LOG.debug("space occupancy => " + dataFromDB.getLL84SpaceOccupancyGrpData());
-
   }
 }

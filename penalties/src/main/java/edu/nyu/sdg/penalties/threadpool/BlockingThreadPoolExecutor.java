@@ -1,10 +1,9 @@
 package edu.nyu.sdg.penalties.threadpool;
 
 import edu.nyu.sdg.penalties.inputstream.file.SOANAFileLoader;
+import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.*;
 
 public final class BlockingThreadPoolExecutor extends ThreadPoolExecutor {
 
@@ -12,38 +11,35 @@ public final class BlockingThreadPoolExecutor extends ThreadPoolExecutor {
 
   private final Semaphore semaphore;
 
-  public BlockingThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue)
-  {
+  public BlockingThreadPoolExecutor(
+      int corePoolSize,
+      int maximumPoolSize,
+      long keepAliveTime,
+      TimeUnit unit,
+      BlockingQueue<Runnable> workQueue) {
     super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);
     semaphore = new Semaphore(corePoolSize + 50);
   }
 
   @Override
-  protected void beforeExecute(Thread t, Runnable r)
-  {
+  protected void beforeExecute(Thread t, Runnable r) {
     super.beforeExecute(t, r);
   }
 
   @Override
-  public void execute(final Runnable task)
-  {
+  public void execute(final Runnable task) {
     boolean acquired = false;
-    do
-    {
-      try
-      {
+    do {
+      try {
         semaphore.acquire();
         acquired = true;
-      } catch (final InterruptedException e)
-      {
-        //LOGGER.warn("InterruptedException whilst aquiring semaphore", e);
+      } catch (final InterruptedException e) {
+        // LOGGER.warn("InterruptedException whilst aquiring semaphore", e);
       }
     } while (!acquired);
-    try
-    {
+    try {
       super.execute(task);
-    } catch (final RejectedExecutionException e)
-    {
+    } catch (final RejectedExecutionException e) {
       LOG.error("Task Rejected");
       semaphore.release();
       throw e;
@@ -51,14 +47,11 @@ public final class BlockingThreadPoolExecutor extends ThreadPoolExecutor {
   }
 
   @Override
-  protected void afterExecute(Runnable r, Throwable t)
-  {
+  protected void afterExecute(Runnable r, Throwable t) {
     super.afterExecute(r, t);
-    if (t != null)
-    {
+    if (t != null) {
       LOG.error(t.getMessage());
     }
     semaphore.release();
   }
-
 }

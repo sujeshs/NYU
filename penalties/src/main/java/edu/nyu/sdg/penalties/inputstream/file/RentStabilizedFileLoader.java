@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -58,30 +57,34 @@ public final class RentStabilizedFileLoader {
     for (CSVRecord record : csvParser) {
       if (null != record) {
 
-        threadPool.submit(() -> {
+        threadPool.submit(
+            () -> {
+              lineCounter.getAndIncrement();
+              RentStabilizedBBLFeedData rentStabilizedBBLFeedData = new RentStabilizedBBLFeedData();
 
-        lineCounter.getAndIncrement();
-        RentStabilizedBBLFeedData rentStabilizedBBLFeedData = new RentStabilizedBBLFeedData();
+              try {
 
-        try {
+                rentStabilizedBBLFeedData.setBBL(parseIntoString(record, "bbl"));
+                rentStabilizedBBLFeedData.setMpVersion(parseIntoString(record, "mp_version"));
+                rentStabilizedBBLFeedData.setMpResidentialUnits(
+                    parseIntoInt(record, "mp_res_units"));
+                rentStabilizedBBLFeedData.setStabilizedUnits2018(
+                    parseIntoInt(record, "dof_stab_units_2018"));
+                rentStabilizedBBLFeedData.setStabilizedUnits2019(
+                    parseIntoInt(record, "dof_stab_units_2019"));
+                rentStabilizedBBLFeedData.setStabilizedUnitPercentage(
+                    parseIntoBigDecimal(record, "stab_unit_pct"));
 
-          rentStabilizedBBLFeedData.setBBL(parseIntoString(record, "bbl"));
-          rentStabilizedBBLFeedData.setMpVersion(parseIntoString(record, "mp_version"));
-          rentStabilizedBBLFeedData.setMpResidentialUnits(parseIntoInt(record, "mp_res_units"));
-          rentStabilizedBBLFeedData.setStabilizedUnits2018(
-              parseIntoInt(record, "dof_stab_units_2018"));
-          rentStabilizedBBLFeedData.setStabilizedUnits2019(
-              parseIntoInt(record, "dof_stab_units_2019"));
-          rentStabilizedBBLFeedData.setStabilizedUnitPercentage(
-              parseIntoBigDecimal(record, "stab_unit_pct"));
+                flowOrchestrator.loadRentStabilizedUnitsData(rentStabilizedBBLFeedData);
 
-          flowOrchestrator.loadRentStabilizedUnitsData(rentStabilizedBBLFeedData);
-
-        } catch (Exception excp) {
-          errorCounter.getAndIncrement();
-          LOG.error("Exception while processing BBL:{}:{}", rentStabilizedBBLFeedData.getBBL(), excp.getMessage());
-        }
-      });
+              } catch (Exception excp) {
+                errorCounter.getAndIncrement();
+                LOG.error(
+                    "Exception while processing BBL:{}:{}",
+                    rentStabilizedBBLFeedData.getBBL(),
+                    excp.getMessage());
+              }
+            });
       }
     }
 

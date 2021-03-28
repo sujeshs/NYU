@@ -1,2 +1,2 @@
 # Maven commands
-mvn sortpom:sortmvn
+mvn sortpom:sort

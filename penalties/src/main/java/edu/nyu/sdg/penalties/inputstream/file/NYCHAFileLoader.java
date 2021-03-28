@@ -11,7 +11,6 @@ import edu.nyu.sdg.penalties.model.NYCHAFeedData;
 import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -51,23 +50,26 @@ public final class NYCHAFileLoader {
     for (CSVRecord record : csvParser) {
       if (null != record) {
 
-        threadPool.submit(() -> {
+        threadPool.submit(
+            () -> {
+              lineCounter.getAndIncrement();
+              NYCHAFeedData nychaFeedData = new NYCHAFeedData();
 
-        lineCounter.getAndIncrement();
-        NYCHAFeedData nychaFeedData = new NYCHAFeedData();
+              try {
 
-        try {
+                nychaFeedData.setBBL(parseIntoString(record, "bbl"));
+                nychaFeedData.setDevelopment(parseIntoString(record, "development"));
 
-          nychaFeedData.setBBL(parseIntoString(record, "bbl"));
-          nychaFeedData.setDevelopment(parseIntoString(record, "development"));
+                flowOrchestrator.loadNYCHAData(nychaFeedData);
 
-          flowOrchestrator.loadNYCHAData(nychaFeedData);
-
-        } catch (Exception excp) {
-          errorCounter.getAndIncrement();
-          LOG.error("Exception while processing BBL:{}:{}", nychaFeedData.getBBL(), excp.getMessage());
-        }
-      });
+              } catch (Exception excp) {
+                errorCounter.getAndIncrement();
+                LOG.error(
+                    "Exception while processing BBL:{}:{}",
+                    nychaFeedData.getBBL(),
+                    excp.getMessage());
+              }
+            });
       }
     }
 
