@@ -11,6 +11,9 @@ import edu.nyu.sdg.penalties.model.RentStabilizedBBLFeedData;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.csv.CSVFormat;
@@ -27,11 +30,14 @@ public final class RentStabilizedFileLoader {
   private static final BigDecimalValidator BIGDECIMAL_VALIDATOR = new BigDecimalValidator();
   private static final Logger LOG = LoggerFactory.getLogger(RentStabilizedFileLoader.class);
 
+  private final Clock clock;
   private final ExecutorService threadPool;
   private final FlowOrchestrator flowOrchestrator;
   private static CSVFormat csvFormat;
 
-  public RentStabilizedFileLoader(ExecutorService threadPool, FlowOrchestrator flowOrchestrator) {
+  public RentStabilizedFileLoader(
+      Clock clock, ExecutorService threadPool, FlowOrchestrator flowOrchestrator) {
+    this.clock = requireNonNull(clock, "clock is required and missing.");
     this.threadPool = requireNonNull(threadPool, "threadPool is required and missing.");
     this.flowOrchestrator =
         requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
@@ -53,6 +59,7 @@ public final class RentStabilizedFileLoader {
     AtomicInteger lineCounter = new AtomicInteger(0);
 
     LOG.info("Started loading file:{}", csvDataFile.getName());
+    Instant startTime = clock.instant();
 
     for (CSVRecord record : csvParser) {
       if (null != record) {
@@ -89,9 +96,10 @@ public final class RentStabilizedFileLoader {
     }
 
     LOG.info(
-        "Hydration complete. {}/{} rows loaded successfully",
+        "Hydration complete. {}/{} rows loaded successfully in {}",
         (lineCounter.get() - errorCounter.get()),
-        lineCounter);
+        lineCounter,
+        Duration.between(startTime, clock.instant()));
   }
 
   private static String parseIntoString(CSVRecord record, String columnName) {

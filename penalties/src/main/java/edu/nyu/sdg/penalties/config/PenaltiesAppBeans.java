@@ -11,6 +11,7 @@ import edu.nyu.sdg.penalties.dao.contract.PACEDAO;
 import edu.nyu.sdg.penalties.inputstream.file.*;
 import edu.nyu.sdg.penalties.threadpool.BlockingThreadPoolExecutor;
 import java.math.BigDecimal;
+import java.time.Clock;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -22,6 +23,11 @@ import org.springframework.core.env.Environment;
 
 @Configuration
 public class PenaltiesAppBeans {
+
+  @Bean
+  Clock clock() {
+    return Clock.systemUTC();
+  }
 
   @Bean
   ExecutorService executorService(Environment env) {
@@ -78,37 +84,41 @@ public class PenaltiesAppBeans {
 
   @Bean
   LL84CSVFileLoader ll84FileLoader(
-      ExecutorService executorService, FlowOrchestrator flowOrchestrator) {
+      Clock clock, ExecutorService executorService, FlowOrchestrator flowOrchestrator) {
+    requireNonNull(clock, "clock is required and missing.");
     requireNonNull(executorService, "executorService is required and missing.");
     requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
 
-    return new LL84CSVFileLoader(executorService, flowOrchestrator);
+    return new LL84CSVFileLoader(clock, executorService, flowOrchestrator);
   }
 
   @Bean
   NYCHAFileLoader nychaFileLoader(
-      ExecutorService executorService, FlowOrchestrator flowOrchestrator) {
+      Clock clock, ExecutorService executorService, FlowOrchestrator flowOrchestrator) {
+    requireNonNull(clock, "clock is required and missing.");
     requireNonNull(executorService, "executorService is required and missing.");
     requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
 
-    return new NYCHAFileLoader(executorService, flowOrchestrator);
+    return new NYCHAFileLoader(clock, executorService, flowOrchestrator);
   }
 
   @Bean
   RentStabilizedFileLoader rentStabilizedFileLoader(
-      ExecutorService executorService, FlowOrchestrator flowOrchestrator) {
+      Clock clock, ExecutorService executorService, FlowOrchestrator flowOrchestrator) {
+    requireNonNull(clock, "clock is required and missing.");
     requireNonNull(executorService, "executorService is required and missing.");
     requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
 
-    return new RentStabilizedFileLoader(executorService, flowOrchestrator);
+    return new RentStabilizedFileLoader(clock, executorService, flowOrchestrator);
   }
 
   @Bean
   SOANAFileLoader soanaFileLoader(
-      ExecutorService executorService, FlowOrchestrator flowOrchestrator) {
+      Clock clock, ExecutorService executorService, FlowOrchestrator flowOrchestrator) {
+    requireNonNull(clock, "clock is required and missing.");
     requireNonNull(executorService, "executorService is required and missing.");
     requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
 
-    return new SOANAFileLoader(executorService, flowOrchestrator);
+    return new SOANAFileLoader(clock, executorService, flowOrchestrator);
   }
 }

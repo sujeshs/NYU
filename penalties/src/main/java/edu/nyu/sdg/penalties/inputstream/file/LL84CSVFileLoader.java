@@ -15,6 +15,9 @@ import edu.nyu.sdg.penalties.model.LL84FeedData;
 import java.io.File;
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -32,6 +35,7 @@ public final class LL84CSVFileLoader {
 
   private static final Logger LOG = LoggerFactory.getLogger(LL84CSVFileLoader.class);
 
+  private final Clock clock;
   private final CSVFormat csvFormat;
   private final ExecutorService threadPool;
   private final FlowOrchestrator flowOrchestrator;
@@ -43,7 +47,9 @@ public final class LL84CSVFileLoader {
   private static final String DATE_GENERATION_PATTERN = "yyyy-MM-dd";
   private static final String DATE_ACRIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS";
 
-  public LL84CSVFileLoader(ExecutorService threadPool, FlowOrchestrator flowOrchestrator) {
+  public LL84CSVFileLoader(
+      Clock clock, ExecutorService threadPool, FlowOrchestrator flowOrchestrator) {
+    this.clock = requireNonNull(clock, "clock is required and missing.");
     this.threadPool = requireNonNull(threadPool, "threadPool is required and missing.");
     this.flowOrchestrator =
         requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
@@ -65,6 +71,7 @@ public final class LL84CSVFileLoader {
     AtomicInteger lineCounter = new AtomicInteger(0);
 
     LOG.info("Started loading file:{}", csvDataFile.getName());
+    Instant startTime = clock.instant();
 
     for (CSVRecord record : csvParser) {
       if (null != record) {
@@ -220,9 +227,10 @@ public final class LL84CSVFileLoader {
     }
 
     LOG.info(
-        "Hydration complete. {}/{} rows loaded successfully",
+        "Hydration complete. {}/{} rows loaded successfully in {}",
         (lineCounter.get() - errorCounter.get()),
-        lineCounter);
+        lineCounter,
+        Duration.between(startTime, clock.instant()));
   }
 
   private AcrisEntry constructAcrisEntry(CSVRecord record, int iteration) throws ParseException {
