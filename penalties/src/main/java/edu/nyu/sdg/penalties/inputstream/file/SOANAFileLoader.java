@@ -8,6 +8,7 @@ import static org.apache.commons.lang3.StringUtils.*;
 
 import edu.nyu.sdg.penalties.controller.FlowOrchestrator;
 import edu.nyu.sdg.penalties.model.SoanaFeedData;
+import io.micrometer.core.instrument.Timer;
 import java.io.File;
 import java.time.Clock;
 import java.time.Duration;
@@ -28,10 +29,12 @@ public final class SOANAFileLoader {
   private final CSVFormat csvFormat;
   private final ExecutorService threadPool;
   private final FlowOrchestrator flowOrchestrator;
+  private final Timer timer;
 
   public SOANAFileLoader(
-      Clock clock, ExecutorService threadPool, FlowOrchestrator flowOrchestrator) {
+      Clock clock, Timer timer, ExecutorService threadPool, FlowOrchestrator flowOrchestrator) {
     this.clock = requireNonNull(clock, "clock is required and missing.");
+    this.timer = requireNonNull(timer, "timer is required and missing.");
     this.threadPool = requireNonNull(threadPool, "threadPool is required and missing.");
     this.flowOrchestrator =
         requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
@@ -60,6 +63,8 @@ public final class SOANAFileLoader {
 
         threadPool.submit(
             () -> {
+              Instant recordStartTime = clock.instant();
+
               lineCounter.getAndIncrement();
               SoanaFeedData soanaFeedData = new SoanaFeedData();
 
@@ -116,6 +121,8 @@ public final class SOANAFileLoader {
                     soanaFeedData.getBBL(),
                     excp.getMessage());
               }
+
+              timer.record(Duration.between(recordStartTime, clock.instant()));
             });
       }
     }

@@ -1,4 +1,6 @@
 spring:
+  main:
+    banner-mode: off
   profiles:
     include: postgres
 server:
@@ -10,3 +12,20 @@ app:
         blocking-queue-size: 1000
         executor-name-format: cpu-pool-%d
         size: 4
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      base-path: /actuator/
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    info:
+      enabled: true
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+

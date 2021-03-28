@@ -10,6 +10,8 @@ import edu.nyu.sdg.penalties.controller.FlowOrchestrator;
 import edu.nyu.sdg.penalties.dao.contract.PACEDAO;
 import edu.nyu.sdg.penalties.inputstream.file.*;
 import edu.nyu.sdg.penalties.threadpool.BlockingThreadPoolExecutor;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
 import java.math.BigDecimal;
 import java.time.Clock;
 import java.util.Map;
@@ -27,6 +29,30 @@ public class PenaltiesAppBeans {
   @Bean
   Clock clock() {
     return Clock.systemUTC();
+  }
+
+  @Bean
+  @Qualifier("soana-timer")
+  Timer soanaTimer(MeterRegistry meterRegistry) {
+    requireNonNull(meterRegistry, "meterRegistry is required and missing.");
+
+    return Timer.builder("soana-timer").publishPercentileHistogram().register(meterRegistry);
+  }
+
+  @Bean
+  @Qualifier("nycha-timer")
+  Timer nychaTimer(MeterRegistry meterRegistry) {
+    requireNonNull(meterRegistry, "meterRegistry is required and missing.");
+
+    return Timer.builder("nycha-timer").publishPercentileHistogram().register(meterRegistry);
+  }
+
+  @Bean
+  @Qualifier("ll84-acris-timer")
+  Timer ll84AcrisTimer(MeterRegistry meterRegistry) {
+    requireNonNull(meterRegistry, "meterRegistry is required and missing.");
+
+    return Timer.builder("ll84-acris-timer").publishPercentileHistogram().register(meterRegistry);
   }
 
   @Bean
@@ -94,12 +120,15 @@ public class PenaltiesAppBeans {
 
   @Bean
   NYCHAFileLoader nychaFileLoader(
-      Clock clock, ExecutorService executorService, FlowOrchestrator flowOrchestrator) {
+      Clock clock,
+      @Qualifier("nycha-timer") Timer timer,
+      ExecutorService executorService,
+      FlowOrchestrator flowOrchestrator) {
     requireNonNull(clock, "clock is required and missing.");
     requireNonNull(executorService, "executorService is required and missing.");
     requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
 
-    return new NYCHAFileLoader(clock, executorService, flowOrchestrator);
+    return new NYCHAFileLoader(clock, timer, executorService, flowOrchestrator);
   }
 
   @Bean
@@ -114,11 +143,14 @@ public class PenaltiesAppBeans {
 
   @Bean
   SOANAFileLoader soanaFileLoader(
-      Clock clock, ExecutorService executorService, FlowOrchestrator flowOrchestrator) {
+      Clock clock,
+      @Qualifier("soana-timer") Timer timer,
+      ExecutorService executorService,
+      FlowOrchestrator flowOrchestrator) {
     requireNonNull(clock, "clock is required and missing.");
     requireNonNull(executorService, "executorService is required and missing.");
     requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
 
-    return new SOANAFileLoader(clock, executorService, flowOrchestrator);
+    return new SOANAFileLoader(clock, timer, executorService, flowOrchestrator);
   }
 }
