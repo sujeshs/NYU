@@ -18,7 +18,7 @@ public final class BlockingThreadPoolExecutor extends ThreadPoolExecutor {
       TimeUnit unit,
       BlockingQueue<Runnable> workQueue) {
     super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);
-    semaphore = new Semaphore(corePoolSize + 50);
+    semaphore = new Semaphore(workQueue.size() + 50);
   }
 
   @Override
@@ -34,7 +34,7 @@ public final class BlockingThreadPoolExecutor extends ThreadPoolExecutor {
         semaphore.acquire();
         acquired = true;
       } catch (final InterruptedException e) {
-        // LOGGER.warn("InterruptedException whilst aquiring semaphore", e);
+        LOG.warn("InterruptedException whilst acquiring semaphore", e);
       }
     } while (!acquired);
     try {
