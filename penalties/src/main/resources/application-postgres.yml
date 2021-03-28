@@ -7,8 +7,5 @@ db:
           executor-name-format: postgres-dao-pool-%d
           size: 4
     hikari:
-      jdbc-url: jdbc:postgresql://localhost:5432/postgres
       maximum-pool-size: 40
       minimum-idle: 10
-      password: postgres
-      username: postgres

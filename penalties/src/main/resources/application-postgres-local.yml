@@ -1,0 +1,6 @@
+db:
+  postgres:
+    hikari:
+      jdbc-url: jdbc:postgresql://localhost:5432/postgres
+      password: postgres
+      username: postgres

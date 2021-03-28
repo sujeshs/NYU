@@ -1,0 +1,6 @@
+db:
+  postgres:
+    hikari:
+      jdbc-url: jdbc:postgresql://fcdata.c7h93yqbqnvu.us-east-1.rds.amazonaws.com:5432/fcdata
+      password: "@Te8Lr3k8k44a$Km"
+      username: stern
