@@ -22,26 +22,5 @@ public class PenaltiesApplication {
     LOG.debug("carbon limit => " + dataFromDB.getCarbonLimitData());
     LOG.debug("space occupancy => " + dataFromDB.getLL84SpaceOccupancyGrpData());
 
-    CleanUpLL84CSVFile cleanUpLL84CSVFile = ctx.getBean(CleanUpLL84CSVFile.class);
-    String ll84DataDump = "/Users/sujeshs/IdeaProjects/NYU/docs/samples/subset_ll84.csv";
-    // cleanUpLL84CSVFile.loadCSV(ll84DataDump);
-
-    LL84CSVFileLoader ll84CSVFileLoader = ctx.getBean(LL84CSVFileLoader.class);
-    String ll84FeedData = "/Users/sujeshs/Documents/PACE/merged_ll84_parties.csv";
-    // ll84CSVFileLoader.loadCSV(ll84FeedData);
-
-    NYCHAFileLoader nychaFileLoader = ctx.getBean(NYCHAFileLoader.class);
-    String nychaFeedData = "/Users/sujeshs/Documents/PACE/nycha-bbls.csv";
-    // nychaFileLoader.loadCSV(nychaFeedData);
-
-    RentStabilizedFileLoader rentStabilizedFileLoader = ctx.getBean(RentStabilizedFileLoader.class);
-    String rentFeedData =
-        "/Users/sujeshs/IdeaProjects/NYU/docs/furman-center_rent-stabilized-units.csv";
-    // rentStabilizedFileLoader.loadCSV(rentFeedData);
-
-    SOANAFileLoader soanaFileLoader = ctx.getBean(SOANAFileLoader.class);
-    String soanaFeedData = "/Users/sujeshs/Documents/PACE/SOANA.csv";
-    // soanaFileLoader.loadCSV(soanaFeedData);
-
   }
 }

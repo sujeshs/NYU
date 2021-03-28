@@ -3,3 +3,10 @@ spring:
     include: postgres
 server:
   port: 9000
+app:
+  cpu:
+    thread:
+      pool:
+        blocking-queue-size: 1000
+        executor-name-format: cpu-pool-%d
+        size: 4

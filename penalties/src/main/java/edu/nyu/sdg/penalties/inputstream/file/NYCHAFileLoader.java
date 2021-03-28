@@ -9,6 +9,9 @@ import static org.apache.commons.lang3.StringUtils.*;
 import edu.nyu.sdg.penalties.controller.FlowOrchestrator;
 import edu.nyu.sdg.penalties.model.NYCHAFeedData;
 import java.io.File;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -19,10 +22,12 @@ public final class NYCHAFileLoader {
 
   private static final Logger LOG = LoggerFactory.getLogger(NYCHAFileLoader.class);
 
+  private final CSVFormat csvFormat;
+  private final ExecutorService threadPool;
   private final FlowOrchestrator flowOrchestrator;
-  private static CSVFormat csvFormat;
 
-  public NYCHAFileLoader(FlowOrchestrator flowOrchestrator) {
+  public NYCHAFileLoader(ExecutorService threadPool, FlowOrchestrator flowOrchestrator) {
+    this.threadPool = requireNonNull(threadPool, "threadPool is required and missing.");
     this.flowOrchestrator =
         requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
 
@@ -38,15 +43,17 @@ public final class NYCHAFileLoader {
     CSVParser csvParser = CSVParser.parse(csvDataFile, UTF_8, csvFormat);
     csvParser.getHeaderMap();
 
-    int lineCounter = 0;
-    int errorCounter = 0;
+    AtomicInteger errorCounter = new AtomicInteger(0);
+    AtomicInteger lineCounter = new AtomicInteger(0);
 
     LOG.info("Started loading file:{}", csvDataFile.getName());
 
     for (CSVRecord record : csvParser) {
       if (null != record) {
 
-        lineCounter++;
+        threadPool.submit(() -> {
+
+        lineCounter.getAndIncrement();
         NYCHAFeedData nychaFeedData = new NYCHAFeedData();
 
         try {
@@ -57,15 +64,16 @@ public final class NYCHAFileLoader {
           flowOrchestrator.loadNYCHAData(nychaFeedData);
 
         } catch (Exception excp) {
-          errorCounter++;
+          errorCounter.getAndIncrement();
           LOG.error("Exception while processing BBL:{}:{}", nychaFeedData.getBBL(), excp.getMessage());
         }
+      });
       }
     }
 
     LOG.info(
         "Hydration complete. {}/{} rows loaded successfully",
-        (lineCounter - errorCounter),
+        (lineCounter.get() - errorCounter.get()),
         lineCounter);
   }
 

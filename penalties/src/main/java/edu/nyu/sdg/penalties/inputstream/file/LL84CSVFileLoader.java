@@ -16,6 +16,9 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -30,9 +33,10 @@ public final class LL84CSVFileLoader {
 
   private static final Logger LOG = LoggerFactory.getLogger(LL84CSVFileLoader.class);
 
+  private final CSVFormat csvFormat;
+  private final ExecutorService threadPool;
   private final FlowOrchestrator flowOrchestrator;
 
-  private static CSVFormat csvFormat;
   private static final BigDecimalValidator BIGDECIMAL_VALIDATOR = new BigDecimalValidator();
   private static final DateValidator DATE_VALIDATOR = new DateValidator();
 
@@ -40,7 +44,8 @@ public final class LL84CSVFileLoader {
   private static final String DATE_GENERATION_PATTERN = "yyyy-MM-dd";
   private static final String DATE_ACRIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS";
 
-  public LL84CSVFileLoader(FlowOrchestrator flowOrchestrator) {
+  public LL84CSVFileLoader(ExecutorService threadPool, FlowOrchestrator flowOrchestrator) {
+    this.threadPool = requireNonNull(threadPool, "threadPool is required and missing.");
     this.flowOrchestrator =
         requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
 
@@ -57,16 +62,17 @@ public final class LL84CSVFileLoader {
     CSVParser csvParser = CSVParser.parse(csvDataFile, UTF_8, csvFormat);
     csvParser.getHeaderMap();
 
-    int lineCounter = 0;
-    int errorCounter = 0;
+    AtomicInteger errorCounter = new AtomicInteger(0);
+    AtomicInteger lineCounter = new AtomicInteger(0);
 
     LOG.info("Started loading file:{}", csvDataFile.getName());
 
     for (CSVRecord record : csvParser) {
       if (null != record) {
 
-        lineCounter++;
+        threadPool.submit(() -> {
 
+        lineCounter.getAndIncrement();
         LL84FeedData ll84FeedData = new LL84FeedData();
 
         try {
@@ -196,15 +202,16 @@ public final class LL84CSVFileLoader {
           flowOrchestrator.loadLL84AndAcrisData(ll84FeedData);
 
         } catch (Exception excp) {
-          errorCounter++;
+          errorCounter.getAndIncrement();
           LOG.error("Exception while processing BBL:{}:{}", ll84FeedData.getBBL10Digits(), excp.getMessage());
         }
+      });
       }
     }
 
     LOG.info(
         "Hydration complete. {}/{} rows loaded successfully",
-        (lineCounter - errorCounter),
+        (lineCounter.get() - errorCounter.get()),
         lineCounter);
   }
 
