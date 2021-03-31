@@ -2,7 +2,7 @@ package edu.nyu.sdg.penalties.dao.postgres.sql;
 
 public final class PACESql {
 
-  public static final String READ_LL84_DATA = "SELECT * FROM FEED_LL84_BBL";
+  public static final String READ_LL84_DATA = "SELECT * FROM stern.feed_ll84_bbl";
 
   public static final String PUT_DERIVED_VARS_DATA =
       "INSERT INTO stern.derived_penalty_variables ( bbl,nyc_bin,parent_property_id,property_id,largest_property_use_type,generation_date,total_carbon_emission_threshold_2024_2029,total_carbon_emission_threshold_2030_2034,total_actual_emission ,emission_excess_2024_2029 ,emission_excess_2030_2034 ,emission_penalty_2024_2029,emission_penalty_2030_2034, phase1_penalty, phase2_penalty ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
