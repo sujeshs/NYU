@@ -142,7 +142,7 @@ create table feed_ll84_bbl
     fuel_oil_2_use                                    numeric(24, 2),
     fuel_oil_4_use                                    numeric(24, 2),
     fuel_oil_5_6_use                                  numeric(24, 2),
-    disel_2_use                                       numeric(24, 2),
+    diesel_2_use                                       numeric(24, 2),
     propane_use                                       numeric(24, 2),
     district_steam_use                                numeric(24, 2),
     district_chilledwater_use                         numeric(24, 2),

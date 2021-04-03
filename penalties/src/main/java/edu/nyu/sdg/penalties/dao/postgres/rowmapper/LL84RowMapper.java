@@ -38,7 +38,7 @@ public final class LL84RowMapper implements ResultSetExtractor<List<LL84FeedData
       feedData.setFuelOil2Use(rs.getBigDecimal("fuel_oil_2_use"));
       feedData.setFuelOil4Use(rs.getBigDecimal("fuel_oil_4_use"));
       feedData.setFuelOil5_6Use(rs.getBigDecimal("fuel_oil_5_6_use"));
-      feedData.setDiesel2Use(rs.getBigDecimal("disel_2_use"));
+      feedData.setDiesel2Use(rs.getBigDecimal("diesel_2_use"));
       feedData.setPropaneUse(rs.getBigDecimal("propane_use"));
       feedData.setDistrictSteamUse(rs.getBigDecimal("district_steam_use"));
       feedData.setDistrictChilledWaterUse(rs.getBigDecimal("district_chilledwater_use"));
