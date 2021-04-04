@@ -235,20 +235,17 @@ public final class LL84CSVFileLoader {
 
   private AcrisEntry constructAcrisEntry(CSVRecord record, int iteration) throws ParseException {
 
-    AcrisEntry acrisEntry = new AcrisEntry();
-
-    acrisEntry.setBBL10Digits(parseIntoString(record, "BBL - 10 digits"));
-    acrisEntry.setDocumentId(parseIntoString(record, iteration + " document_id"));
-    acrisEntry.setDocumentType(parseIntoString(record, iteration + " doc_type"));
-    acrisEntry.setDocumentAmount(parseIntoBigDecimal(record, iteration + " document_amt"));
-    acrisEntry.setDocumentRecordedTimestamp(
-        parseAcrisDate(record, iteration + " recorded_datetime"));
-    acrisEntry.setPartyType(iteration <= 5 ? "1" : "2");
-    acrisEntry.setName(parseIntoString(record, iteration + " name"));
-    acrisEntry.setAddress1(parseIntoString(record, iteration + " address_1"));
-    acrisEntry.setZipCode(parseIntoString(record, iteration + " zip"));
-
-    return acrisEntry;
+    return new AcrisEntry(
+      parseIntoString(record, "BBL - 10 digits"),
+      parseIntoString(record, iteration + " document_id"),
+      parseIntoString(record, iteration + " doc_type"),
+      parseIntoBigDecimal(record, iteration + " document_amt"),
+      parseAcrisDate(record, iteration + " recorded_datetime"),
+      iteration <= 5 ? "1" : "2",
+      parseIntoString(record, iteration + " name"),
+      parseIntoString(record, iteration + " address_1"),
+      parseIntoString(record, iteration + " zip")
+    );
   }
 
   private static BigDecimal parseIntoBigDecimal(CSVRecord record, String columnName) {

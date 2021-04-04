@@ -5,7 +5,6 @@
  */
 
 
-
 /*
  * Rank buildings by total LL97 carbon
  */
@@ -27,23 +26,23 @@ order by site_eui desc;
 /*
  * Rank buildings by Penalties to pay in phase 1
  */
-select A.bbl, A.nyc_bin, A.emission_penalty_2024_2029
+select A.bbl, A.nyc_bin, cast(A.emission_penalty_2024_2029 as money)
 from derived_penalty_variables A
          left join feed_ll84_bbl B
                    on A.bbl = B.bbl
-group by A.bbl, A.nyc_bin, A.emission_penalty_2024_2029, A.phase1_penalty
-order by phase1_penalty desc;
+group by A.bbl, A.nyc_bin, A.emission_penalty_2024_2029
+order by A.emission_penalty_2024_2029 desc;
 
 
 /*
  * Rank buildings by Penalties to pay in phase 2
  */
-select A.bbl, A.nyc_bin, A.emission_penalty_2030_2034
+select A.bbl, A.nyc_bin, cast(A.emission_penalty_2030_2034 as money)
 from derived_penalty_variables A
          left join feed_ll84_bbl B
                    on A.bbl = B.bbl
-group by A.bbl, A.nyc_bin, A.emission_penalty_2030_2034, A.phase2_penalty
-order by phase2_penalty desc;
+group by A.bbl, A.nyc_bin, A.emission_penalty_2030_2034
+order by A.emission_penalty_2030_2034 desc;
 
 
 /*
@@ -71,23 +70,23 @@ order by site_eui desc;
 /*
  * Rank ownership groups by added penalties phase 1
  */
-select B.mail_careof, A.emission_penalty_2024_2029
+select B.mail_careof, cast(A.emission_penalty_2024_2029 as money)
 from derived_penalty_variables A
          left join feed_soana B
                    on A.bbl = B.bbl
-group by B.mail_careof, A.emission_penalty_2024_2029, A.phase1_penalty
-order by phase1_penalty desc;
+group by B.mail_careof, A.emission_penalty_2024_2029
+order by A.emission_penalty_2024_2029 desc;
 
 
 /*
  * Rank ownership groups by added penalties phase 2
  */
-select B.mail_careof, A.emission_penalty_2030_2034
+select B.mail_careof,  cast(A.emission_penalty_2030_2034 as money)
 from derived_penalty_variables A
          left join feed_soana B
                    on A.bbl = B.bbl
-group by B.mail_careof, A.emission_penalty_2030_2034, A.phase2_penalty
-order by phase2_penalty desc;
+group by B.mail_careof, A.emission_penalty_2030_2034
+order by A.emission_penalty_2030_2034 desc;
 
 
 
@@ -131,7 +130,7 @@ order by TotalPhase1Penalty desc;
 /*
  * Rank Lenders by added penalties phase 1
  */
-select A.name, cast(sum(B.phase1_penalty) as money) as TotalPhase1Penalty from feed_acris_mortgage_info A
+select A.name, cast(sum(B.emission_penalty_2024_2029) as money) as TotalPhase1Penalty from feed_acris_mortgage_info A
 left join derived_penalty_variables B
 on A.bbl = B.bbl
 where A.party_type = '2' and A.name <> ''
@@ -143,7 +142,7 @@ order by TotalPhase1Penalty desc;
 /*
  * Rank Lenders by added penalties phase 2
  */
-select A.name, cast(sum(B.phase2_penalty) as money) as TotalPhase2Penalty from feed_acris_mortgage_info A
+select A.name, cast(sum(B.emission_penalty_2030_2034) as money) as TotalPhase2Penalty from feed_acris_mortgage_info A
 left join derived_penalty_variables B
 on A.bbl = B.bbl
 where A.party_type = '2' and A.name <> ''
@@ -248,7 +247,6 @@ from derived_penalty_variables A
                    on A.bbl = B.bbl
 group by B.census_tract
 order by TotalEmissions desc;
-
 
 
 

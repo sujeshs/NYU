@@ -1,17 +1,3 @@
-create table derived_penalty_exemption
-(
-    id                                serial        not null,
-    bbl                               text not null,
-    power_generation                  boolean,
-    city_building                     boolean,
-    nycha                             boolean,
-    rent_stablized_aptmt              boolean,
-    house_of_worship                  boolean,
-    hdfc                              boolean,
-    project_based_fed_housing_program boolean,
-    penalty_exempt_flag               boolean
-);
-
 
 create table derived_penalty_variables
 (
@@ -27,10 +13,8 @@ create table derived_penalty_variables
     total_actual_emission                     numeric(24, 2),
     emission_excess_2024_2029                 numeric(24, 2),
     emission_excess_2030_2034                 numeric(24, 2),
-    emission_penalty_2024_2029                text,
-    emission_penalty_2030_2034                text,
-    phase1_penalty                            numeric(24, 2),
-    phase2_penalty                            numeric(24, 2)
+    emission_penalty_2024_2029                numeric(24, 2),
+    emission_penalty_2030_2034                numeric(24, 2)
 );
 
 

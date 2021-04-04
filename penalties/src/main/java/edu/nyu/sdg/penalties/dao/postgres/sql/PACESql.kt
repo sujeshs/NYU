@@ -41,11 +41,9 @@ INSERT INTO stern.derived_penalty_variables(
   emission_excess_2024_2029 ,
   emission_excess_2030_2034 ,
   emission_penalty_2024_2029,
-  emission_penalty_2030_2034,
-  phase1_penalty,
-  phase2_penalty
+  emission_penalty_2030_2034
 )
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
   const val PUT_FEED_ACRIS_DATA = """
