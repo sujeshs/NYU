@@ -7,6 +7,7 @@ import com.google.common.util.concurrent.MoreExecutors;
 import edu.nyu.sdg.penalties.controller.CarbonLimitCalculator;
 import edu.nyu.sdg.penalties.controller.EnergyConsumptionCalculator;
 import edu.nyu.sdg.penalties.controller.FlowOrchestrator;
+import edu.nyu.sdg.penalties.controller.LL84Deduper;
 import edu.nyu.sdg.penalties.dao.contract.PACEDAO;
 import edu.nyu.sdg.penalties.inputstream.file.*;
 import edu.nyu.sdg.penalties.threadpool.BlockingThreadPoolExecutor;
@@ -152,5 +153,13 @@ public class PenaltiesAppBeans {
     requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
 
     return new SOANAFileLoader(clock, timer, executorService, flowOrchestrator);
+  }
+
+  @Bean
+  LL84Deduper ll84Deduper(Clock clock, PACEDAO pacedao) {
+    requireNonNull(clock, "clock is required and missing.");
+    requireNonNull(pacedao, "pacedao is required and missing.");
+
+    return new LL84Deduper(clock, pacedao);
   }
 }

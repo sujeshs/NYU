@@ -6,7 +6,6 @@ import static java.util.Objects.requireNonNull;
 import edu.nyu.sdg.penalties.AppConstants;
 import edu.nyu.sdg.penalties.dao.contract.PACEDAO;
 import edu.nyu.sdg.penalties.model.*;
-
 import java.math.BigDecimal;
 
 public final class FlowOrchestrator {
@@ -16,14 +15,14 @@ public final class FlowOrchestrator {
   private final PACEDAO PACEDAO;
 
   public FlowOrchestrator(
-    CarbonLimitCalculator carbonLimitCalculator,
-    EnergyConsumptionCalculator energyConsumptionCalculator,
-    PACEDAO PACEDAO) {
+      CarbonLimitCalculator carbonLimitCalculator,
+      EnergyConsumptionCalculator energyConsumptionCalculator,
+      PACEDAO PACEDAO) {
     this.carbonLimitCalculator =
-      requireNonNull(carbonLimitCalculator, "carbonLimitCalculator is required and missing.");
+        requireNonNull(carbonLimitCalculator, "carbonLimitCalculator is required and missing.");
     this.energyConsumptionCalculator =
-      requireNonNull(
-        energyConsumptionCalculator, "energyConsumptionCalculator is required and missing.");
+        requireNonNull(
+            energyConsumptionCalculator, "energyConsumptionCalculator is required and missing.");
     this.PACEDAO = requireNonNull(PACEDAO, "sdgDataInsertDAO is required and missing.");
   }
 
@@ -50,24 +49,23 @@ public final class FlowOrchestrator {
     BigDecimal phase2ExcessEmission = emissions.subtract(carbonLimits.getCarbonLimitPhase2());
 
     BigDecimal phase1Penalty =
-      phase1ExcessEmission.compareTo(ZERO) == 1
-        ? phase1ExcessEmission.multiply(AppConstants.PENALTY_PER_TON)
-        : ZERO;
+        phase1ExcessEmission.compareTo(ZERO) == 1
+            ? phase1ExcessEmission.multiply(AppConstants.PENALTY_PER_TON)
+            : ZERO;
     BigDecimal phase2Penalty =
-      phase2ExcessEmission.compareTo(ZERO) == 1
-        ? phase2ExcessEmission.multiply(AppConstants.PENALTY_PER_TON)
-        : ZERO;
+        phase2ExcessEmission.compareTo(ZERO) == 1
+            ? phase2ExcessEmission.multiply(AppConstants.PENALTY_PER_TON)
+            : ZERO;
 
-    Penalties calculatedPenalties =
-      new Penalties(phase1Penalty, phase2Penalty);
+    Penalties calculatedPenalties = new Penalties(phase1Penalty, phase2Penalty);
 
     DerivedVariables derivedVariables =
-      new DerivedVariables(carbonLimits,
-        phase1ExcessEmission,
-        phase2ExcessEmission,
-        calculatedPenalties,
-        emissions
-      );
+        new DerivedVariables(
+            carbonLimits,
+            phase1ExcessEmission,
+            phase2ExcessEmission,
+            calculatedPenalties,
+            emissions);
 
     PACEDAO.writePenaltyInfo(ll84FeedData, derivedVariables);
 

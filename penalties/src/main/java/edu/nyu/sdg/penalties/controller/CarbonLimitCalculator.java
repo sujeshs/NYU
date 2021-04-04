@@ -49,7 +49,7 @@ public final class CarbonLimitCalculator {
       totalCarbonLimitPhase2 = totalCarbonLimitPhase2.add(carbonLimitPhase2);
     }
 
-    return new CarbonLimits(totalCarbonLimitPhase1,totalCarbonLimitPhase2);
+    return new CarbonLimits(totalCarbonLimitPhase1, totalCarbonLimitPhase2);
   }
 
   private List<OccupancyGroupInfo> constructOccupancyGroupInfo(LL84FeedData ll84FeedData) {

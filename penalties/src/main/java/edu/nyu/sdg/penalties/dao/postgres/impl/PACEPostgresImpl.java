@@ -212,4 +212,11 @@ public final class PACEPostgresImpl implements PACEDAO {
         soanaFeedData.getReturned_Mail(),
         soanaFeedData.getUSPS_Address());
   }
+
+  @Override
+  public void deleteLL84Data(LL84FeedData ll84FeedData) {
+    requireNonNull(ll84FeedData, "ll84FeedData is required and missing.");
+
+    template.update(PACESql.DELETE_LL84_DATA, ll84FeedData.getId());
+  }
 }

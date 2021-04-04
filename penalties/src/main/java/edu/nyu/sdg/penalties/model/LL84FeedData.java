@@ -6,6 +6,7 @@ import java.util.List;
 
 public final class LL84FeedData {
 
+  private int id;
   private int order;
   private String propertyId;
   private String propertyName;
@@ -77,6 +78,14 @@ public final class LL84FeedData {
   private String censusTract;
   private String nta;
   private List<AcrisEntry> acrisEntries;
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 
   public int getOrder() {
     return order;
@@ -655,10 +664,13 @@ public final class LL84FeedData {
   @Override
   public String toString() {
     return "LL84FeedData{"
-        + "order="
+        + "id="
+        + id
+        + ", order="
         + order
-        + ", propertyId="
+        + ", propertyId='"
         + propertyId
+        + '\''
         + ", propertyName='"
         + propertyName
         + '\''
@@ -691,8 +703,9 @@ public final class LL84FeedData {
         + '\''
         + ", postalCode="
         + postalCode
-        + ", streetNumber="
+        + ", streetNumber='"
         + streetNumber
+        + '\''
         + ", streetName='"
         + streetName
         + '\''

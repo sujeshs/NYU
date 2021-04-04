@@ -18,6 +18,7 @@ public final class LL84RowMapper implements ResultSetExtractor<List<LL84FeedData
     while (rs.next()) {
 
       LL84FeedData feedData = new LL84FeedData();
+      feedData.setId(rs.getInt("id"));
       feedData.setBBL10Digits(rs.getString("bbl"));
       feedData.setNYCBIN(rs.getString("nyc_bin"));
       feedData.setPropertyId(rs.getString("property_id"));

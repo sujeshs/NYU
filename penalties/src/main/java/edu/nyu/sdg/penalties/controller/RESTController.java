@@ -17,6 +17,7 @@ public class RESTController {
   private final FlowOrchestrator flowOrchestrator;
   private final PACEDAO PACEDAO;
   private final LL84CSVFileLoader ll84CSVFileLoader;
+  private final LL84Deduper ll84Deduper;
   private final NYCHAFileLoader nychaFileLoader;
   private final SOANAFileLoader soanaFileLoader;
   private final RentStabilizedFileLoader rentStabilizedFileLoader;
@@ -24,6 +25,7 @@ public class RESTController {
   public RESTController(
       FlowOrchestrator flowOrchestrator,
       LL84CSVFileLoader ll84CSVFileLoader,
+      LL84Deduper ll84Deduper,
       NYCHAFileLoader nychaFileLoader,
       PACEDAO PACEDAO,
       SOANAFileLoader soanaFileLoader,
@@ -32,6 +34,7 @@ public class RESTController {
         requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
     this.ll84CSVFileLoader =
         requireNonNull(ll84CSVFileLoader, "ll84CSVFileLoader is required and missing.");
+    this.ll84Deduper = requireNonNull(ll84Deduper, "ll84Deduper is required and missing.");
     this.nychaFileLoader =
         requireNonNull(nychaFileLoader, "nychaFileLoader is required and missing.");
     this.PACEDAO = requireNonNull(PACEDAO, " is required and missing.");
@@ -83,5 +86,12 @@ public class RESTController {
     rentStabilizedFileLoader.loadCSV(rentStabilizedDataFile);
 
     return "Rent Stabilized Data load complete";
+  }
+
+  @PostMapping(path = "/remove-duplicate-ll84s", consumes = "text/plain")
+  public String removeDuplicateLL84s() {
+    ll84Deduper.dedupeLL84s();
+
+    return "Deduping bin codes complete";
   }
 }

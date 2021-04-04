@@ -178,4 +178,12 @@ SELECT
   *
 FROM stern.feed_ll84_bbl
 """
+
+  const val DELETE_LL84_DATA = """
+    DELETE
+      FROM stern.feed_ll84_bbl
+      WHERE ID=?
+  """
+
+
 }

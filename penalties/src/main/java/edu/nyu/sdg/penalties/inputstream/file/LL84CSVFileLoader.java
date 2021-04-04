@@ -236,16 +236,15 @@ public final class LL84CSVFileLoader {
   private AcrisEntry constructAcrisEntry(CSVRecord record, int iteration) throws ParseException {
 
     return new AcrisEntry(
-      parseIntoString(record, "BBL - 10 digits"),
-      parseIntoString(record, iteration + " document_id"),
-      parseIntoString(record, iteration + " doc_type"),
-      parseIntoBigDecimal(record, iteration + " document_amt"),
-      parseAcrisDate(record, iteration + " recorded_datetime"),
-      iteration <= 5 ? "1" : "2",
-      parseIntoString(record, iteration + " name"),
-      parseIntoString(record, iteration + " address_1"),
-      parseIntoString(record, iteration + " zip")
-    );
+        parseIntoString(record, "BBL - 10 digits"),
+        parseIntoString(record, iteration + " document_id"),
+        parseIntoString(record, iteration + " doc_type"),
+        parseIntoBigDecimal(record, iteration + " document_amt"),
+        parseAcrisDate(record, iteration + " recorded_datetime"),
+        iteration <= 5 ? "1" : "2",
+        parseIntoString(record, iteration + " name"),
+        parseIntoString(record, iteration + " address_1"),
+        parseIntoString(record, iteration + " zip"));
   }
 
   private static BigDecimal parseIntoBigDecimal(CSVRecord record, String columnName) {
