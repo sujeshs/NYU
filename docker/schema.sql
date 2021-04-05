@@ -1,29 +1,29 @@
-create table lookup_carbon_limit
+create table stern.lookup_carbon_limit
 (
-    id                     serial      not null,
-    occupancy_grp          varchar(40) not null,
+    id                     serial        not null,
+    occupancy_grp          varchar(40)   not null,
     carbon_limit_2024_2029 numeric(4, 2) not null,
     carbon_limit_2030_2034 numeric(4, 2) not null,
     primary key (occupancy_grp)
 );
 
-create table lookup_energy_src_ghg_coeff
+create table stern.lookup_energy_src_ghg_coeff
 (
-    id                   serial      not null,
-    energy_source        varchar(40) not null,
+    id                   serial          not null,
+    energy_source        varchar(40)     not null,
     ghg_coefficient      numeric(12, 12) not null,
-    ghg_coefficient_unit varchar(40) not null,
+    ghg_coefficient_unit varchar(40)     not null,
     primary key (energy_source)
 );
 
-create table lookup_occupancy_spaceuse_mapping
+create table stern.lookup_occupancy_spaceuse_mapping
 (
     id            serial       not null,
     occupancy_grp varchar(40)  not null,
     space_use     varchar(100) not null
 );
 
-create table derived_penalty_exemption
+create table stern.derived_penalty_exemption
 (
     id                                serial        not null,
     bbl                               varchar(1000) not null,
@@ -37,7 +37,7 @@ create table derived_penalty_exemption
     penalty_exempt_flag               boolean
 );
 
-create table derived_penalty_variables
+create table stern.derived_penalty_variables
 (
     id                                        serial        not null,
     bbl                                       varchar(1000) not null,
@@ -52,7 +52,7 @@ create table derived_penalty_variables
     primary key (bbl, nyc_bin)
 );
 
-create table feed_acris_mortgage_info
+create table stern.feed_acris_mortgage_info
 (
     id                          serial         not null,
     bbl                         varchar(100)   not null,
@@ -66,19 +66,19 @@ create table feed_acris_mortgage_info
     zipcode                     varchar(40)
 );
 
-create table feed_nycha_info
+create table stern.feed_nycha_info
 (
-    id          serial         not null,
-    bbl         varchar(100)   not null,
-    development varchar(1000)  not null,
+    id          serial        not null,
+    bbl         varchar(100)  not null,
+    development varchar(1000) not null,
     primary key (bbl)
 );
 
-create table feed_rent_stabilized_units_info
+create table stern.feed_rent_stabilized_units_info
 (
-    id                  serial        not null,
-    bbl                 varchar(100)  not null,
-    mp_version          varchar(100)  not null,
+    id                  serial       not null,
+    bbl                 varchar(100) not null,
+    mp_version          varchar(100) not null,
     mp_res_units        int,
     dof_stab_units_2018 int,
     dof_stab_units_2019 int,
@@ -86,7 +86,7 @@ create table feed_rent_stabilized_units_info
     primary key (bbl)
 );
 
-create table feed_soana_ownership_info
+create table stern.feed_soana_ownership_info
 (
     id               serial        not null,
     bbl              varchar(1000) not null,
@@ -105,10 +105,10 @@ create table feed_soana_ownership_info
     mailing_country  varchar(40),
     src              varchar(1000),
     easement         varchar(1000),
-    primary key(bbl)
+    primary key (bbl)
 );
 
-create table feed_ll84_bbl
+create table stern.feed_ll84_bbl
 (
     id                                                serial        not null,
     bbl                                               varchar(1000) not null,
@@ -142,7 +142,7 @@ create table feed_ll84_bbl
     fuel_oil_2_use                                    numeric(24, 2),
     fuel_oil_4_use                                    numeric(24, 2),
     fuel_oil_5_6_use                                  numeric(24, 2),
-    diesel_2_use                                       numeric(24, 2),
+    diesel_2_use                                      numeric(24, 2),
     propane_use                                       numeric(24, 2),
     district_steam_use                                numeric(24, 2),
     district_chilledwater_use                         numeric(24, 2),

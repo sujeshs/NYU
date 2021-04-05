@@ -19,7 +19,8 @@ order by total_actual_emission desc;
 /*
  * Rank buildings by Carbon Intensity
  */
-select A.bbl, A.nyc_bin, A.site_eui from feed_ll84_bbl A
+select A.bbl, A.nyc_bin, A.site_eui
+from feed_ll84_bbl A
 order by site_eui desc;
 
 
@@ -81,7 +82,7 @@ order by A.emission_penalty_2024_2029 desc;
 /*
  * Rank ownership groups by added penalties phase 2
  */
-select B.mail_careof,  cast(A.emission_penalty_2030_2034 as money)
+select B.mail_careof, cast(A.emission_penalty_2030_2034 as money)
 from derived_penalty_variables A
          left join feed_soana B
                    on A.bbl = B.bbl
@@ -89,40 +90,42 @@ group by B.mail_careof, A.emission_penalty_2030_2034
 order by A.emission_penalty_2030_2034 desc;
 
 
-
-
 /*
  * Rank lenders by total LL97 carbon
  */
-select A.name, sum(B.total_actual_emission) as TotalEmissions from feed_acris_mortgage_info A
-left join derived_penalty_variables B
-on A.bbl = B.bbl
-where A.party_type = '2' and A.name <> ''
+select A.name, sum(B.total_actual_emission) as TotalEmissions
+from feed_acris_mortgage_info A
+         left join derived_penalty_variables B
+                   on A.bbl = B.bbl
+where A.party_type = '2'
+  and A.name <> ''
 group by A.name
 order by TotalEmissions desc;
-
 
 
 /*
  * Rank lenders by carbon intensity (by weighted average carbon intensity of lending portfolio –
  * where weights are the notional of each NYC mortgage/total NYC mortgage portfolio)
  */
-select A.name, sum(B.site_eui) as TotalSiteEUI from feed_acris_mortgage_info A
-left join feed_ll84_bbl B
-on A.bbl = B.bbl
-where A.party_type = '2' and A.name <> ''
+select A.name, sum(B.site_eui) as TotalSiteEUI
+from feed_acris_mortgage_info A
+         left join feed_ll84_bbl B
+                   on A.bbl = B.bbl
+where A.party_type = '2'
+  and A.name <> ''
 group by A.name
 order by TotalSiteEUI desc;
 
 
-
 /*
  * Rank Lenders by added penalties phase 1
  */
-select A.name, cast(sum(B.phase1_penalty) as money) as TotalPhase1Penalty from feed_acris_mortgage_info A
-left join derived_penalty_variables B
-on A.bbl = B.bbl
-where A.party_type = '2' and A.name <> ''
+select A.name, cast(sum(B.phase1_penalty) as money) as TotalPhase1Penalty
+from feed_acris_mortgage_info A
+         left join derived_penalty_variables B
+                   on A.bbl = B.bbl
+where A.party_type = '2'
+  and A.name <> ''
 group by A.name
 order by TotalPhase1Penalty desc;
 
@@ -130,22 +133,25 @@ order by TotalPhase1Penalty desc;
 /*
  * Rank Lenders by added penalties phase 1
  */
-select A.name, cast(sum(B.emission_penalty_2024_2029) as money) as TotalPhase1Penalty from feed_acris_mortgage_info A
-left join derived_penalty_variables B
-on A.bbl = B.bbl
-where A.party_type = '2' and A.name <> ''
+select A.name, cast(sum(B.emission_penalty_2024_2029) as money) as TotalPhase1Penalty
+from feed_acris_mortgage_info A
+         left join derived_penalty_variables B
+                   on A.bbl = B.bbl
+where A.party_type = '2'
+  and A.name <> ''
 group by A.name
 order by TotalPhase1Penalty desc;
-
 
 
 /*
  * Rank Lenders by added penalties phase 2
  */
-select A.name, cast(sum(B.emission_penalty_2030_2034) as money) as TotalPhase2Penalty from feed_acris_mortgage_info A
-left join derived_penalty_variables B
-on A.bbl = B.bbl
-where A.party_type = '2' and A.name <> ''
+select A.name, cast(sum(B.emission_penalty_2030_2034) as money) as TotalPhase2Penalty
+from feed_acris_mortgage_info A
+         left join derived_penalty_variables B
+                   on A.bbl = B.bbl
+where A.party_type = '2'
+  and A.name <> ''
 group by A.name
 order by TotalPhase2Penalty desc;
 
@@ -153,15 +159,17 @@ order by TotalPhase2Penalty desc;
 /*
  * Rank lenders by number of open liens
  */
-select name as lenders, bbl from feed_acris_mortgage_info A
-where party_type = '2' and name='UBS REAL ESTATE INVESTMENTS INC.'
+select name as lenders, bbl
+from feed_acris_mortgage_info A
+where party_type = '2'
+  and name = 'UBS REAL ESTATE INVESTMENTS INC.'
 
 
-select name as lenders, count(bbl) as totalbbls from feed_acris_mortgage_info A
+select name as lenders, count(bbl) as totalbbls
+from feed_acris_mortgage_info A
 where party_type = '2'
 group by lenders
 order by totalbbls desc;
-
 
 
 /*
@@ -177,7 +185,7 @@ from feed_ll84_bbl A
 group by second_largest_property_use_type
 order by TotalAreasqfoot desc;
 
-select third_largest_property_use_type , sum(third_largest_property_use_type_gross_floor_area) as TotalAreasqfoot
+select third_largest_property_use_type, sum(third_largest_property_use_type_gross_floor_area) as TotalAreasqfoot
 from feed_ll84_bbl A
 group by third_largest_property_use_type
 order by TotalAreasqfoot desc;
@@ -194,14 +202,12 @@ order by TotalAreasqfoot desc;
  */
 
 
-
 /*
  * Rank buildings by efficiency score (1-100/letter grade)
  */
 select nyc_bin, energy_star_score
 from feed_ll84_bbl A
 order by energy_star_score desc;
-
 
 
 /*
@@ -224,7 +230,6 @@ from derived_penalty_variables A
                    on A.bbl = B.bbl
 group by B.council_district
 order by TotalEmissions desc;
-
 
 
 /*
