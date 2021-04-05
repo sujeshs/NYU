@@ -1,5 +1,5 @@
 
-create table derived_penalty_variables
+create table stern.derived_penalty_variables
 (
     id                                        serial        not null,
     bbl                                       text,
@@ -18,7 +18,7 @@ create table derived_penalty_variables
 );
 
 
-create table feed_acris_mortgage_info
+create table stern.feed_acris_mortgage_info
 (
     id                          serial         not null,
     bbl                         text   not null,
@@ -33,7 +33,7 @@ create table feed_acris_mortgage_info
 );
 
 
-create table feed_ll84_bbl
+create table stern.feed_ll84_bbl
 (
     id                                                serial not null,
     bbl                                               text   not null,
@@ -80,11 +80,19 @@ create table feed_ll84_bbl
     total_ghg_emissions_metric_ton_co2                numeric(24, 2),
     energy_star_score                                 integer,
     site_eui                                          numeric(24, 2),
-    generation_date                                   timestamp
+    generation_date                                   timestamp,
+    street_number text,
+    street_name text,
+    list_of_property_types text,
+    metered_areas text,
+    kerosene_use numeric(24, 2),
+    naturalgas_use_therms numeric(24, 2),
+    direct_ghg_emissions_metric_ton_co2 numeric(24, 2),
+    indirect_ghg_emissions_metric_ton_co2 numeric(24, 2)
 );
 
 
-create table feed_nycha_info
+create table stern.feed_nycha_info
 (
     id          serial not null,
     development text   not null,
@@ -94,7 +102,7 @@ create table feed_nycha_info
 );
 
 
-create table feed_rent_stabilized_units_info
+create table stern.feed_rent_stabilized_units_info
 (
     id                  serial not null,
     bbl                 text   not null
@@ -108,7 +116,7 @@ create table feed_rent_stabilized_units_info
 );
 
 
-create table feed_soana
+create table stern.feed_soana
 (
     bbl                 text,
     mail_sequence       text,
@@ -151,7 +159,7 @@ create table feed_soana
 );
 
 
-create table lookup_carbon_limit
+create table stern.lookup_carbon_limit
 (
     id                     serial        not null,
     occupancy_grp          text   not null
@@ -162,18 +170,18 @@ create table lookup_carbon_limit
 );
 
 
-create table lookup_occupancy_spaceuse_mapping
+create table stern.lookup_occupancy_spaceuse_mapping
 (
     id            serial       not null,
     occupancy_grp text  not null,
     space_use     text not null
 );
 
-create table lookup_energy_src_ghg_coeff
+create table stern.lookup_energy_src_ghg_coeff
 (
     id                   serial      not null,
     energy_source        text not null,
     ghg_coefficient      numeric(12, 12) not null,
-    ghg_coefficient_unit varchar(40) not null,
+    ghg_coefficient_unit text not null,
     primary key (energy_source)
 );
