@@ -125,8 +125,11 @@ public final class PACEPostgresImpl implements PACEDAO {
         ll84FeedData.getStreetNumber(),
         ll84FeedData.getStreetName(),
        ll84FeedData.getListOfAllPropertyUseTypes(),
-      ll84FeedData.getEnergyMeteredAreas()
-
+      ll84FeedData.getEnergyMeteredAreas(),
+      ll84FeedData.getKeroseneUse(),
+      ll84FeedData.getNaturalGasUseTherms(),
+      ll84FeedData.getDirectGHGEmissions(),
+      ll84FeedData.getIndirectGHGEmissions()
       );
   }
 
