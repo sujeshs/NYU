@@ -5,12 +5,12 @@ import java.util.*
 
 data class AcrisEntry (
   var bBL10Digits: String?,
-  var documentId: String,
-  var documentType: String,
-  var documentAmount: BigDecimal,
-  var documentRecordedTimestamp: Date,
-  var partyType: String,
-  var name: String,
-  var address1: String,
-  var zipCode: String,
+  var documentId: String?,
+  var documentType: String?,
+  var documentAmount: BigDecimal?,
+  var documentRecordedTimestamp: Date?,
+  var partyType: String?,
+  var name: String?,
+  var address1: String?,
+  var zipCode: String?,
 )

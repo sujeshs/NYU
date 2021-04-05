@@ -71,7 +71,7 @@ create table stern.feed_ll84_bbl
     fuel_oil_2_use                                    numeric(24, 2),
     fuel_oil_4_use                                    numeric(24, 2),
     fuel_oil_5_6_use                                  numeric(24, 2),
-    diesel_2_use                                       numeric(24, 2),
+    diesel_2_use                                      numeric(24, 2),
     propane_use                                       numeric(24, 2),
     district_steam_use                                numeric(24, 2),
     district_chilledwater_use                         numeric(24, 2),
@@ -81,14 +81,14 @@ create table stern.feed_ll84_bbl
     energy_star_score                                 integer,
     site_eui                                          numeric(24, 2),
     generation_date                                   timestamp,
-    street_number text,
-    street_name text,
-    list_of_property_types text,
-    metered_areas text,
-    kerosene_use numeric(24, 2),
-    naturalgas_use_therms numeric(24, 2),
-    direct_ghg_emissions_metric_ton_co2 numeric(24, 2),
-    indirect_ghg_emissions_metric_ton_co2 numeric(24, 2)
+    street_number                                     text,
+    street_name                                       text,
+    list_of_property_types                            text,
+    metered_areas                                     text,
+    kerosene_use                                      numeric(24, 2),
+    naturalgas_use_therms                             numeric(24, 2),
+    direct_ghg_emissions_metric_ton_co2               numeric(24, 2),
+    indirect_ghg_emissions_metric_ton_co2             numeric(24, 2)
 );
 
 
