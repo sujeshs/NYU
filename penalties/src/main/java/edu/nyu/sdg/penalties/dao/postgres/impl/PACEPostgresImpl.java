@@ -124,13 +124,12 @@ public final class PACEPostgresImpl implements PACEDAO {
         ll84FeedData.getSiteEUI(),
         ll84FeedData.getStreetNumber(),
         ll84FeedData.getStreetName(),
-       ll84FeedData.getListOfAllPropertyUseTypes(),
-      ll84FeedData.getEnergyMeteredAreas(),
-      ll84FeedData.getKeroseneUse(),
-      ll84FeedData.getNaturalGasUseTherms(),
-      ll84FeedData.getDirectGHGEmissions(),
-      ll84FeedData.getIndirectGHGEmissions()
-      );
+        ll84FeedData.getListOfAllPropertyUseTypes(),
+        ll84FeedData.getEnergyMeteredAreas(),
+        ll84FeedData.getKeroseneUse(),
+        ll84FeedData.getNaturalGasUseTherms(),
+        ll84FeedData.getDirectGHGEmissions(),
+        ll84FeedData.getIndirectGHGEmissions());
   }
 
   @Override
@@ -220,6 +219,18 @@ public final class PACEPostgresImpl implements PACEDAO {
         soanaFeedData.getUSPS_Verified(),
         soanaFeedData.getReturned_Mail(),
         soanaFeedData.getUSPS_Address());
+  }
+
+  @Override
+  public void writeQCTData(QCTFeedData qctFeedData) {
+    requireNonNull(qctFeedData, "qctFeedData is required and missing.");
+
+    template.update(
+        PACESql.PUT_FEED_QCT_DATA,
+        qctFeedData.getGeoId(),
+        qctFeedData.getBbl(),
+        qctFeedData.getAddress(),
+        qctFeedData.getBin());
   }
 
   @Override

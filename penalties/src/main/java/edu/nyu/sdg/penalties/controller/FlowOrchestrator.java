@@ -84,6 +84,12 @@ public final class FlowOrchestrator {
     PACEDAO.writeSoanaData(soanaFeedData);
   }
 
+  public void loadQCTData(QCTFeedData qctFeedData) {
+    requireNonNull(qctFeedData, "qctFeedData is required and missing.");
+
+    PACEDAO.writeQCTData(qctFeedData);
+  }
+
   public void loadRentStabilizedUnitsData(RentStabilizedBBLFeedData rentStabilizedBBLFeedData) {
     requireNonNull(rentStabilizedBBLFeedData, "rentStabilizedBBLFeedData is required and missing.");
 

@@ -1,72 +1,25 @@
-select fl84b.bbl,
-       fl84b.nyc_bin,
-       fl84b.property_name,
-       fl84b.is_standalone_property,
-       fl84b.is_parent_property,
-       fl84b.is_child_property,
-       fl84b.parent_property_id,
-       fl84b.city_building,
-       fl84b.address_line_1,
-       fl84b.address_line_2,
-       fl84b.street_number,
-       fl84b.street_name,
-       fl84b.address_line_2,
-       fl84b.postal_code,
-       fl84b.borough,
-       fl84b.latitude_longitude_coordinates,
-       fl84b.community_board,
-       fl84b.council_district,
-       fl84b.census_tract,
-       fl84b.nta,
-       fl84b.generation_date,
-       fl84b.dof_gross_floor_area,
-       fl84b.list_of_property_types,
-       fl84b.largest_property_use_type,
-       fl84b.largest_property_use_type_gross_floor_area,
-       fl84b.second_largest_property_use_type,
-       fl84b.second_largest_property_use_type_gross_floor_area,
-       fl84b.third_largest_property_use_type,
-       fl84b.third_largest_property_use_type_gross_floor_area,
-       fl84b.metered_areas,
-       fl84b.year_built,
-       fl84b.number_of_buildings,
-       fl84b.occupancy,
-       fl84b.energy_star_score,
-       fl84b.site_eui,
-       fl84b.fuel_oil_1_use,
-       fl84b.fuel_oil_2_use,
-       fl84b.fuel_oil_4_use,
-       fl84b.fuel_oil_5_6_use,
-       fl84b.diesel_2_use,
-       fl84b.kerosene_use,
-       fl84b.propane_use,
-       fl84b.district_steam_use,
-       fl84b.naturalgas_use_kbtu,
-       fl84b.naturalgas_use_therms,
-       fl84b.electricity_use_grid_purchase_kwh,
-       fl84b.total_ghg_emissions_metric_ton_co2,
-       fl84b.direct_ghg_emissions_metric_ton_co2,
-       fl84b.indirect_ghg_emissions_metric_ton_co2,
+INSERT INTO stern.consolidated_report
+SELECT * FROM stern.feed_ll84_bbl;
 
-       dpv.total_carbon_emission_threshold_2024_2029,
-       dpv.total_carbon_emission_threshold_2030_2034,
-       dpv.total_actual_emission,
-       dpv.emission_excess_2024_2029,
-       dpv.emission_excess_2030_2034,
-       cast(dpv.emission_penalty_2024_2029 as money),
-       cast(dpv.emission_penalty_2030_2034 as money),
+UPDATE stern.consolidated_report A
+ SET total_carbon_emission_threshold_2024_2029 = B.total_carbon_emission_threshold_2024_2029,
+   total_carbon_emission_threshold_2030_2034 = B.total_carbon_emission_threshold_2030_2034,
+   total_actual_emission = B.total_actual_emission,
+   emission_excess_2024_2029 = B.emission_excess_2024_2029,
+   emission_excess_2030_2034 = B.emission_excess_2030_2034,
+   emission_penalty_2024_2029 = B.emission_penalty_2024_2029,
+   emission_penalty_2030_2034 = B.emission_penalty_2030_2034
+ FROM stern.derived_penalty_variables B
+ WHERE A.bbl = B.bbl;
 
-       fs.owner_name_1,
-       fs.owner_name_2,
-       fs.mail_recipient_name,
-       fs.mail_careof,
-       fs.mail_city,
-       fs.mail_state,
-       fs.usps_address
+UPDATE stern.consolidated_report A
+ SET owner_name_1 = B.owner_name_1,
+   owner_name_2 = B.owner_name_2,
+   mail_recipient_name = B.mail_recipient_name,
+   mail_careof = B.mail_careof,
+   mail_city = B.mail_city,
+   mail_state = B.mail_state,
+   usps_address = B.usps_address
+ FROM stern.feed_soana B
+ WHERE A.bbl = B.bbl;
 
-
-
-from stern.feed_ll84_bbl fl84b
-         left join stern.derived_penalty_variables dpv on fl84b.bbl = dpv.bbl
-         left join stern.feed_soana fs on fl84b.bbl = dpv.bbl
-         left join stern.feed_acris_mortgage_info fami on fl84b.bbl = dpv.bbl

@@ -3,10 +3,7 @@ package edu.nyu.sdg.penalties.controller;
 import static java.util.Objects.requireNonNull;
 
 import edu.nyu.sdg.penalties.dao.contract.PACEDAO;
-import edu.nyu.sdg.penalties.inputstream.file.LL84CSVFileLoader;
-import edu.nyu.sdg.penalties.inputstream.file.NYCHAFileLoader;
-import edu.nyu.sdg.penalties.inputstream.file.RentStabilizedFileLoader;
-import edu.nyu.sdg.penalties.inputstream.file.SOANAFileLoader;
+import edu.nyu.sdg.penalties.inputstream.file.*;
 import edu.nyu.sdg.penalties.model.LL84FeedData;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +12,13 @@ import org.springframework.web.bind.annotation.*;
 public class RESTController {
 
   private final FlowOrchestrator flowOrchestrator;
-  private final PACEDAO PACEDAO;
   private final LL84CSVFileLoader ll84CSVFileLoader;
   private final LL84Deduper ll84Deduper;
   private final NYCHAFileLoader nychaFileLoader;
-  private final SOANAFileLoader soanaFileLoader;
+  private final PACEDAO PACEDAO;
+  private final QCTFileLoader qctFileLoader;
   private final RentStabilizedFileLoader rentStabilizedFileLoader;
+  private final SOANAFileLoader soanaFileLoader;
 
   public RESTController(
       FlowOrchestrator flowOrchestrator,
@@ -29,6 +27,7 @@ public class RESTController {
       NYCHAFileLoader nychaFileLoader,
       PACEDAO PACEDAO,
       SOANAFileLoader soanaFileLoader,
+      QCTFileLoader qctFileLoader,
       RentStabilizedFileLoader rentStabilizedFileLoader) {
     this.flowOrchestrator =
         requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
@@ -37,7 +36,8 @@ public class RESTController {
     this.ll84Deduper = requireNonNull(ll84Deduper, "ll84Deduper is required and missing.");
     this.nychaFileLoader =
         requireNonNull(nychaFileLoader, "nychaFileLoader is required and missing.");
-    this.PACEDAO = requireNonNull(PACEDAO, " is required and missing.");
+    this.PACEDAO = requireNonNull(PACEDAO, "PACEDAO is required and missing.");
+    this.qctFileLoader = requireNonNull(qctFileLoader, "qctFileLoader is required and missing.");
     this.soanaFileLoader =
         requireNonNull(soanaFileLoader, "soanaFileLoader is required and missing.");
     ;
@@ -77,6 +77,14 @@ public class RESTController {
     soanaFileLoader.loadCSV(soanaFile);
 
     return "SOANA load complete";
+  }
+
+  @PostMapping(path = "/load-qct", consumes = "text/plain")
+  public String loadQCT(@RequestBody String qctFile) throws Exception {
+    requireNonNull(qctFile, "qctFile is required and missing.");
+    qctFileLoader.loadCSV(qctFile);
+
+    return "QCT load complete";
   }
 
   @PostMapping(path = "/load-rent-stablized-data", consumes = "text/plain")

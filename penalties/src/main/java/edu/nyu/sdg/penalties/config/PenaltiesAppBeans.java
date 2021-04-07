@@ -156,6 +156,18 @@ public class PenaltiesAppBeans {
   }
 
   @Bean
+  QCTFileLoader qctFileLoader(
+    Clock clock,
+    ExecutorService executorService,
+    FlowOrchestrator flowOrchestrator) {
+    requireNonNull(clock, "clock is required and missing.");
+    requireNonNull(executorService, "executorService is required and missing.");
+    requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");
+
+    return new QCTFileLoader(clock, executorService, flowOrchestrator);
+  }
+
+  @Bean
   LL84Deduper ll84Deduper(Clock clock, PACEDAO pacedao) {
     requireNonNull(clock, "clock is required and missing.");
     requireNonNull(pacedao, "pacedao is required and missing.");

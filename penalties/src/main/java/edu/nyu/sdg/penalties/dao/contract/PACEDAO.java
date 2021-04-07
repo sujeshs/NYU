@@ -29,6 +29,8 @@ public interface PACEDAO {
 
   void writeSoanaData(SoanaFeedData soanaFeedData);
 
+  void writeQCTData(QCTFeedData qctFeedData);
+
   List<LL84FeedData> readLL84Data();
 
   void deleteLL84Data(LL84FeedData ll84FeedData);
