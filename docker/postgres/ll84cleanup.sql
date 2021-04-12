@@ -7,7 +7,7 @@ set is_parent_property     =
             end,
     is_child_property      =
         case
-            when parent_property_id = property_id then 0
+            when parent_property_id = property_id AND parent_property_id not like '%Standalone Property%' then 0
             else 1
             end,
     is_standalone_property =

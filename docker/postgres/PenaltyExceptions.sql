@@ -26,18 +26,27 @@ SET city_building = '0'
 WHERE city_building is null;
 
 -- Rent stabilization
--- TODO : something's not right here
 
 UPDATE stern.derived_penalty_exception
-SET rent_stablized_aptmt = '1'
-FROM stern.feed_rent_stabilized_units_info
-WHERE stern.derived_penalty_exception.bbl = stern.feed_rent_stabilized_units_info.bbl
-AND stern.feed_rent_stabilized_units_info.stab_unit_pct>0.01
-AND stern.feed_rent_stabilized_units_info.stab_unit_pct<0.35 ;
+SET rent_stab_1_to_35 = '1'
+FROM stern.feed_rent_stab_info
+WHERE stern.derived_penalty_exception.bbl = stern.feed_rent_stab_info.bbl
+AND stern.feed_rent_stab_info.stab_unit_pct>0.01
+AND stern.feed_rent_stab_info.stab_unit_pct<0.35 ;
 
 UPDATE stern.derived_penalty_exception
-SET rent_stablized_aptmt = '0'
-WHERE rent_stablized_aptmt is null;
+SET rent_stab_1_to_35 = '0'
+WHERE rent_stab_1_to_35 is null;
+
+UPDATE stern.derived_penalty_exception
+SET rent_stab_gt_35 = '1'
+FROM stern.feed_rent_stab_info
+WHERE stern.derived_penalty_exception.bbl = stern.feed_rent_stab_info.bbl
+AND stern.feed_rent_stab_info.stab_unit_pct>=0.35 ;
+
+UPDATE stern.derived_penalty_exception
+SET rent_stab_gt_35 = '0'
+WHERE rent_stab_gt_35 is null;
 
 -- Power generation
 

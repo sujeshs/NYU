@@ -81,6 +81,7 @@ create table stern.feed_ll84_bbl
     property_id                                       text,
     property_name                                     text,
     parent_property_id                                text,
+    parent_property_name                              text,
     is_standalone_property                            integer,
     is_parent_property                                integer,
     is_child_property                                 integer,

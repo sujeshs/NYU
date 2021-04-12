@@ -84,6 +84,7 @@ public final class PACEPostgresImpl implements PACEDAO {
         ll84FeedData.getPropertyId(),
         ll84FeedData.getPropertyName(),
         ll84FeedData.getParentPropertyId(),
+        ll84FeedData.getParentPropertyName(),
         ll84FeedData.getCityBuilding(),
         ll84FeedData.getEmail(),
         ll84FeedData.getAddress1SelfReported(),
@@ -239,4 +240,6 @@ public final class PACEPostgresImpl implements PACEDAO {
 
     template.update(PACESql.DELETE_LL84_DATA, ll84FeedData.getId());
   }
+
+
 }

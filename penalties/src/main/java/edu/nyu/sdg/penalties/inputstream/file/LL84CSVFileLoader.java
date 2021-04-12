@@ -244,7 +244,9 @@ public final class LL84CSVFileLoader {
         iteration <= 5 ? "1" : "2",
         parseIntoString(record, iteration + " name"),
         parseIntoString(record, iteration + " address_1"),
-        parseIntoString(record, iteration + " zip"));
+        parseIntoString(record, iteration + " zip"),
+        iteration
+      );
   }
 
   private static BigDecimal parseIntoBigDecimal(CSVRecord record, String columnName) {

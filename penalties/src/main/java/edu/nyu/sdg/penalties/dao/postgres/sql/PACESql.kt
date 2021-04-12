@@ -68,6 +68,7 @@ INSERT INTO stern.feed_ll84_bbl(
   property_id,
   property_name,
   parent_property_id,
+  parent_property_name,
   city_building,
   email,
   address_line_1,
@@ -114,7 +115,7 @@ INSERT INTO stern.feed_ll84_bbl(
   direct_ghg_emissions_metric_ton_co2,
   indirect_ghg_emissions_metric_ton_co2
 )
-VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,point(?,?),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,point(?,?),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 """
 
   const val PUT_FEED_NYCHA_DATA = """
@@ -202,6 +203,92 @@ FROM stern.feed_ll84_bbl
       FROM stern.feed_ll84_bbl
       WHERE ID=?
   """
+
+  const val UPDATE_ACRIS_DATA_FOR_CONSOLIDATED_TABLE = """
+    update stern.consolidated_report
+    set
+    acr1_document_id=?,
+    acr1_document_type=?,
+    acr1_document_amount=?,
+    acr1_document_recorded_timestamp=?,
+    acr1_party_type=?,
+    acr1_name=?,
+    acr1_address_1=?,
+    acr2_zipcode=?,
+    acr2_document_id=?,
+    acr2_document_type=?,
+    acr2_document_amount=?,
+    acr2_document_recorded_timestamp=?,
+    acr2_party_type=?,
+    acr2_name=?,
+    acr2_address_1=?,
+    acr2_zipcode=?,
+    acr3_document_id=?,
+    acr3_document_type=?,
+    acr3_document_amount=?,
+    acr3_document_recorded_timestamp=?,
+    acr3_party_type=?,
+    acr3_name=?,
+    acr3_address_1=?,
+    acr3_zipcode=?,
+    acr4_document_id=?,
+    acr4_document_type=?,
+    acr4_document_amount=?,
+    acr4_document_recorded_timestamp=?,
+    acr4_party_type=?,
+    acr4_name=?,
+    acr4_address_1=?,
+    acr4_zipcode=?,
+    acr5_document_id=?,
+    acr5_document_type=?,
+    acr5_document_amount=?,
+    acr5_document_recorded_timestamp=?,
+    acr5_party_type=?,
+    acr5_name=?,
+    acr5_address_1=?,
+    acr5_zipcode=?,
+    acr6_document_id=?,
+    acr6_document_type=?,
+    acr6_document_amount=?,
+    acr6_document_recorded_timestamp=?,
+    acr6_party_type=?,
+    acr6_name=?,
+    acr6_address_1=?,
+    acr6_zipcode=?,
+    acr7_document_id=?,
+    acr7_document_type=?,
+    acr7_document_amount=?,
+    acr7_document_recorded_timestamp=?,
+    acr7_party_type=?,
+    acr7_name=?,
+    acr7_address_1=?,
+    acr7_zipcode=?,
+    acr8_document_id=?,
+    acr8_document_type=?,
+    acr8_document_amount=?,
+    acr8_document_recorded_timestamp=?,
+    acr8_party_type=?,
+    acr8_name=?,
+    acr8_address_1=?,
+    acr8_zipcode=?,
+    acr9_document_id=?,
+    acr9_document_type=?,
+    acr9_document_amount=?,
+    acr9_document_recorded_timestamp=?,
+    acr9_party_type=?,
+    acr9_name=?,
+    acr9_address_1=?,
+    acr9_zipcode=?,
+    acr10_document_id=?,
+    acr10_document_type=?,
+    acr10_document_amount=?,
+    acr10_document_recorded_timestamp=?,
+    acr10_party_type=?,
+    acr10_name=?,
+    acr10_address_1=?,
+    acr10_zipcode=?
+    where bbl=?
+    """
 
 
 }

@@ -4,6 +4,7 @@ import java.math.BigDecimal
 import java.util.*
 
 data class AcrisEntry (
+  // DO NOT sort this
   var bBL10Digits: String?,
   var documentId: String?,
   var documentType: String?,
@@ -13,4 +14,5 @@ data class AcrisEntry (
   var name: String?,
   var address1: String?,
   var zipCode: String?,
+  var iteration: Int?,
 )
