@@ -82,6 +82,28 @@ where A.bbl = B.bbl;
 
 
 update stern.consolidated_report A
+set exception_type =
+	case when rent_stab_1_to_35='1' then 'Comply with GHG limits beginning 2026'
+	     when data_nycha='1' then 'Reduce general GHG 40% from 2005 by 2030'
+	     when mitchell_lama='1' or
+            prog_j51='1' or
+            prog_421a='1' or
+            prog_421a_aff='1' then 'Comply with GHG limits beginning 2035'
+       when rent_stab_gt_35='1' or
+            prog_202_8='1' or
+            prog_prac_202='1' or
+            prog_proj8='1' or
+            prog_rad='1' or
+            hdfc='1' or
+	          power_generation='1' or
+	          B.city_building='1' or
+	          house_of_worship='1' then 'Exempted from compliance with all GHG limits, but subject to prescriptive requirements'
+	     end
+from stern.derived_penalty_exception B
+where A.bbl = B.bbl;
+
+
+update stern.consolidated_report A
 set city_building =
   case when B.city_building='1' then 'Yes'
   else 'No'
@@ -107,3 +129,13 @@ else 'No'
 end
 from stern.derived_penalty_exception B
 where A.bbl=B.bbl
+
+
+update stern.consolidated_report A
+set latitude = B.latitude,
+longitude = B.longitude,
+ownerpluto = B.ownerpluto
+from stern.pluto B
+where A.bbl=B.bbl
+
+
