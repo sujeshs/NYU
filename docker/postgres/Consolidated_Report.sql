@@ -31,7 +31,6 @@ case when energy_star_score >= 85 then 'A'
             when energy_star_score < 55 then 'D'
             else 'N' end;
 
-
 update stern.consolidated_report A
 set is_penalty_applicable_in_2024 =
 	case when power_generation='1' or
@@ -48,14 +47,15 @@ set is_penalty_applicable_in_2024 =
 	          prog_202_8='1' or
 	          prog_prac_202='1' or
 	          prog_proj8='1' or
-	          prog_rad='1'
-	     then 'no'
+	          prog_rad='1' or
+	          city_building='1'
+	     then 'No'
 	end
 from stern.derived_penalty_exception B
 where A.bbl = B.bbl ;
 
 update stern.consolidated_report A
-set is_penalty_applicable_in_2024 = 'yes'
+set is_penalty_applicable_in_2024 = 'Yes'
 where is_penalty_applicable_in_2024 is null ;
 
 
@@ -114,11 +114,11 @@ where A.bbl = B.bbl;
 
 update stern.consolidated_report A
 set borough =
-  case when bbl like '1%' then 'manhattan'
-       when bbl like '2%' then 'bronx'
-       when bbl like '3%' then 'brooklyn'
-       when bbl like '4%' then 'queens'
-       when bbl like '5%' then 'statenisland'
+  case when bbl like '1%' then 'Manhattan'
+       when bbl like '2%' then 'Bronx'
+       when bbl like '3%' then 'Brooklyn'
+       when bbl like '4%' then 'Queens'
+       when bbl like '5%' then 'Staten Island'
   end;
 
 
@@ -139,3 +139,13 @@ from stern.pluto B
 where A.bbl=B.bbl
 
 
+update stern.consolidated_report A
+set A.year_built = B.year_built
+from stern.feed_ll84_bbl B
+where A.bbl = B.bbl ;
+
+update stern.consolidated_report cr
+set ownerpluto = faboc."Owner-PLUTO",
+   "Owner-CorporationNameHDP"  = faboc."Owner-Corporation Name HDP"
+from stern.feed_alejandro_bbl_owners_csv faboc
+where cr.bbl = faboc.bbl
