@@ -61,46 +61,48 @@ where is_penalty_applicable_in_2024 is null ;
 
 update stern.consolidated_report A
 set exception_name =
-	case when rent_stab_1_to_35='1' then 'Rent stabilized-With at least  1 property but less than 35%, including Non government assisted buildings that utilize 421-a and J-51 exemptions'
+	case when rent_stab_1_to_35='1' then 'Rent Stabilized With At Least One Unit and Fewer Than 35% (If Income Restricted, Compliance Delayed to 2035)'
 	     when data_nycha='1' then 'NYCHA'
 	     when mitchell_lama='1' then 'Mitchell-Lama'
        when prog_j51='1' then 'Government assisted buildings J-51 Tax Incentive'
        when prog_421a='1' then 'Government assisted buildings 421-a Tax Incentive Program'
        when prog_421a_aff='1' then 'Government assisted buildings 421a Affordable'
-       when rent_stab_gt_35='1' then 'Rent stabilized-More than 35%, including Non government assisted buildings that utilize 421-a and J-51 exemptions'
-       when prog_202_8='1' then 'Section 202/8'
+       when rent_stab_gt_35='1' then 'More than 35% Rent Stabilized'
+       when prog_202_8='1' then 'Section 202/8 - Elderly Supportive Housing'
        when prog_prac_202='1' then 'Project Rental Assistance Contract / 202'
        when prog_proj8='1' then 'Project-Based Section 8'
        when prog_rad='1' then 'Section 8 - RAD'
        when hdfc='1' then 'HDFC'
 	     when power_generation='1' then 'Energy/Power Station'
-	     when B.city_building='1' then 'City building'
+	     when B.city_building='1' then 'City-owned Building'
 	     when house_of_worship='1' then 'Worship Facility'
 	     end
 from stern.derived_penalty_exception B
 where A.bbl = B.bbl;
 
 
-update stern.consolidated_report A
-set exception_type =
-	case when rent_stab_1_to_35='1' then 'Comply with GHG limits beginning 2026'
-	     when data_nycha='1' then 'Reduce general GHG 40% from 2005 by 2030'
-	     when mitchell_lama='1' or
-            prog_j51='1' or
-            prog_421a='1' or
-            prog_421a_aff='1' then 'Comply with GHG limits beginning 2035'
-       when rent_stab_gt_35='1' or
-            prog_202_8='1' or
-            prog_prac_202='1' or
-            prog_proj8='1' or
-            prog_rad='1' or
-            hdfc='1' or
-	          power_generation='1' or
-	          B.city_building='1' or
-	          house_of_worship='1' then 'Exempted from compliance with all GHG limits, but subject to prescriptive requirements'
-	     end
-from stern.derived_penalty_exception B
-where A.bbl = B.bbl;
+update
+	stern.consolidated_report A
+set
+	exception_type =
+	case
+		when data_nycha = '1'
+		or B.city_building = '1'
+		or prog_rad = '1' then 'Emissions Reductions Required Portfolio-Wide'
+		when rent_stab_gt_35 = '1'
+		or prog_202_8 = '1'
+		or prog_prac_202 = '1'
+		or prog_proj8 = '1'
+		or hdfc = '1'
+		or house_of_worship = '1' then 'Subject to Prescriptive Requirements, but Exempt from Penalties'
+		when mitchell_lama = '1' then 'Compliance Delayed to 2035'
+		when rent_stab_1_to_35 = '1' then 'Compliance Delayed to 2026'
+		when power_generation = '1' then 'Exempt from Prescriptive Requirements and Penalties'
+	end
+from
+	stern.derived_penalty_exception B
+where
+	A.bbl = B.bbl;
 
 
 update stern.consolidated_report A
