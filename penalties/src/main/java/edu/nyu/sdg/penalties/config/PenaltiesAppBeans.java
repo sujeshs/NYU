@@ -157,9 +157,7 @@ public class PenaltiesAppBeans {
 
   @Bean
   QCTFileLoader qctFileLoader(
-    Clock clock,
-    ExecutorService executorService,
-    FlowOrchestrator flowOrchestrator) {
+      Clock clock, ExecutorService executorService, FlowOrchestrator flowOrchestrator) {
     requireNonNull(clock, "clock is required and missing.");
     requireNonNull(executorService, "executorService is required and missing.");
     requireNonNull(flowOrchestrator, "flowOrchestrator is required and missing.");

@@ -34,5 +34,4 @@ public interface PACEDAO {
   List<LL84FeedData> readLL84Data();
 
   void deleteLL84Data(LL84FeedData ll84FeedData);
-
 }

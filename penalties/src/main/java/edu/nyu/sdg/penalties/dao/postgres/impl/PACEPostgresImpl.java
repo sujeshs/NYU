@@ -240,6 +240,4 @@ public final class PACEPostgresImpl implements PACEDAO {
 
     template.update(PACESql.DELETE_LL84_DATA, ll84FeedData.getId());
   }
-
-
 }
