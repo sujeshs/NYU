@@ -2,6 +2,16 @@ INSERT INTO stern.consolidated_report
 SELECT * FROM stern.feed_ll84_bbl;
 
 UPDATE stern.consolidated_report A
+ SET standardized_address = B.standardized_address
+ FROM stern.ll97_standardizedaddress_csv B
+ WHERE A.bbl = B.bbl;
+
+UPDATE stern.consolidated_report A
+  SET master_servicer = B.master_servicer
+  FROM stern.agency_hud_ny_csv B
+  WHERE A.standardized_address = B.standardized_address;
+
+UPDATE stern.consolidated_report A
  SET total_carbon_emission_threshold_2024_2029 = B.total_carbon_emission_threshold_2024_2029,
    total_carbon_emission_threshold_2030_2034 = B.total_carbon_emission_threshold_2030_2034,
    total_actual_emission = B.total_actual_emission,
