@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>pace-app</artifactId>
-  <version>v.1.0</version>
+  <version>v1.0</version>
   <name>pace-app</name>
   <description>PACE lending application</description>
 
