@@ -12,6 +12,16 @@ UPDATE stern.consolidated_report A
   WHERE A.standardized_address = B.standardized_address;
 
 UPDATE stern.consolidated_report A
+SET A.deal_name = B."Deal",
+    A.securitization_type = 'private'
+FROM stern.bloomberg B
+WHERE A.standardized_address = B."StandardizedAddress";
+
+UPDATE stern.consolidated_report A
+SET securitization_type = 'agency'
+WHERE A.master_servicer is not null;
+
+UPDATE stern.consolidated_report A
  SET total_carbon_emission_threshold_2024_2029 = B.total_carbon_emission_threshold_2024_2029,
    total_carbon_emission_threshold_2030_2034 = B.total_carbon_emission_threshold_2030_2034,
    total_actual_emission = B.total_actual_emission,

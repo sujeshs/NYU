@@ -1,8 +1,4 @@
--- stern.feed_ll84_bbl definition
-
--- Drop table
-
--- DROP TABLE stern.feed_ll84_bbl;
+CREATE SCHEMA IF NOT EXISTS stern;
 
 CREATE TABLE stern.feed_ll84_bbl (
 	id serial NOT NULL,
