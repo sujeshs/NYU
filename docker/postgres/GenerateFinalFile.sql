@@ -87,5 +87,6 @@ mail_city,
 mail_state,
 usps_address,
 ownerpluto,
-"Owner-CorporationNameHDP"
+"Owner-CorporationNameHDP",
+lien_name as "Lien names"
 FROM stern.consolidated_report;

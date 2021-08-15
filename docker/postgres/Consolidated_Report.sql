@@ -7,6 +7,11 @@ UPDATE stern.consolidated_report A
  WHERE A.bbl = B.bbl;
 
 UPDATE stern.consolidated_report A
+SET lien_name = array_append(lien_name, B."Name")
+FROM stern.openliendata B
+WHERE A.bbl like B.bbl;
+
+UPDATE stern.consolidated_report A
   SET master_servicer = B.master_servicer
   FROM stern.agency_hud_ny_csv B
   WHERE A.standardized_address = B.standardized_address;
