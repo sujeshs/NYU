@@ -10,6 +10,7 @@
   <description>SDG Initiative Parent POM</description>
 
   <modules>
+    <module>data-api</module>
     <module>penalties</module>
   </modules>
 
@@ -39,15 +40,22 @@
     <version.mvn.spotless.google>1.7</version.mvn.spotless.google>
     <version.mvn.spotless.ktfmt>0.18</version.mvn.spotless.ktfmt>
     <version.mvn.spotless>2.7.0</version.mvn.spotless>
-    <version.postgresql>42.2.9</version.postgresql>
+    <version.postgresql>42.4.1</version.postgresql>
     <version.spotless-maven-plugin>1.27.0</version.spotless-maven-plugin>
     <version.spring-boot>2.3.3.RELEASE</version.spring-boot>
     <version.spring>5.2.8.RELEASE</version.spring>
+    <version.httpclient>4.1.1</version.httpclient>
   </properties>
 
   <dependencyManagement>
 
     <dependencies>
+
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>${version.httpclient}</version>
+      </dependency>
 
       <dependency>
         <groupId>com.fasterxml.jackson.module</groupId>
